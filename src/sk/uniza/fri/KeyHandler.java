@@ -10,13 +10,13 @@ import java.util.HashMap;
  */
 public class KeyHandler {
     private HashMap<Character, Boolean> pressed;
-    private GamePanel panel;
+    private Game game;
 
-    public KeyHandler(GamePanel panel) {
+    public KeyHandler(Game panel) {
         this.pressed = new HashMap<Character, Boolean>();
 
 
-        this.panel = panel;
+        this.game = game;
         this.registerKeys();
     }
 

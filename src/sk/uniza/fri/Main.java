@@ -6,6 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         GamePanel gamePanel = new GamePanel();
-        JFrame gameWindow = new GameFrame(gamePanel);
+        Game game = new Game(gamePanel);
+        JFrame gameWindow = new GameFrame(gamePanel, game);
     }
 }

@@ -10,16 +10,16 @@ import java.awt.event.KeyListener;
  * @author peto1
  */
 public class GameFrame extends JFrame {
-    private GamePanel panel;
 
-    public GameFrame(GamePanel panel) {
-        this.panel = panel;
+    private Game game;
 
+    public GameFrame(GamePanel panel, Game game) {
+        this.game = game;
         this.setTitle("Semestralka");
         this.setResizable(false);
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.add(this.panel);
+        this.add(panel);
         this.pack();
 
         this.createKeyListener();
@@ -34,12 +34,12 @@ public class GameFrame extends JFrame {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                GameFrame.this.panel.getKeyHandler().keyUpdate(Character.toLowerCase(e.getKeyChar()), true);
+                GameFrame.this.game.getKeyHandler().keyUpdate(Character.toLowerCase(e.getKeyChar()), true);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                GameFrame.this.panel.getKeyHandler().keyUpdate(Character.toLowerCase(e.getKeyChar()), false);
+                GameFrame.this.game.getKeyHandler().keyUpdate(Character.toLowerCase(e.getKeyChar()), false);
             }
         });
     }
