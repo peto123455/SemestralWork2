@@ -4,12 +4,13 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public enum ETileList {
-    WALL1("/tiles/wall_1.png");
+public enum EImageList {
+    WALL1("/tiles/wall_1.png"),
+    KNIGHT("/tiles/knight.png");
 
     private BufferedImage image;
 
-    ETileList(String route) {
+    EImageList(String route) {
         try {
             this.image = ImageIO.read(this.getClass().getResourceAsStream(route));
         } catch (IOException e) {

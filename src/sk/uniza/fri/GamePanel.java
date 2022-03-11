@@ -13,17 +13,19 @@ public class GamePanel extends JPanel {
     private int height = 720;
 
     private Map map;
+    private Player player;
 
     public GamePanel() {
         this.map = new Map(this.width / 3, this.height / 3);
+        this.player = new Player();
 
         super.setPreferredSize(new Dimension(this.width, this.height));
         super.setDoubleBuffered(true);
         super.setBackground(Color.BLACK);
 
-        this.map.setTile(1, 0, ETileList.WALL1);
-        this.map.setTile(2, 0, ETileList.WALL1);
-        this.map.setTile(3, 0, ETileList.WALL1);
+        this.map.setTile(1, 0, EImageList.WALL1);
+        this.map.setTile(2, 0, EImageList.WALL1);
+        this.map.setTile(3, 0, EImageList.WALL1);
     }
 
     public void paint(Graphics g) {
@@ -39,5 +41,8 @@ public class GamePanel extends JPanel {
 
             }
         }
+
+        Position position = this.player.getPosition();
+        g2d.drawImage(this.player.getImage(), position.getCoordX(), position.getCoordY(), 42, 42, null);
     }
 }

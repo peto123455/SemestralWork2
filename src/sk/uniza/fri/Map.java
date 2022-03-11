@@ -7,7 +7,7 @@ public class Map {
         this.mapLayout = new GameTile[sizeX][sizeY];
     }
 
-    public void setTile(int x, int y, ETileList tile) {
+    public void setTile(int x, int y, EImageList tile) {
         if (tile == null) {
             this.mapLayout[x][y] = null;
             return;
