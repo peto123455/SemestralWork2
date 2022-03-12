@@ -2,8 +2,6 @@ package sk.uniza.fri;
 
 import javax.swing.JPanel;
 import java.awt.*;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * 8. 3. 2022 - 17:02
@@ -12,7 +10,7 @@ import java.util.TimerTask;
  */
 public class GamePanel extends JPanel {
 
-    public static final int WIDTH = 1280;
+    public static final int WIDTH = 1280 - 32;
     public static final int HEIGHT = 720;
     public static final int TILE_SIZE = 16 * 3;
 
@@ -34,13 +32,13 @@ public class GamePanel extends JPanel {
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
-        for (int i = 0; i < this.game.getMap().getSizeY() ; ++i) {
-            for (int j = 0; j < this.game.getMap().getSizeX(); ++j) {
-                if (this.game.getMap().getTile(j, i) == null) {
+        for (int i = 0; i < this.game.getMapHandler().getSizeY() ; ++i) {
+            for (int j = 0; j < this.game.getMapHandler().getSizeX(); ++j) {
+                if (this.game.getMapHandler().getTile(j, i) == null) {
                     continue;
                 }
 
-                g2d.drawImage(this.game.getMap().getTile(j, i).getImage(), j * GamePanel.TILE_SIZE, i * GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+                g2d.drawImage(this.game.getMapHandler().getTile(j, i).getImage(), j * GamePanel.TILE_SIZE, i * GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
 
             }
         }

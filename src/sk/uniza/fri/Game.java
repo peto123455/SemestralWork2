@@ -1,6 +1,5 @@
 package sk.uniza.fri;
 
-import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -8,7 +7,7 @@ public class Game {
     private Timer timer = new Timer();
     private GamePanel panel;
 
-    private Map map;
+    private MapHandler mapHandler;
     private Player player;
     private KeyHandler keyHandler;
 
@@ -16,13 +15,9 @@ public class Game {
         this.panel = panel;
         this.panel.setGame(this);
 
-        this.map = new Map(GamePanel.WIDTH / 3, GamePanel.HEIGHT / 3);
+        this.mapHandler = new MapHandler();
         this.player = new Player();
         this.keyHandler = new KeyHandler(this);
-
-        this.map.setTile(1, 0, EImageList.WALL1);
-        this.map.setTile(2, 0, EImageList.WALL1);
-        this.map.setTile(3, 0, EImageList.WALL1);
 
         this.player.getPosition().setPosition(new Position(100, 100));
 
@@ -34,8 +29,8 @@ public class Game {
         }, 50, 25);
     }
 
-    public Map getMap() {
-        return this.map;
+    public MapHandler getMapHandler() {
+        return this.mapHandler;
     }
 
     public Player getPlayer() {
