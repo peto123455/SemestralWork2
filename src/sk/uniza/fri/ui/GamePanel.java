@@ -1,5 +1,6 @@
 package sk.uniza.fri.ui;
 
+import sk.uniza.fri.essentials.EImageList;
 import sk.uniza.fri.essentials.EItemList;
 import sk.uniza.fri.main.Game;
 import sk.uniza.fri.entities.Item;
@@ -63,10 +64,16 @@ public class GamePanel extends JPanel {
         g2d.drawImage(this.game.getPlayer().getImage(), position.getCoordX() - GamePanel.TILE_SIZE / 2, position.getCoordY() - GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
 
         //UI
-        g2d.setFont(new Font("TimesRoman", Font.BOLD, 25));
-        g2d.drawString(String.format("Coins: %d", this.game.getPlayer().getInventory().getItemAmount(EItemList.COINS)), 5, 30);
+        g2d.setFont(new Font("SansSerif", Font.BOLD, 25));
+        g2d.drawString(String.format("Coins: %d", this.game.getPlayer().getInventory().getItemAmount(EItemList.COINS)), 5, 35);
+        this.drawHearts(1223, 24, this.game.getPlayer().getHearths(), g2d);
 
         g2d.dispose();
     }
 
+    private void drawHearts(int x, int y, int amount, Graphics2D g2d) {
+        for (int i = 0; i < amount; ++i) {
+            g2d.drawImage(EImageList.HEART.getImage(), x -  39 / 2 - 50 * i, y - 36 / 2, 39, 36, null);
+        }
+    }
 }

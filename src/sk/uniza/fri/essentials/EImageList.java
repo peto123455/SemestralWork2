@@ -7,7 +7,8 @@ import java.io.IOException;
 public enum EImageList {
     KNIGHT("/textures/knight.png"),
     KNIGHT_I("/textures/knight_inverted.png"),
-    COINS("/textures/coins.png");
+    COINS("/textures/coins.png"),
+    HEART("/textures/heart.png");
 
     private BufferedImage image;
 
