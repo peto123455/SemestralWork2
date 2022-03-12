@@ -1,13 +1,10 @@
 package sk.uniza.fri.entities;
 
-import sk.uniza.fri.essentials.Direction;
-import sk.uniza.fri.essentials.EImageList;
-import sk.uniza.fri.essentials.HealthSystem;
-import sk.uniza.fri.essentials.Inventory;
+import sk.uniza.fri.essentials.*;
 
 import java.awt.image.BufferedImage;
 
-public class Player extends Entity {
+public class Player extends Entity implements IEntityAlive {
     private Direction direction;
     private Inventory inventory;
     private HealthSystem healthSystem;
@@ -34,6 +31,10 @@ public class Player extends Entity {
 
     public Inventory getInventory() {
         return this.inventory;
+    }
+
+    public HealthSystem getHealthSystem() {
+        return this.healthSystem;
     }
 
     public int getHearths() {

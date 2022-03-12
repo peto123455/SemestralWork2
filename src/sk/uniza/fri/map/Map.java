@@ -1,13 +1,26 @@
 package sk.uniza.fri.map;
 
+import sk.uniza.fri.entities.Enemy;
+import sk.uniza.fri.entities.Item;
+import sk.uniza.fri.entities.ItemCoins;
+import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.essentials.ETileList;
 
+import java.util.ArrayList;
+
 public class Map {
     private GameTile[][] mapLayout;
+    private ArrayList<Item> items;
+    private ArrayList<Enemy> enemies;
 
     public Map(int sizeX, int sizeY) {
         this.mapLayout = new GameTile[sizeX][sizeY];
+        this.items = new ArrayList<>();
+        this.enemies = new ArrayList<>();
+
+        this.items.add(new ItemCoins(100, 300, 100));
+        this.enemies.add(new Enemy(new Position(500, 500)));
     }
 
     public void setTile(int x, int y, ETileList tile) {
@@ -29,5 +42,13 @@ public class Map {
 
     public int getSizeY() {
         return this.mapLayout[0].length;
+    }
+
+    public ArrayList<Item> getItems() {
+        return this.items;
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return this.enemies;
     }
 }

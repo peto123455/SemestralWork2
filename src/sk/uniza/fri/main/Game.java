@@ -1,5 +1,6 @@
 package sk.uniza.fri.main;
 
+import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.entities.ItemCoins;
 import sk.uniza.fri.entities.Player;
@@ -10,6 +11,7 @@ import sk.uniza.fri.ui.GamePanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -75,6 +77,9 @@ public class Game {
 
             this.checkForItems();
         }
+
+        this.handleEnemies();
+
         panel.repaint();
     }
 
@@ -98,10 +103,18 @@ public class Game {
     }
 
     private void checkForItems() {
-        for (int i = 0; i < Item.getSpawnedItems().size(); ++i) {
-            if (this.player.isNearEntity(Item.getSpawnedItems().get(i), 30)) {
-                this.player.getInventory().addItemStack(Item.getSpawnedItems().remove(i).pickup());
+        ArrayList<Item> items = this.mapHandler.getItems();
+        for (int i = 0; i < items.size(); ++i) {
+            if (this.player.isNearEntity(items.get(i), 30)) {
+                this.player.getInventory().addItemStack(items.remove(i).pickup());
             }
+        }
+    }
+
+    private void handleEnemies() {
+        ArrayList<Enemy> enemies = this.getMapHandler().getEnemies();
+        for (Enemy enemy : enemies) {
+            enemy.update(this);
         }
     }
 }

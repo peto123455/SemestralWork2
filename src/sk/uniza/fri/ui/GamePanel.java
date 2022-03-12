@@ -1,5 +1,6 @@
 package sk.uniza.fri.ui;
 
+import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.essentials.EImageList;
 import sk.uniza.fri.essentials.EItemList;
 import sk.uniza.fri.main.Game;
@@ -13,6 +14,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
 
@@ -43,21 +45,15 @@ public class GamePanel extends JPanel {
         //g2d.setColor(Color.BLACK);
 
         //Políčka
-        for (int i = 0; i < this.game.getMapHandler().getSizeY() ; ++i) {
-            for (int j = 0; j < this.game.getMapHandler().getSizeX(); ++j) {
-                if (this.game.getMapHandler().getTile(j, i) == null) {
-                    continue;
-                }
-
-                g2d.drawImage(this.game.getMapHandler().getTile(j, i).getImage(), j * GamePanel.TILE_SIZE, i * GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
-
-            }
-        }
+        this.drawTiles(g2d);
 
         //Itemy
-        for (Item item : Item.getSpawnedItems()) {
+        for (Item item : this.game.getMapHandler().getItems()) {
             g2d.drawImage(item.getImage(), item.getPosition().getCoordX() - GamePanel.TILE_SIZE / 2, item.getPosition().getCoordY() - GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
         }
+
+        //Nepriatelia
+        this.drawEnemies(g2d);
 
         //Hráč
         Position position = this.game.getPlayer().getPosition();
@@ -74,6 +70,26 @@ public class GamePanel extends JPanel {
     private void drawHearts(int x, int y, int amount, Graphics2D g2d) {
         for (int i = 0; i < amount; ++i) {
             g2d.drawImage(EImageList.HEART.getImage(), x -  39 / 2 - 50 * i, y - 36 / 2, 39, 36, null);
+        }
+    }
+
+    private void drawEnemies(Graphics2D g2d) {
+        ArrayList<Enemy> enemies = this.game.getMapHandler().getEnemies();
+        for (int i = 0; i < enemies.size(); ++i) {
+            g2d.drawImage(enemies.get(i).getImage(), enemies.get(i).getPosition().getCoordX(), enemies.get(i).getPosition().getCoordY(), GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+        }
+    }
+
+    private void drawTiles(Graphics2D g2d) {
+        for (int i = 0; i < this.game.getMapHandler().getSizeY() ; ++i) {
+            for (int j = 0; j < this.game.getMapHandler().getSizeX(); ++j) {
+                if (this.game.getMapHandler().getTile(j, i) == null) {
+                    continue;
+                }
+
+                g2d.drawImage(this.game.getMapHandler().getTile(j, i).getImage(), j * GamePanel.TILE_SIZE, i * GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+
+            }
         }
     }
 }

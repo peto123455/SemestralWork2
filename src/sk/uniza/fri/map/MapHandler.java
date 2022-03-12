@@ -1,9 +1,12 @@
 package sk.uniza.fri.map;
 
+import sk.uniza.fri.entities.Enemy;
+import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.essentials.ETileList;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MapHandler {
@@ -55,5 +58,13 @@ public class MapHandler {
             return;
         }
         this.currentMap = map;
+    }
+
+    public ArrayList<Item> getItems() {
+        return this.maps[currentMap].getItems();
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return this.maps[currentMap].getEnemies();
     }
 }
