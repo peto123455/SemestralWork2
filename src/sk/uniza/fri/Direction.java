@@ -27,9 +27,13 @@ public enum Direction {
     }
 
     public static Position getPosByChar(char c, int i) {
+        return Direction.getDirByChar(c).getPos(i);
+    }
+
+    public static Direction getDirByChar(char c) {
         for (Direction direction : Direction.values()) {
             if (direction.character == c) {
-                return direction.getPos(i);
+                return direction;
             }
         }
         return null;

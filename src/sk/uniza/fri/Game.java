@@ -57,13 +57,13 @@ public class Game {
             }
 
             //Player Movement
-            this.player.getPosition().addPosition(Direction.getPosByChar(c, 4));
+            Direction direction = Direction.getDirByChar(c);
+            if (direction == Direction.Right || direction == Direction.LEFT) {
+                this.player.setDirection(direction);
+            }
+            this.player.getPosition().addPosition(direction.getPosByChar(c, 4));
         }
         panel.repaint();
-    }
-
-    public KeyHandler getKeyHandler() {
-        return this.keyHandler;
     }
 
     private void createKeyListener() {
