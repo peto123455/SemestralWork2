@@ -25,13 +25,13 @@ public class MapHandler {
             this.maps[map] = new Map(x, y);
             for (int i = 0; i < y; ++i) {
                 for (int j = 0; j < x; ++j) {
-                    this.maps[map].setTile(j, i, EImageList.getByID(scanner.nextInt()));
+                    this.maps[map].setTile(j, i, ETileList.getByID(scanner.nextInt()));
                 }
             }
         }
     }
 
-    public void setTile(int x, int y, EImageList tile) {
+    public void setTile(int x, int y, ETileList tile) {
         this.maps[currentMap].setTile(x, y, tile);
     }
 

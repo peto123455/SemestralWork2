@@ -7,13 +7,13 @@ public class Map {
         this.mapLayout = new GameTile[sizeX][sizeY];
     }
 
-    public void setTile(int x, int y, EImageList tile) {
+    public void setTile(int x, int y, ETileList tile) {
         if (tile == null) {
             this.mapLayout[x][y] = null;
             return;
         }
 
-        this.mapLayout[x][y] = new GameTile(tile.getImage());
+        this.mapLayout[x][y] = new GameTile(tile);
     }
 
     public GameTile getTile(int x, int y) {

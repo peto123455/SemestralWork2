@@ -10,12 +10,18 @@ import java.awt.image.BufferedImage;
 public class GameTile {
 
     private BufferedImage image;
+    private boolean hasCollision;
 
-    public GameTile(BufferedImage image) {
-        this.image = image;
+    public GameTile(ETileList tile) {
+        this.image = tile.getImage();
+        this.hasCollision = tile.hasCollision();
     }
 
     public BufferedImage getImage() {
         return this.image;
+    }
+
+    public boolean hasCollision() {
+        return this.hasCollision;
     }
 }

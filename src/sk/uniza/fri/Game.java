@@ -52,7 +52,8 @@ public class Game {
             futurePosition.addPosition(this.player.getPosition());
             futurePosition = Position.getPositionRelativeToGrid(futurePosition);
 
-            if (this.mapHandler.getTile(futurePosition.getCoordX(), futurePosition.getCoordY()) != null) {
+            GameTile tile = this.mapHandler.getTile(futurePosition.getCoordX(), futurePosition.getCoordY());
+            if (tile != null && tile.hasCollision()) {
                 continue;
             }
 
