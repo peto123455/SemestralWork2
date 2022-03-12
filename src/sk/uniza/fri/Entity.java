@@ -36,4 +36,8 @@ public abstract class Entity {
     public Position getPositionRelativeToGrid() {
         return Position.getPositionRelativeToGrid(this.position);
     }
+
+    public boolean isNearEntity(Entity entity, double distance) {
+        return Position.getDistance(this.getPosition(), entity.getPosition()) <= distance;
+    }
 }

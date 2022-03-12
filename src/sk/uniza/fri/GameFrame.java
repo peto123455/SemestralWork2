@@ -2,11 +2,6 @@ package sk.uniza.fri;
 
 import javax.swing.JFrame;
 
-/**
- * 8. 3. 2022 - 17:02
- *
- * @author peto1
- */
 public class GameFrame extends JFrame {
 
     public GameFrame() {

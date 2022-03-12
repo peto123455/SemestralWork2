@@ -50,6 +50,10 @@ public class GamePanel extends JPanel {
             }
         }
 
+        for (Item item : Item.getSpawnedItems()) {
+            g2d.drawImage(item.getImage(), item.getPosition().getCoordX(), item.getPosition().getCoordY(), GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+        }
+
         Position position = this.game.getPlayer().getPosition();
         g2d.drawImage(this.game.getPlayer().getImage(), position.getCoordX() - GamePanel.TILE_SIZE / 2, position.getCoordY() - GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
         g2d.dispose();

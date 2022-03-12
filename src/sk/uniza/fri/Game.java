@@ -22,6 +22,7 @@ public class Game {
         this.keyHandler = new KeyHandler(this);
 
         this.player.getPosition().setPosition(new Position(100, 100));
+        new ItemCoins(100, 300);
 
         this.createKeyListener();
     }
@@ -63,6 +64,8 @@ public class Game {
                 this.player.setDirection(direction);
             }
             this.player.getPosition().addPosition(direction.getPosByChar(c, 4));
+
+            this.checkForItems();
         }
         panel.repaint();
     }
@@ -84,5 +87,13 @@ public class Game {
                 Game.this.keyHandler.keyUpdate(Character.toLowerCase(e.getKeyChar()), false);
             }
         });
+    }
+
+    private void checkForItems() {
+        for (int i = 0; i < Item.getSpawnedItems().size(); ++i) {
+            if (this.player.isNearEntity(Item.getSpawnedItems().get(i), 20)) {
+                Item.getSpawnedItems().remove(i).pickup();
+            }
+        }
     }
 }
