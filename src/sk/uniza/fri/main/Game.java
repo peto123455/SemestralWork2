@@ -30,7 +30,7 @@ public class Game {
         this.keyHandler = new KeyHandler(this);
 
         this.player.getPosition().setPosition(new Position(100, 100));
-        new ItemCoins(100, 300);
+        new ItemCoins(100, 300, 50);
 
         this.createKeyListener();
     }
@@ -99,8 +99,8 @@ public class Game {
 
     private void checkForItems() {
         for (int i = 0; i < Item.getSpawnedItems().size(); ++i) {
-            if (this.player.isNearEntity(Item.getSpawnedItems().get(i), 20)) {
-                Item.getSpawnedItems().remove(i).pickup();
+            if (this.player.isNearEntity(Item.getSpawnedItems().get(i), 30)) {
+                this.player.getInventory().addItemStack(Item.getSpawnedItems().remove(i).pickup());
             }
         }
     }

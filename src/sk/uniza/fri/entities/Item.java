@@ -1,6 +1,7 @@
 package sk.uniza.fri.entities;
 
 import sk.uniza.fri.essentials.EImageList;
+import sk.uniza.fri.essentials.ItemStack;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public abstract class Item extends Entity {
         Item.spawnedItems.add(this);
     }
 
-    public abstract void pickup();
+    public abstract ItemStack pickup();
 
     public static ArrayList<Item> getSpawnedItems() {
         return spawnedItems;
