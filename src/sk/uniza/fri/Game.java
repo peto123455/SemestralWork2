@@ -1,5 +1,7 @@
 package sk.uniza.fri;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,12 +23,16 @@ public class Game {
 
         this.player.getPosition().setPosition(new Position(100, 100));
 
+        this.createKeyListener();
+    }
+
+    public void startGame() {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 Game.this.updateGame();
             }
-        }, 50, 25);
+        }, 50, 20);
     }
 
     public MapHandler getMapHandler() {
@@ -58,5 +64,24 @@ public class Game {
 
     public KeyHandler getKeyHandler() {
         return this.keyHandler;
+    }
+
+    private void createKeyListener() {
+        this.panel.createKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                Game.this.keyHandler.keyUpdate(Character.toLowerCase(e.getKeyChar()), true);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                Game.this.keyHandler.keyUpdate(Character.toLowerCase(e.getKeyChar()), false);
+            }
+        });
     }
 }

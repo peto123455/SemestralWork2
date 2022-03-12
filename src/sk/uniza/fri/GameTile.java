@@ -1,6 +1,5 @@
 package sk.uniza.fri;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**

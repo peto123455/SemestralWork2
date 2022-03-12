@@ -1,7 +1,11 @@
 package sk.uniza.fri;
 
 import javax.swing.JPanel;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Color;
+import java.awt.event.KeyListener;
 
 /**
  * 8. 3. 2022 - 17:02
@@ -19,6 +23,10 @@ public class GamePanel extends JPanel {
     public GamePanel() {
         super.setPreferredSize(new Dimension(this.WIDTH, this.HEIGHT));
         super.setDoubleBuffered(true);
+    }
+
+    public void createKeyListener(KeyListener keyListener) {
+        this.addKeyListener(keyListener);
     }
 
     public void setGame(Game game) {

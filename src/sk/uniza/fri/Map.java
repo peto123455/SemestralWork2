@@ -1,10 +1,5 @@
 package sk.uniza.fri;
 
-/**
- * 8. 3. 2022 - 17:02
- *
- * @author peto1
- */
 public class Map {
     private GameTile[][] mapLayout;
 
