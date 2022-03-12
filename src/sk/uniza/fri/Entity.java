@@ -19,4 +19,8 @@ public abstract class Entity {
     public Position getPosition() {
         return this.position;
     }
+
+    public Position getPositionRelativeToGrid() {
+        return Position.getPositionRelativeToGrid(this.position);
+    }
 }

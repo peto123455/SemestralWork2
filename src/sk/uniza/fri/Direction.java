@@ -1,10 +1,10 @@
 package sk.uniza.fri;
 
 public enum Direction {
-    UP(new Position(0, -4), 'w'),
-    DOWN(new Position(0, 4), 's'),
-    LEFT(new Position(-4, 0), 'a'),
-    Right(new Position(4, 0), 'd');
+    UP(new Position(0, -1), 'w'),
+    DOWN(new Position(0, 1), 's'),
+    LEFT(new Position(-1, 0), 'a'),
+    Right(new Position(1, 0), 'd');
 
     private Position pos;
     private char character;
@@ -15,13 +15,21 @@ public enum Direction {
     }
 
     public Position getPos() {
-        return new Position(this.pos.getCoordX(), this.pos.getCoordY()); //Posielam novú inštanciu Pos. aby náhodou nedošlo k jej zmene hodnôt
+        return this.getPos(1);
+    }
+
+    public Position getPos(int i) {
+        return new Position(this.pos.getCoordX() * i, this.pos.getCoordY() * i); //Posielam novú inštanciu Pos. aby náhodou nedošlo k jej zmene hodnôt
     }
 
     public static Position getPosByChar(char c) {
+        return Direction.getPosByChar(c, 1);
+    }
+
+    public static Position getPosByChar(char c, int i) {
         for (Direction direction : Direction.values()) {
             if (direction.character == c) {
-                return direction.getPos();
+                return direction.getPos(i);
             }
         }
         return null;

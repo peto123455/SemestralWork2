@@ -38,8 +38,20 @@ public class Game {
     }
 
     public void updateGame() {
+        Position pos = this.player.getPositionRelativeToGrid();
+
         for (Character c : this.keyHandler.getPressedKeys()) {
-            this.player.getPosition().addPosition(Direction.getPosByChar(c));
+            //Collision System
+            Position futurePosition = Direction.getPosByChar(c, 16);
+            futurePosition.addPosition(this.player.getPosition());
+            futurePosition = Position.getPositionRelativeToGrid(futurePosition);
+
+            if (this.mapHandler.getTile(futurePosition.getCoordX(), futurePosition.getCoordY()) != null) {
+                continue;
+            }
+
+            //Player Movement
+            this.player.getPosition().addPosition(Direction.getPosByChar(c, 4));
         }
         panel.repaint();
     }

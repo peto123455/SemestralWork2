@@ -44,4 +44,8 @@ public class Position {
         this.coords[0] = pos.getCoordX();
         this.coords[1] = pos.getCoordY();
     }
+
+    public static Position getPositionRelativeToGrid(Position position) {
+        return new Position(position.getCoordX() / GamePanel.TILE_SIZE, position.getCoordY() / GamePanel.TILE_SIZE);
+    }
 }
