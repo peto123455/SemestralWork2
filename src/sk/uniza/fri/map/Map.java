@@ -21,6 +21,7 @@ public class Map {
 
         this.items.add(new ItemCoins(100, 300, 100));
         this.enemies.add(new Enemy(new Position(500, 500)));
+        this.enemies.get(0).goToPos(new Position(100, 200));
     }
 
     public void setTile(int x, int y, ETileList tile) {

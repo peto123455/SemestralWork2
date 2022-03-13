@@ -76,7 +76,7 @@ public class GamePanel extends JPanel {
     private void drawEnemies(Graphics2D g2d) {
         ArrayList<Enemy> enemies = this.game.getMapHandler().getEnemies();
         for (int i = 0; i < enemies.size(); ++i) {
-            g2d.drawImage(enemies.get(i).getImage(), enemies.get(i).getPosition().getCoordX(), enemies.get(i).getPosition().getCoordY(), GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+            g2d.drawImage(enemies.get(i).getImage(), enemies.get(i).getPosition().getCoordX() - GamePanel.TILE_SIZE / 2, enemies.get(i).getPosition().getCoordY() - GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
         }
     }
 
