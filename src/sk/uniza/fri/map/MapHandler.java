@@ -67,4 +67,8 @@ public class MapHandler {
     public ArrayList<Enemy> getEnemies() {
         return this.maps[currentMap].getEnemies();
     }
+
+    public Map getMan() {
+        return this.maps[currentMap];
+    }
 }

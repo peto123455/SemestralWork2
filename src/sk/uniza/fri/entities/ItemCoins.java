@@ -1,9 +1,6 @@
 package sk.uniza.fri.entities;
 
-import sk.uniza.fri.essentials.EImageList;
-import sk.uniza.fri.essentials.EItemList;
-import sk.uniza.fri.essentials.ItemStack;
-import sk.uniza.fri.essentials.Position;
+import sk.uniza.fri.essentials.*;
 
 public class ItemCoins extends Item {
     private int amount;
@@ -15,6 +12,7 @@ public class ItemCoins extends Item {
     }
 
     public ItemStack pickup() {
+        ESoundList.playSound(ESoundList.COIN_PICKUP);
         return new ItemStack(EItemList.COINS, this.amount);
     }
 }

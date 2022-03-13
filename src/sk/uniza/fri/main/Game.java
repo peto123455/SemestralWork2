@@ -38,6 +38,8 @@ public class Game {
 
         this.createKeyListener();
         this.createMouseListener();
+
+        Enemy.createEnemies(mapHandler, player);
     }
 
     public void startGame() {
@@ -59,7 +61,8 @@ public class Game {
 
     public void updateGame() {
         Position pos = this.player.getPositionRelativeToGrid();
-        this.getMapHandler().getEnemies().get(0).goToPos(this.player.getPosition());
+
+        Position finalPosition = new Position();
 
         for (Character c : this.keyHandler.getPressedKeys()) {
             //Collision System
@@ -77,10 +80,16 @@ public class Game {
             if (direction == Direction.RIGHT || direction == Direction.LEFT) {
                 this.player.setDirection(direction);
             }
-            this.player.getPosition().addPosition(direction.getPosByChar(c, 4));
+            finalPosition.addPosition(direction.getPosByChar(c, 4));
 
             this.checkForItems();
         }
+
+        /*if (finalPosition.getCoordX() != 0 && finalPosition.getCoordY() != 0) {
+            finalPosition = new Position(finalPosition.getCoordX() / 2, finalPosition.getCoordY() / 2);
+        }*/
+
+        this.player.getPosition().addPosition(finalPosition);
 
         this.handleEnemies();
 
@@ -107,13 +116,15 @@ public class Game {
     }
 
     private void mouseClicked(MouseEvent e) {
-        this.player.hit(this.mapHandler.getEnemies());
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            this.player.hit(this.mapHandler.getEnemies());
+        }
     }
 
     private void createMouseListener() {
         this.panel.createMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 Game.this.mouseClicked(e);
             }
         });

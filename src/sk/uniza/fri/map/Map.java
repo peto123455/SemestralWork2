@@ -21,9 +21,6 @@ public class Map {
         this.items = new ArrayList<>();
         this.enemies = new ArrayList<>();
 
-        this.items.add(new ItemCoins(100, 300, 100));
-        this.enemies.add(new Enemy(new Position(500, 500), this));
-        this.enemies.get(0).addDropItem(new ItemStack(EItemList.COINS, 50));
         //this.enemies.get(0).goToPos(new Position(150, 80));
     }
 

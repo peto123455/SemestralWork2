@@ -1,12 +1,6 @@
 package sk.uniza.fri.entities;
 
-import sk.uniza.fri.essentials.Direction;
-import sk.uniza.fri.essentials.EImageList;
-import sk.uniza.fri.essentials.HealthSystem;
-import sk.uniza.fri.essentials.IEntityAlive;
-import sk.uniza.fri.essentials.ItemStack;
-import sk.uniza.fri.essentials.Position;
-import sk.uniza.fri.essentials.Vector;
+import sk.uniza.fri.essentials.*;
 import sk.uniza.fri.main.Game;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.map.Map;
@@ -22,9 +16,18 @@ public class Enemy extends Entity implements IEntityAlive {
     private int cooldown;
     private Direction direction;
     private Position toPos;
+    private Entity follow;
     private boolean dead;
     private ArrayList<ItemStack> drops;
     private Map map;
+
+    public static void createEnemies(MapHandler mapHandler, Player player) {
+        Enemy enemy = new Enemy(new Position(1100, 500), mapHandler.getMan());
+        enemy.addDropItem(new ItemStack(EItemList.COINS, 50));
+        enemy.goToPos(new Position(1100, 100));
+        enemy.follow(player);
+        mapHandler.getEnemies().add(enemy);
+    }
 
     public Enemy(Map map) {
         this(new Position(0, 0), map);
@@ -51,9 +54,7 @@ public class Enemy extends Entity implements IEntityAlive {
             return;
         }
 
-        if (this.canSeePlayer(game.getPlayer(), game.getMapHandler())) {
-            this.updatePos(game.getMapHandler());
-        }
+        this.updatePos(game);
         this.checkForPlayer(game.getPlayer());
     }
 
@@ -78,6 +79,7 @@ public class Enemy extends Entity implements IEntityAlive {
         if (temp < lastHit + cooldown) {
             return;
         }
+        ESoundList.playSound(ESoundList.SOWRD_STAB);
         entity.takeHeart();
         this.lastHit = temp + cooldown;
     }
@@ -96,12 +98,13 @@ public class Enemy extends Entity implements IEntityAlive {
 
     private void onDeath() {
         this.dead = true;
+        ESoundList.playSound(ESoundList.DEATH);
         super.changeImages(new EImageList[] {EImageList.KNIGHT_DEAD});
         this.dropItems();
     }
 
     private void checkForPlayer(Player player) {
-        if (this.isNearEntity(player, 40)) {
+        if (this.isNearEntity(player, 50)) {
             this.hit(player);
         }
     }
@@ -110,14 +113,30 @@ public class Enemy extends Entity implements IEntityAlive {
         this.toPos = toPos;
     }
 
-    private void updatePos(MapHandler mapHandler) {
-        if (this.toPos == null) {
+    public void follow(Entity entity) {
+        this.follow = entity;
+    }
+
+    private void updatePos(Game game) {
+        Position position;
+
+        if (this.follow != null && this.canSeePlayer(game.getPlayer(), game.getMapHandler())) {
+            if (this.isNearEntity(follow, 40)) {
+                return;
+            }
+            position = this.follow.getPosition();
+        } else if (this.toPos != null) {
+            position = this.toPos;
+        } else {
             return;
         }
 
-        Vector vector = new Vector(toPos.getCoordX() - super.getPosition().getCoordX(), toPos.getCoordY() - super.getPosition().getCoordY());
-        vector.normalize();
-        vector.multiply(4);
+        Vector vector = new Vector(position.getCoordX() - super.getPosition().getCoordX(), position.getCoordY() - super.getPosition().getCoordY());
+        //Obmedzenie maximálnej prejdenej vzialenosti na 4px
+        if (vector.length() > 4) {
+            vector.normalize();
+            vector.multiply(4);
+        }
 
         Position pos = new Position((int)vector.getX(), (int)vector.getY());
         if (pos.getCoordX() != 0 || pos.getCoordY() != 0) {
@@ -128,12 +147,15 @@ public class Enemy extends Entity implements IEntityAlive {
                 this.direction = Direction.RIGHT;
             }
 
-            this.move(new Position(pos.getCoordX(), 0), mapHandler);
-            this.move(new Position(0, pos.getCoordY()), mapHandler);
+            this.move(new Position(pos.getCoordX(), 0), game.getMapHandler());
+            this.move(new Position(0, pos.getCoordY()), game.getMapHandler());
+        } else {
+            this.toPos = null;
         }
     }
 
     private void move(Position byPos, MapHandler mapHandler) {
+        //Systém kolízií
         Position futurePosition = new Position().addPosition(this.getPosition()).addPosition(byPos);
         futurePosition = Position.getPositionRelativeToGrid(futurePosition);
         GameTile tile = mapHandler.getTile(futurePosition.getCoordX(), futurePosition.getCoordY());

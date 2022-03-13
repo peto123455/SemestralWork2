@@ -1,11 +1,6 @@
 package sk.uniza.fri.entities;
 
-import sk.uniza.fri.essentials.Direction;
-import sk.uniza.fri.essentials.EImageList;
-import sk.uniza.fri.essentials.HealthSystem;
-import sk.uniza.fri.essentials.IEntityAlive;
-import sk.uniza.fri.essentials.Inventory;
-import sk.uniza.fri.entities.Enemy;
+import sk.uniza.fri.essentials.*;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -52,8 +47,9 @@ public class Player extends Entity implements IEntityAlive {
     }
 
     public void hit(ArrayList<Enemy> enemies) {
+        ESoundList.playSound(ESoundList.SWORD_SLASH);
         for (Enemy enemy : enemies) {
-            if (super.isNearEntity(enemy, 40)) {
+            if (super.isNearEntity(enemy, 50)) {
                 enemy.takeHeart();
             }
         }
