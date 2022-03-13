@@ -52,4 +52,8 @@ public class Position {
         double y = Math.abs((double)pos1.getCoordY() - (double)pos2.getCoordY());
         return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     }
+
+    public double length() {
+        return Math.sqrt(Math.pow(this.coords[0], 2) + Math.pow(this.coords[1], 2));
+    }
 }

@@ -13,6 +13,7 @@ public class Enemy extends Entity implements IEntityAlive {
     private int cooldown;
     private Direction direction;
     private Position toPos;
+    private boolean canSeePlayer;
 
     public Enemy() {
         this(new Position(0, 0));
@@ -26,11 +27,30 @@ public class Enemy extends Entity implements IEntityAlive {
         this.cooldown = 1000;
         super.getPosition().setPosition(position);
         this.direction = Direction.RIGHT;
+        this.canSeePlayer = false;
     }
 
     public void update(Game game) {
-        this.updatePos(game.getMapHandler());
+        if (this.canSeePlayer(game.getPlayer(), game.getMapHandler())) {
+            this.updatePos(game.getMapHandler());
+        }
         this.checkForPlayer(game.getPlayer());
+    }
+
+    private boolean canSeePlayer(Player player, MapHandler mapHandler) {
+        Vector vector = new Vector(player.getPosition().getCoordX() - super.getPosition().getCoordX(), player.getPosition().getCoordY() - super.getPosition().getCoordY());
+        for (int i = 1; i < (int)vector.length() / 20; ++i) {
+            Position position = new Position(super.getPosition().getCoordX(), super.getPosition().getCoordY());
+            Vector vectorPart = new Vector(vector.getX(), vector.getY());
+            vectorPart.normalize();
+            Position girdPos = Position.getPositionRelativeToGrid(new Position(this.getPosition().getCoordX() + (int)(vectorPart.getX() * i * 20), this.getPosition().getCoordY() + (int)(vectorPart.getY() * i * 20)));
+
+            GameTile tile = mapHandler.getTile(girdPos.getCoordX(), girdPos.getCoordY());
+            if (tile != null && tile.hasCollision()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void hit(IEntityAlive entity) {
