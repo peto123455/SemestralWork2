@@ -56,6 +56,7 @@ public class Game {
 
     public void updateGame() {
         Position pos = this.player.getPositionRelativeToGrid();
+        this.getMapHandler().getEnemies().get(0).goToPos(this.player.getPosition());
 
         for (Character c : this.keyHandler.getPressedKeys()) {
             //Collision System
@@ -70,7 +71,7 @@ public class Game {
 
             //Player Movement
             Direction direction = Direction.getDirByChar(c);
-            if (direction == Direction.Right || direction == Direction.LEFT) {
+            if (direction == Direction.RIGHT || direction == Direction.LEFT) {
                 this.player.setDirection(direction);
             }
             this.player.getPosition().addPosition(direction.getPosByChar(c, 4));

@@ -12,14 +12,14 @@ public class Player extends Entity implements IEntityAlive {
     public Player() {
         super(new EImageList[] {EImageList.KNIGHT, EImageList.KNIGHT_I});
 
-        this.direction = Direction.Right;
+        this.direction = Direction.RIGHT;
         this.inventory = new Inventory();
         this.healthSystem = new HealthSystem(5);
     }
 
     @Override
     public BufferedImage getImage() {
-        if (this.direction == Direction.Right) {
+        if (this.direction == Direction.RIGHT) {
             return super.getImage(0);
         }
         return super.getImage(1);

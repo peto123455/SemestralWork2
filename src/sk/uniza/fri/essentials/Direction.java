@@ -4,7 +4,7 @@ public enum Direction {
     UP(new Position(0, -1), 'w'),
     DOWN(new Position(0, 1), 's'),
     LEFT(new Position(-1, 0), 'a'),
-    Right(new Position(1, 0), 'd');
+    RIGHT(new Position(1, 0), 'd');
 
     private Position pos;
     private char character;

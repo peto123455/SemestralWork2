@@ -32,9 +32,10 @@ public class Position {
         this.coords[1] = y;
     }
 
-    public void addPosition(Position pos) {
+    public Position addPosition(Position pos) {
         this.coords[0] += pos.getCoordX();
         this.coords[1] += pos.getCoordY();
+        return this;
     }
 
     public void setPosition(Position pos) {

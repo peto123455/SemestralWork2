@@ -2,11 +2,16 @@ package sk.uniza.fri.entities;
 
 import sk.uniza.fri.essentials.*;
 import sk.uniza.fri.main.Game;
+import sk.uniza.fri.main.GameTile;
+import sk.uniza.fri.map.MapHandler;
+
+import java.awt.image.BufferedImage;
 
 public class Enemy extends Entity implements IEntityAlive {
     private HealthSystem healthSystem;
     private long lastHit;
     private int cooldown;
+    private Direction direction;
     private Position toPos;
 
     public Enemy() {
@@ -20,10 +25,11 @@ public class Enemy extends Entity implements IEntityAlive {
         this.lastHit = System.currentTimeMillis();
         this.cooldown = 1000;
         super.getPosition().setPosition(position);
+        this.direction = Direction.RIGHT;
     }
 
     public void update(Game game) {
-        this.updatePos();
+        this.updatePos(game.getMapHandler());
         this.checkForPlayer(game.getPlayer());
     }
 
@@ -50,7 +56,7 @@ public class Enemy extends Entity implements IEntityAlive {
         this.toPos = toPos;
     }
 
-    private void updatePos() {
+    private void updatePos(MapHandler mapHandler) {
         if (this.toPos == null) {
             return;
         }
@@ -61,7 +67,35 @@ public class Enemy extends Entity implements IEntityAlive {
 
         Position pos = new Position((int)vector.getX(), (int)vector.getY());
         if (pos.getCoordX() != 0 || pos.getCoordY() != 0) {
-            this.getPosition().addPosition(pos);
+            //Zmena smeru
+            if (pos.getCoordX() < 0) {
+                this.direction = Direction.LEFT;
+            } else if (pos.getCoordX() > 0) {
+                this.direction = Direction.RIGHT;
+            }
+
+            this.move(new Position(pos.getCoordX(), 0), mapHandler);
+            this.move(new Position(0, pos.getCoordY()), mapHandler);
         }
+    }
+
+    private void move(Position byPos, MapHandler mapHandler) {
+        Position futurePosition = new Position().addPosition(this.getPosition()).addPosition(byPos);
+        futurePosition = Position.getPositionRelativeToGrid(futurePosition);
+        GameTile tile = mapHandler.getTile(futurePosition.getCoordX(), futurePosition.getCoordY());
+        if (tile != null && tile.hasCollision()) {
+            return;
+        }
+
+        //Pohyb
+        this.getPosition().addPosition(byPos);
+    }
+
+    @Override
+    public BufferedImage getImage() {
+        if (this.direction == Direction.RIGHT) {
+            return super.getImage(0);
+        }
+        return super.getImage(1);
     }
 }
