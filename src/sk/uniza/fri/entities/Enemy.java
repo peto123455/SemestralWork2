@@ -1,6 +1,11 @@
 package sk.uniza.fri.entities;
 
-import sk.uniza.fri.essentials.*;
+import sk.uniza.fri.essentials.HealthSystem;
+import sk.uniza.fri.essentials.Direction;
+import sk.uniza.fri.essentials.Position;
+import sk.uniza.fri.essentials.IEntityAlive;
+import sk.uniza.fri.essentials.EImageList;
+import sk.uniza.fri.essentials.Vector;
 import sk.uniza.fri.main.Game;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.map.MapHandler;
@@ -13,7 +18,6 @@ public class Enemy extends Entity implements IEntityAlive {
     private int cooldown;
     private Direction direction;
     private Position toPos;
-    private boolean canSeePlayer;
 
     public Enemy() {
         this(new Position(0, 0));
@@ -27,7 +31,6 @@ public class Enemy extends Entity implements IEntityAlive {
         this.cooldown = 1000;
         super.getPosition().setPosition(position);
         this.direction = Direction.RIGHT;
-        this.canSeePlayer = false;
     }
 
     public void update(Game game) {
