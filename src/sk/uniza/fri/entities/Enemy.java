@@ -1,16 +1,20 @@
 package sk.uniza.fri.entities;
 
-import sk.uniza.fri.essentials.HealthSystem;
 import sk.uniza.fri.essentials.Direction;
-import sk.uniza.fri.essentials.Position;
-import sk.uniza.fri.essentials.IEntityAlive;
 import sk.uniza.fri.essentials.EImageList;
+import sk.uniza.fri.essentials.HealthSystem;
+import sk.uniza.fri.essentials.IEntityAlive;
+import sk.uniza.fri.essentials.ItemStack;
+import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.essentials.Vector;
 import sk.uniza.fri.main.Game;
 import sk.uniza.fri.main.GameTile;
+import sk.uniza.fri.map.Map;
 import sk.uniza.fri.map.MapHandler;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Enemy extends Entity implements IEntityAlive {
     private HealthSystem healthSystem;
@@ -19,18 +23,25 @@ public class Enemy extends Entity implements IEntityAlive {
     private Direction direction;
     private Position toPos;
     private boolean dead;
+    private ArrayList<ItemStack> drops;
+    private Map map;
 
-    public Enemy() {
-        this(new Position(0, 0));
+    public Enemy(Map map) {
+        this(new Position(0, 0), map);
     }
 
-    public Enemy(Position position) {
+    public Enemy(Position position, Map map) {
         super(new EImageList[] {EImageList.KNIGHT, EImageList.KNIGHT_I});
 
+        super.getPosition().setPosition(position);
+
         this.healthSystem = new HealthSystem(2);
+        this.drops = new ArrayList<>();
+        this.map = map;
+
         this.lastHit = System.currentTimeMillis();
         this.cooldown = 1000;
-        super.getPosition().setPosition(position);
+
         this.direction = Direction.RIGHT;
         this.dead = false;
     }
@@ -86,6 +97,7 @@ public class Enemy extends Entity implements IEntityAlive {
     private void onDeath() {
         this.dead = true;
         super.changeImages(new EImageList[] {EImageList.KNIGHT_DEAD});
+        this.dropItems();
     }
 
     private void checkForPlayer(Player player) {
@@ -139,5 +151,16 @@ public class Enemy extends Entity implements IEntityAlive {
             return super.getImage(1);
         }
         return super.getImage(0);
+    }
+
+    public void addDropItem(ItemStack item) {
+        this.drops.add(item);
+    }
+
+    private void dropItems() {
+        for (ItemStack item : this.drops) {
+            Random rand = new Random();
+            Item.spawnItem(this.map, item, this.getPosition().getCoordX() + rand.nextInt(50) - 25, this.getPosition().getCoordY() + rand.nextInt(50) - 25);
+        }
     }
 }
