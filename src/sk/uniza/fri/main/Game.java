@@ -111,7 +111,6 @@ public class Game {
             @Override
             public void keyTyped(KeyEvent e) {
                 if (e.getKeyChar() == Character.toLowerCase('c')) {
-                    System.out.println("Nieco");
                     Game.this.enterPortal();
                 }
             }

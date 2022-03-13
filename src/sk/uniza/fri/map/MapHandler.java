@@ -2,6 +2,7 @@ package sk.uniza.fri.map;
 
 import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Item;
+import sk.uniza.fri.entities.ItemHealthPotion;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.essentials.ETileList;
 
@@ -36,6 +37,7 @@ public class MapHandler {
             }
         }
         this.currentMap = this.maps[0];
+        this.currentMap.getItems().add(new ItemHealthPotion(400, 200));
     }
 
     public void setTile(int x, int y, ETileList tile) {

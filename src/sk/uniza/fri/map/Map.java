@@ -18,8 +18,6 @@ public class Map {
         this.items = new ArrayList<>();
         this.enemies = new ArrayList<>();
         this.portals = new ArrayList<>();
-
-        //this.enemies.get(0).goToPos(new Position(150, 80));
     }
 
     public void setTile(int x, int y, ETileList tile) {

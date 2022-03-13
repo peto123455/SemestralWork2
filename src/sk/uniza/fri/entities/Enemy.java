@@ -34,7 +34,7 @@ public class Enemy extends Entity implements IEntityAlive {
     }
 
     public Enemy(Position position, Map map) {
-        super(new EImageList[] {EImageList.KNIGHT, EImageList.KNIGHT_I});
+        super(new EImageList[] {EImageList.KNIGHT});
 
         super.getPosition().setPosition(position);
 
@@ -45,7 +45,7 @@ public class Enemy extends Entity implements IEntityAlive {
         this.lastHit = System.currentTimeMillis();
         this.cooldown = 1000;
 
-        this.direction = Direction.RIGHT;
+        this.direction = Direction.LEFT;
         this.dead = false;
     }
 
@@ -170,10 +170,10 @@ public class Enemy extends Entity implements IEntityAlive {
 
     @Override
     public BufferedImage getImage() {
-        if (this.direction == Direction.LEFT && !dead) {
-            return super.getImage(1);
+        if (this.direction == Direction.LEFT) {
+            return ImageTools.flip(super.getImage());
         }
-        return super.getImage(0);
+        return super.getImage();
     }
 
     public void addDropItem(ItemStack item) {

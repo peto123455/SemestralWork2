@@ -11,7 +11,7 @@ public class Player extends Entity implements IEntityAlive {
     private HealthSystem healthSystem;
 
     public Player() {
-        super(new EImageList[] {EImageList.PLAYER, EImageList.PLAYER_I});
+        super(new EImageList[] {EImageList.PLAYER});
 
         this.direction = Direction.RIGHT;
         this.inventory = new Inventory();
@@ -20,10 +20,10 @@ public class Player extends Entity implements IEntityAlive {
 
     @Override
     public BufferedImage getImage() {
-        if (this.direction == Direction.RIGHT) {
-            return super.getImage(0);
+        if (this.direction == Direction.LEFT) {
+            return ImageTools.flip(super.getImage());
         }
-        return super.getImage(1);
+        return super.getImage();
     }
 
     public void setDirection(Direction direction) {
