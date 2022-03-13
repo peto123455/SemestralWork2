@@ -4,6 +4,7 @@ import sk.uniza.fri.essentials.EImageList;
 import sk.uniza.fri.essentials.Position;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public abstract class Entity {
     private BufferedImage[] images;
@@ -50,5 +51,9 @@ public abstract class Entity {
         for (int i = 0; i < images.length; ++i) {
             this.images[i] = images[i].getImage();
         }
+    }
+
+    protected BufferedImage[] getImages() {
+        return this.images;
     }
 }

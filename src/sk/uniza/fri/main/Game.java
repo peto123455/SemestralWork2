@@ -1,9 +1,6 @@
 package sk.uniza.fri.main;
 
-import sk.uniza.fri.entities.Enemy;
-import sk.uniza.fri.entities.Item;
-import sk.uniza.fri.entities.ItemCoins;
-import sk.uniza.fri.entities.Player;
+import sk.uniza.fri.entities.*;
 import sk.uniza.fri.essentials.Direction;
 import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.map.MapHandler;
@@ -97,7 +94,16 @@ public class Game {
 
         this.handleEnemies();
 
+        this.updateParticles();
+
         panel.repaint();
+    }
+
+    private void updateParticles() {
+        ArrayList<Particle> particles = Particle.getParticles();
+        for (int i = 0; i < particles.size(); ++i) {
+            particles.get(i).update();
+        }
     }
 
     private void createKeyListener() {

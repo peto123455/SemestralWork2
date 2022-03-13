@@ -80,6 +80,7 @@ public class Enemy extends Entity implements IEntityAlive {
             return;
         }
         ESoundList.playSound(ESoundList.SOWRD_STAB);
+        new ParticleSlash(super.getPosition(), this.direction);
         entity.takeHeart();
         this.lastHit = temp + cooldown;
     }

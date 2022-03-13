@@ -1,6 +1,7 @@
 package sk.uniza.fri.ui;
 
 import sk.uniza.fri.entities.Enemy;
+import sk.uniza.fri.entities.Particle;
 import sk.uniza.fri.essentials.EImageList;
 import sk.uniza.fri.essentials.EItemList;
 import sk.uniza.fri.main.Game;
@@ -44,6 +45,8 @@ public class GamePanel extends JPanel {
     }
 
     public void paint(Graphics g) {
+        super.paint(g);
+
         Graphics2D g2d = (Graphics2D)g;
 
         g2d.setColor(Color.WHITE);
@@ -68,6 +71,11 @@ public class GamePanel extends JPanel {
         //Hráč
         Position position = this.game.getPlayer().getPosition();
         g2d.drawImage(this.game.getPlayer().getImage(), position.getCoordX() - GamePanel.TILE_SIZE / 2, position.getCoordY() - GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+
+        //Particles
+        for (Particle particle : Particle.getParticles()) {
+            g2d.drawImage(particle.getImage(), particle.getPosition().getCoordX() - (particle.getImage().getWidth() * 3) / 2, particle.getPosition().getCoordY() - (particle.getImage().getHeight() * 3) / 2, particle.getImage().getWidth() * 3, particle.getImage().getHeight() * 3, null);
+        }
 
         //UI
         g2d.setFont(new Font("SansSerif", Font.BOLD, 25));

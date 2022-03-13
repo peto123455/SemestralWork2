@@ -11,6 +11,9 @@ public enum EImageList {
     KNIGHT_I("/textures/knight_inverted.png"),
     KNIGHT_DEAD("/textures/knight_dead.png"),
     COINS("/textures/coins.png"),
+    SLASH1("/textures/slash1.png"),
+    SLASH2("/textures/slash2.png"),
+    SLASH3("/textures/slash3.png"),
     HEART("/textures/heart.png"),
     PORTAL("/textures/portal.png");
 
