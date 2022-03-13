@@ -10,11 +10,12 @@ public class HealthSystem {
         this.hearts = maxHearts;
     }
 
-    public void takeHeart() {
+    public boolean takeHeart() {
         if (this.hearts <= 0) {
-            return;
+            return false;
         }
         --this.hearts;
+        return true;
     }
 
     public void addHeart() {

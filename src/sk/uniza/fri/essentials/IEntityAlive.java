@@ -1,5 +1,7 @@
 package sk.uniza.fri.essentials;
 
 public interface IEntityAlive {
-    HealthSystem getHealthSystem();
+    //HealthSystem getHealthSystem();
+    boolean takeHeart();
+    int getHearts();
 }

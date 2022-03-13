@@ -18,6 +18,7 @@ public class Enemy extends Entity implements IEntityAlive {
     private int cooldown;
     private Direction direction;
     private Position toPos;
+    private boolean dead;
 
     public Enemy() {
         this(new Position(0, 0));
@@ -26,14 +27,19 @@ public class Enemy extends Entity implements IEntityAlive {
     public Enemy(Position position) {
         super(new EImageList[] {EImageList.KNIGHT, EImageList.KNIGHT_I});
 
-        this.healthSystem = new HealthSystem(5);
+        this.healthSystem = new HealthSystem(2);
         this.lastHit = System.currentTimeMillis();
         this.cooldown = 1000;
         super.getPosition().setPosition(position);
         this.direction = Direction.RIGHT;
+        this.dead = false;
     }
 
     public void update(Game game) {
+        if (dead) {
+            return;
+        }
+
         if (this.canSeePlayer(game.getPlayer(), game.getMapHandler())) {
             this.updatePos(game.getMapHandler());
         }
@@ -61,12 +67,25 @@ public class Enemy extends Entity implements IEntityAlive {
         if (temp < lastHit + cooldown) {
             return;
         }
-        entity.getHealthSystem().takeHeart();
+        entity.takeHeart();
         this.lastHit = temp + cooldown;
     }
 
-    public HealthSystem getHealthSystem() {
-        return this.healthSystem;
+    public int getHearts() {
+        return this.healthSystem.getHearts();
+    }
+
+    public boolean takeHeart() {
+        boolean taken = this.healthSystem.takeHeart();
+        if (taken && this.healthSystem.getHearts() <= 0) {
+            this.onDeath();
+        }
+        return taken;
+    }
+
+    private void onDeath() {
+        this.dead = true;
+        super.changeImages(new EImageList[] {EImageList.KNIGHT_DEAD});
     }
 
     private void checkForPlayer(Player player) {
@@ -116,9 +135,9 @@ public class Enemy extends Entity implements IEntityAlive {
 
     @Override
     public BufferedImage getImage() {
-        if (this.direction == Direction.RIGHT) {
-            return super.getImage(0);
+        if (this.direction == Direction.LEFT && !dead) {
+            return super.getImage(1);
         }
-        return super.getImage(1);
+        return super.getImage(0);
     }
 }

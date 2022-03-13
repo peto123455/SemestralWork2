@@ -5,8 +5,10 @@ import sk.uniza.fri.essentials.EImageList;
 import sk.uniza.fri.essentials.HealthSystem;
 import sk.uniza.fri.essentials.IEntityAlive;
 import sk.uniza.fri.essentials.Inventory;
+import sk.uniza.fri.entities.Enemy;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Player extends Entity implements IEntityAlive {
     private Direction direction;
@@ -37,11 +39,23 @@ public class Player extends Entity implements IEntityAlive {
         return this.inventory;
     }
 
-    public HealthSystem getHealthSystem() {
-        return this.healthSystem;
+    public int getHearts() {
+        return this.healthSystem.getHearts();
+    }
+
+    public boolean takeHeart() {
+        return this.healthSystem.takeHeart();
     }
 
     public int getHearths() {
         return this.healthSystem.getHearts();
+    }
+
+    public void hit(ArrayList<Enemy> enemies) {
+        for (Enemy enemy : enemies) {
+            if (super.isNearEntity(enemy, 40)) {
+                enemy.takeHeart();
+            }
+        }
     }
 }

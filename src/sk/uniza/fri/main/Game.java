@@ -11,6 +11,8 @@ import sk.uniza.fri.ui.GamePanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,6 +37,7 @@ public class Game {
         new ItemCoins(100, 300, 50);
 
         this.createKeyListener();
+        this.createMouseListener();
     }
 
     public void startGame() {
@@ -99,6 +102,19 @@ public class Game {
             @Override
             public void keyReleased(KeyEvent e) {
                 Game.this.keyHandler.keyUpdate(Character.toLowerCase(e.getKeyChar()), false);
+            }
+        });
+    }
+
+    private void mouseClicked(MouseEvent e) {
+        this.player.hit(this.mapHandler.getEnemies());
+    }
+
+    private void createMouseListener() {
+        this.panel.createMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Game.this.mouseClicked(e);
             }
         });
     }

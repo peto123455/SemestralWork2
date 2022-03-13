@@ -6,7 +6,7 @@ import sk.uniza.fri.essentials.Position;
 import java.awt.image.BufferedImage;
 
 public abstract class Entity {
-    private final BufferedImage[] images;
+    private BufferedImage[] images;
 
     private Position position;
 
@@ -42,5 +42,13 @@ public abstract class Entity {
 
     public boolean isNearEntity(Entity entity, double distance) {
         return Position.getDistance(this.getPosition(), entity.getPosition()) <= distance;
+    }
+
+    public void changeImages(EImageList[] images) {
+        this.images = new BufferedImage[images.length];
+
+        for (int i = 0; i < images.length; ++i) {
+            this.images[i] = images[i].getImage();
+        }
     }
 }

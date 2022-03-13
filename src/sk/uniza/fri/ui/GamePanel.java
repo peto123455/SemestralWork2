@@ -14,6 +14,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
@@ -31,6 +32,10 @@ public class GamePanel extends JPanel {
 
     public void createKeyListener(KeyListener keyListener) {
         this.addKeyListener(keyListener);
+    }
+
+    public void createMouseListener(MouseListener mouseListener) {
+        this.addMouseListener(mouseListener);
     }
 
     public void setGame(Game game) {
