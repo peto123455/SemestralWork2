@@ -22,7 +22,7 @@ public class Enemy extends Entity implements IEntityAlive {
     private Map map;
 
     public static void createEnemies(MapHandler mapHandler, Player player) {
-        Enemy enemy = new Enemy(new Position(1100, 500), mapHandler.getMan());
+        Enemy enemy = new Enemy(new Position(1100, 500), mapHandler.getMap());
         enemy.addDropItem(new ItemStack(EItemList.COINS, 50));
         enemy.goToPos(new Position(1100, 100));
         enemy.follow(player);

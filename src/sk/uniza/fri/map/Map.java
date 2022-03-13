@@ -2,10 +2,6 @@ package sk.uniza.fri.map;
 
 import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Item;
-import sk.uniza.fri.entities.ItemCoins;
-import sk.uniza.fri.essentials.EItemList;
-import sk.uniza.fri.essentials.ItemStack;
-import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.essentials.ETileList;
 
@@ -15,11 +11,13 @@ public class Map {
     private GameTile[][] mapLayout;
     private ArrayList<Item> items;
     private ArrayList<Enemy> enemies;
+    private ArrayList<Portal> portals;
 
     public Map(int sizeX, int sizeY) {
         this.mapLayout = new GameTile[sizeX][sizeY];
         this.items = new ArrayList<>();
         this.enemies = new ArrayList<>();
+        this.portals = new ArrayList<>();
 
         //this.enemies.get(0).goToPos(new Position(150, 80));
     }
@@ -55,5 +53,9 @@ public class Map {
 
     public void addItem(Item item) {
         this.items.add(item);
+    }
+
+    public ArrayList<Portal> getPortals() {
+        return this.portals;
     }
 }

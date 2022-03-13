@@ -12,12 +12,13 @@ public class MenuPanel extends JPanel {
     private JButton[] buttons;
 
     public MenuPanel() {
-        this.buttons = new JButton[2];
+        this.buttons = new JButton[3];
 
         super.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         super.setPreferredSize(new Dimension(250, 400));
         this.buttons[0] = new JButton("Start Game");
-        this.buttons[1] = new JButton("Exit");
+        this.buttons[1] = new JButton("Help");
+        this.buttons[2] = new JButton("Exit");
 
         for (JButton button : this.buttons) {
             button.setAlignmentX(Component.CENTER_ALIGNMENT);

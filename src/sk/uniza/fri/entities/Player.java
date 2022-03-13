@@ -11,7 +11,7 @@ public class Player extends Entity implements IEntityAlive {
     private HealthSystem healthSystem;
 
     public Player() {
-        super(new EImageList[] {EImageList.KNIGHT, EImageList.KNIGHT_I});
+        super(new EImageList[] {EImageList.PLAYER, EImageList.PLAYER_I});
 
         this.direction = Direction.RIGHT;
         this.inventory = new Inventory();

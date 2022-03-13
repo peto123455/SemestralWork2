@@ -5,6 +5,8 @@ import sk.uniza.fri.ui.GameFrame;
 import sk.uniza.fri.ui.GamePanel;
 import sk.uniza.fri.ui.MenuPanel;
 
+import javax.swing.*;
+
 public class Main {
 
     private MenuPanel menuPanel;
@@ -48,6 +50,7 @@ public class Main {
 
     private void registerListeners() {
         this.menuPanel.registerAction(e -> this.startGame(), 0); //Zavolá startGame() pri stlačení tlačiala
-        this.menuPanel.registerAction(e -> System.exit(0), 1);
+        this.menuPanel.registerAction(e -> JOptionPane.showMessageDialog(null, "W,A,S,D - Pohyb\nC - Vstup do portálu"), 1);
+        this.menuPanel.registerAction(e -> System.exit(0), 2);
     }
 }

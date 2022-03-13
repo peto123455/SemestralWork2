@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MapHandler {
-    private static final int MAPS_COUNT = 1;
+    private static final int MAPS_COUNT = 2;
 
     private Map[] maps;
-    private int currentMap;
+    private Map currentMap;
 
     public MapHandler() {
-        this.currentMap = 0;
-        this.maps = new Map[1];
+        //this.currentMap = 0;
+        this.maps = new Map[MapHandler.MAPS_COUNT];
 
         this.loadMaps();
     }
@@ -35,40 +35,50 @@ public class MapHandler {
                 }
             }
         }
+        this.currentMap = this.maps[0];
     }
 
     public void setTile(int x, int y, ETileList tile) {
-        this.maps[currentMap].setTile(x, y, tile);
+        this.currentMap.setTile(x, y, tile);
     }
 
     public GameTile getTile(int x, int y) {
-        return maps[currentMap].getTile(x, y);
+        return this.currentMap.getTile(x, y);
     }
 
     public int getSizeX() {
-        return this.maps[currentMap].getSizeX();
+        return this.currentMap.getSizeX();
     }
 
     public int getSizeY() {
-        return this.maps[currentMap].getSizeY();
+        return this.currentMap.getSizeY();
     }
 
-    public void changeMap(int map) {
-        if (currentMap < 0 || currentMap >= this.maps.length) {
-            return;
-        }
+    public void changeMap(Map map) {
         this.currentMap = map;
     }
 
     public ArrayList<Item> getItems() {
-        return this.maps[currentMap].getItems();
+        return this.currentMap.getItems();
     }
 
     public ArrayList<Enemy> getEnemies() {
-        return this.maps[currentMap].getEnemies();
+        return this.currentMap.getEnemies();
     }
 
-    public Map getMan() {
-        return this.maps[currentMap];
+    public Map getMap() {
+        return this.currentMap;
+    }
+
+    public Map getMap(int map) {
+        return this.maps[map];
+    }
+
+    public ArrayList<Portal> getPortals(Map map) {
+        return this.currentMap.getPortals();
+    }
+
+    public ArrayList<Portal> getPortals() {
+        return this.getPortals(currentMap);
     }
 }

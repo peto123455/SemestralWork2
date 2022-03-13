@@ -7,8 +7,11 @@ import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.essentials.Direction;
 import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.map.MapHandler;
+import sk.uniza.fri.map.Portal;
+import sk.uniza.fri.map.PortalGroup;
 import sk.uniza.fri.ui.GamePanel;
 
+import javax.sound.sampled.Port;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -40,6 +43,7 @@ public class Game {
         this.createMouseListener();
 
         Enemy.createEnemies(mapHandler, player);
+        PortalGroup.createPortals(this.mapHandler);
     }
 
     public void startGame() {
@@ -100,7 +104,10 @@ public class Game {
         this.panel.createKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-
+                if (e.getKeyChar() == Character.toLowerCase('c')) {
+                    System.out.println("Nieco");
+                    Game.this.enterPortal();
+                }
             }
 
             @Override
@@ -113,6 +120,16 @@ public class Game {
                 Game.this.keyHandler.keyUpdate(Character.toLowerCase(e.getKeyChar()), false);
             }
         });
+    }
+
+    private void enterPortal() {
+        for (Portal portal : this.getMapHandler().getPortals()) {
+            if (Position.getDistance(portal.getPosition(), this.player.getPosition()) < 80) {
+                portal.teleport(this.player, this.mapHandler);
+                return;
+            }
+        }
+        return;
     }
 
     private void mouseClicked(MouseEvent e) {

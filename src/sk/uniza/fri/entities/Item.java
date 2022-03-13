@@ -1,10 +1,8 @@
 package sk.uniza.fri.entities;
 
 import sk.uniza.fri.essentials.EImageList;
-import sk.uniza.fri.essentials.EItemList;
 import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.map.Map;
-import sk.uniza.fri.map.MapHandler;
 
 public abstract class Item extends Entity {
 

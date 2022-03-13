@@ -6,6 +6,7 @@ import sk.uniza.fri.essentials.EItemList;
 import sk.uniza.fri.main.Game;
 import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.essentials.Position;
+import sk.uniza.fri.map.Portal;
 
 import javax.swing.JPanel;
 import java.awt.Font;
@@ -47,7 +48,6 @@ public class GamePanel extends JPanel {
 
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
-        //g2d.setColor(Color.BLACK);
 
         //Políčka
         this.drawTiles(g2d);
@@ -55,6 +55,11 @@ public class GamePanel extends JPanel {
         //Itemy
         for (Item item : this.game.getMapHandler().getItems()) {
             g2d.drawImage(item.getImage(), item.getPosition().getCoordX() - GamePanel.TILE_SIZE / 2, item.getPosition().getCoordY() - GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+        }
+
+        //Portal
+        for (Portal portal : this.game.getMapHandler().getPortals()) {
+            g2d.drawImage(portal.getImage(), portal.getPosition().getCoordX() - 29 / 2, portal.getPosition().getCoordY() - 126 / 2, 29, 126, null);
         }
 
         //Nepriatelia
