@@ -35,4 +35,17 @@ public class Inventory {
         ItemStack itemStack = this.containsItem(item);
         return (itemStack != null) ? itemStack.getAmount() : 0;
     }
+
+    @Override
+    public String toString() {
+        if (this.inventory.isEmpty()) {
+            return "Empty";
+        }
+
+        String string = new String();
+        for (ItemStack item : this.inventory) {
+            string += String.format("%s: %dx\n", item.getItem().getName(), item.getAmount());
+        }
+        return string;
+    }
 }

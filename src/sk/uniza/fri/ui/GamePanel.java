@@ -26,10 +26,13 @@ public class GamePanel extends JPanel {
     public static final int TILE_SIZE = 16 * 3;
 
     private Game game;
+    private InventoryRenderer inventoryRenderer;
 
     public GamePanel() {
         super.setPreferredSize(new Dimension(this.WIDTH, this.HEIGHT));
         super.setDoubleBuffered(true);
+
+        this.inventoryRenderer = new InventoryRenderer();
     }
 
     public void createKeyListener(KeyListener keyListener) {
@@ -81,6 +84,7 @@ public class GamePanel extends JPanel {
         g2d.setFont(new Font("SansSerif", Font.BOLD, 25));
         g2d.drawString(String.format("Coins: %d", this.game.getPlayer().getInventory().getItemAmount(EItemList.COINS)), 5, 35);
         this.drawHearts(1223, 24, this.game.getPlayer().getHearths(), g2d);
+        this.inventoryRenderer.draw(g2d, this.game.getPlayer().getInventory());
 
         g2d.dispose();
     }
@@ -109,5 +113,9 @@ public class GamePanel extends JPanel {
 
             }
         }
+    }
+
+    public void switchInventory() {
+        this.inventoryRenderer.switchVisible();
     }
 }

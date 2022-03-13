@@ -112,6 +112,8 @@ public class Game {
             public void keyTyped(KeyEvent e) {
                 if (e.getKeyChar() == Character.toLowerCase('c')) {
                     Game.this.enterPortal();
+                } else if (e.getKeyChar() == Character.toLowerCase('i')) {
+                    Game.this.switchInventory();
                 }
             }
 
@@ -135,6 +137,10 @@ public class Game {
             }
         }
         return;
+    }
+
+    private void switchInventory() {
+        this.panel.switchInventory();
     }
 
     private void mouseClicked(MouseEvent e) {
