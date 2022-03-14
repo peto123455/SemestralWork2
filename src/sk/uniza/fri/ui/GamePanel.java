@@ -55,7 +55,7 @@ public class GamePanel extends JPanel {
         //g2d.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
         //Políčka
-        this.drawTiles(g2d);
+        this.game.getMapHandler().drawTiles(g2d);
 
         //Itemy
         for (Item item : this.game.getMapHandler().getItems()) {
@@ -90,19 +90,6 @@ public class GamePanel extends JPanel {
         ArrayList<Enemy> enemies = this.game.getMapHandler().getEnemies();
         for (Enemy enemy : enemies) {
             enemy.draw(g2d);
-        }
-    }
-
-    private void drawTiles(Graphics2D g2d) {
-        for (int i = 0; i < this.game.getMapHandler().getSizeY() ; ++i) {
-            for (int j = 0; j < this.game.getMapHandler().getSizeX(); ++j) {
-                if (this.game.getMapHandler().getTile(j, i) == null) {
-                    continue;
-                }
-
-                this.game.getMapHandler().getTile(j, i).draw(g2d, i, j);
-
-            }
         }
     }
 

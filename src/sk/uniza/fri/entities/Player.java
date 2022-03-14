@@ -1,9 +1,7 @@
 package sk.uniza.fri.entities;
 
 import sk.uniza.fri.essentials.*;
-import sk.uniza.fri.ui.GamePanel;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -51,6 +49,7 @@ public class Player extends Entity implements IEntityAlive {
     public void hit(ArrayList<Enemy> enemies) {
         ESoundList.playSound(ESoundList.SWORD_SLASH);
         new ParticleSlash(this.getPosition(), this.direction);
+
         for (Enemy enemy : enemies) {
             if (super.isNearEntity(enemy, 50)) {
                 enemy.takeHeart();

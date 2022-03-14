@@ -1,15 +1,24 @@
 package sk.uniza.fri.essentials;
 
-import javax.sound.sampled.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.Line;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
 public enum ESoundList {
     COIN_PICKUP("/sounds/coinPickup.wav"),
     DEATH("/sounds/death.wav"),
     SWORD_SLASH("/sounds/swordSlash.wav"),
+    PICKUP("/sounds/pickup.wav"),
     SOWRD_STAB("/sounds/swordStab.wav");
 
-    String route;
+    private static final double VOLUME = 0.3; // Ovládanie hlasitosti 0 - 1
+
+    private String route;
 
     ESoundList(String route) {
         this.route = route;
@@ -42,6 +51,12 @@ public enum ESoundList {
                         }
                     });
                     clip.open(sound.getAudioInputStream());
+
+                    //Nastavenie hlasitosti
+                    FloatControl fc = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
+                    fc.setValue(20f * (float)Math.log10(ESoundList.VOLUME));
+
+                    //Prehratie zvuku
                     clip.start();
                 } catch (Exception e) {
                     System.err.println(e.getMessage());

@@ -1,6 +1,10 @@
 package sk.uniza.fri.main;
 
-import sk.uniza.fri.entities.*;
+import sk.uniza.fri.entities.Enemy;
+import sk.uniza.fri.entities.Item;
+import sk.uniza.fri.entities.ItemCoins;
+import sk.uniza.fri.entities.Particle;
+import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.essentials.Direction;
 import sk.uniza.fri.essentials.EItemList;
 import sk.uniza.fri.essentials.ItemStack;
@@ -65,7 +69,7 @@ public class Game {
         Position finalPosition = new Position();
 
         for (Character c : this.keyHandler.getPressedKeys()) {
-            //Collision System
+            //Systém kolízií
             Position futurePosition = Direction.getPosByChar(c, 16);
             futurePosition.addPosition(this.player.getPosition());
             futurePosition = Position.getPositionRelativeToGrid(futurePosition);
@@ -75,7 +79,7 @@ public class Game {
                 continue;
             }
 
-            //Player Movement
+            //Pohyb hráča
             Direction direction = Direction.getDirByChar(c);
             if (direction == Direction.RIGHT || direction == Direction.LEFT) {
                 this.player.setDirection(direction);

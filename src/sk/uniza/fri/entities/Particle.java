@@ -1,11 +1,10 @@
 package sk.uniza.fri.entities;
 
 
-import sk.uniza.fri.essentials.Direction;
 import sk.uniza.fri.essentials.EImageList;
 import sk.uniza.fri.essentials.Position;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 

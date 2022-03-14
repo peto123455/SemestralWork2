@@ -1,13 +1,20 @@
 package sk.uniza.fri.entities;
 
-import sk.uniza.fri.essentials.*;
+import sk.uniza.fri.essentials.Direction;
+import sk.uniza.fri.essentials.EImageList;
+import sk.uniza.fri.essentials.EItemList;
+import sk.uniza.fri.essentials.ESoundList;
+import sk.uniza.fri.essentials.HealthSystem;
+import sk.uniza.fri.essentials.IEntityAlive;
+import sk.uniza.fri.essentials.ImageTools;
+import sk.uniza.fri.essentials.ItemStack;
+import sk.uniza.fri.essentials.Position;
+import sk.uniza.fri.essentials.Vector;
 import sk.uniza.fri.main.Game;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.map.Map;
 import sk.uniza.fri.map.MapHandler;
-import sk.uniza.fri.ui.GamePanel;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
@@ -24,11 +31,21 @@ public class Enemy extends Entity implements IEntityAlive {
     private Map map;
 
     public static void createEnemies(MapHandler mapHandler, Player player) {
-        Enemy enemy = new Enemy(new Position(1100, 500), mapHandler.getMap());
+        Enemy enemy = new Enemy(new Position(1100, 500), mapHandler.getMap(0));
         enemy.addDropItem(new ItemStack(EItemList.COINS, 50));
         enemy.goToPos(new Position(1100, 100));
         enemy.follow(player);
-        mapHandler.getEnemies().add(enemy);
+        mapHandler.getMap(0).getEnemies().add(enemy);
+
+        enemy = new Enemy(new Position(1100, 500), mapHandler.getMap(1));
+        enemy.addDropItem(new ItemStack(EItemList.COINS, 100));
+        enemy.follow(player);
+        mapHandler.getMap(1).getEnemies().add(enemy);
+
+        enemy = new Enemy(new Position(1000, 200), mapHandler.getMap(1));
+        enemy.addDropItem(new ItemStack(EItemList.COINS, 100));
+        enemy.follow(player);
+        mapHandler.getMap(1).getEnemies().add(enemy);
     }
 
     public Enemy(Map map) {

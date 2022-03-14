@@ -5,11 +5,6 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * 8. 3. 2022 - 17:02
- *
- * @author peto1
- */
 public class KeyHandler implements KeyListener {
     private HashMap<Character, Boolean> pressed;
     private Game game;

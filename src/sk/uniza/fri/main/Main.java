@@ -5,7 +5,7 @@ import sk.uniza.fri.ui.GameFrame;
 import sk.uniza.fri.ui.GamePanel;
 import sk.uniza.fri.ui.MenuPanel;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 public class Main {
 
@@ -50,7 +50,7 @@ public class Main {
 
     private void registerListeners() {
         this.menuPanel.registerAction(e -> this.startGame(), 0); //Zavolá startGame() pri stlačení tlačiala
-        this.menuPanel.registerAction(e -> JOptionPane.showMessageDialog(null, "W,A,S,D - Pohyb\nC - Vstup do portálu"), 1);
+        this.menuPanel.registerAction(e -> JOptionPane.showMessageDialog(null, "W,A,S,D - Pohyb\nC - Vstup do portálu\nQ - Použitie elixíru života"), 1);
         this.menuPanel.registerAction(e -> System.exit(0), 2);
     }
 }

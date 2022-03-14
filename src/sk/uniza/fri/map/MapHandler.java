@@ -6,6 +6,7 @@ import sk.uniza.fri.entities.ItemHealthPotion;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.essentials.ETileList;
 
+import java.awt.*;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -83,4 +84,18 @@ public class MapHandler {
     public ArrayList<Portal> getPortals() {
         return this.getPortals(currentMap);
     }
+
+    public void drawTiles(Graphics2D g2d) {
+        for (int i = 0; i < this.getSizeY() ; ++i) {
+            for (int j = 0; j < this.getSizeX(); ++j) {
+                if (this.getTile(j, i) == null) {
+                    continue;
+                }
+
+                this.getTile(j, i).draw(g2d, i, j);
+
+            }
+        }
+    }
+
 }

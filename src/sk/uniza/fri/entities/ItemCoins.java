@@ -1,6 +1,10 @@
 package sk.uniza.fri.entities;
 
-import sk.uniza.fri.essentials.*;
+import sk.uniza.fri.essentials.EImageList;
+import sk.uniza.fri.essentials.EItemList;
+import sk.uniza.fri.essentials.ESoundList;
+import sk.uniza.fri.essentials.ItemStack;
+import sk.uniza.fri.essentials.Position;
 
 public class ItemCoins extends Item {
     private int amount;

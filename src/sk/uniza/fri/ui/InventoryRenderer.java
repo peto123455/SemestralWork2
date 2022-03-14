@@ -6,11 +6,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
-/**
- * 8. 3. 2022 - 17:02
- *
- * @author peto1
- */
 public class InventoryRenderer {
     private boolean isVisible;
 

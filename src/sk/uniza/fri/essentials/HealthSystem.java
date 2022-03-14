@@ -1,6 +1,5 @@
 package sk.uniza.fri.essentials;
 
-
 public class HealthSystem {
     private int maxHearts;
     private int hearts;

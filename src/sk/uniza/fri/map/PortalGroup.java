@@ -2,8 +2,6 @@ package sk.uniza.fri.map;
 
 import sk.uniza.fri.essentials.Position;
 
-import java.util.ArrayList;
-
 public class PortalGroup {
     private Portal[] group;
 
