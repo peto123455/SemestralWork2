@@ -30,7 +30,7 @@ public enum ESoundList {
 
     private AudioInputStream getAudioInputStream() {
         try {
-            return AudioSystem.getAudioInputStream(this.getClass().getResourceAsStream(this.getRoute()));
+            return AudioSystem.getAudioInputStream(this.getClass().getResource(this.getRoute()));
         } catch (IOException e) {
             //Nič
         } catch (UnsupportedAudioFileException e) {
