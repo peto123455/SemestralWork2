@@ -1,7 +1,9 @@
 package sk.uniza.fri.entities;
 
 import sk.uniza.fri.essentials.*;
+import sk.uniza.fri.ui.GamePanel;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -54,5 +56,13 @@ public class Player extends Entity implements IEntityAlive {
                 enemy.takeHeart();
             }
         }
+    }
+
+    public boolean isMaxHearts() {
+        return this.healthSystem.isHaxHearts();
+    }
+
+    public void addHeart() {
+        this.healthSystem.addHeart();
     }
 }

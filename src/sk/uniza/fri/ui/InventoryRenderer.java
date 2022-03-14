@@ -2,7 +2,9 @@ package sk.uniza.fri.ui;
 
 import sk.uniza.fri.essentials.Inventory;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
 
 /**
  * 8. 3. 2022 - 17:02
@@ -30,9 +32,17 @@ public class InventoryRenderer {
         }
 
         g2d.setColor(Color.WHITE);
-        g2d.fillRect(GamePanel.WIDTH / 4, GamePanel.HEIGHT / 8, GamePanel.WIDTH / 2, (int)((double) GamePanel.HEIGHT / 1.33));
+        g2d.fillRect(GamePanel.WIDTH / 4, GamePanel.HEIGHT / 8, GamePanel.WIDTH / 2, (int)((double)GamePanel.HEIGHT / 1.33));
         g2d.setColor(Color.BLACK);
+        g2d.setFont(new Font("SansSerif", Font.BOLD, 24));
+        g2d.drawString("Inventory", GamePanel.WIDTH / 4 + GamePanel.WIDTH / 4 - 53, GamePanel.HEIGHT / 8 + 30);
         g2d.setFont(new Font("SansSerif", Font.BOLD, 15));
-        g2d.drawString(inventory.toString(), GamePanel.WIDTH / 4 + 50 - 12, GamePanel.HEIGHT / 8 + 50);
+
+        //Rozdelenie riadkov
+        int y = GamePanel.HEIGHT / 8 + 50;
+        for (String text : inventory.toString().split("\n")) {
+            y += g2d.getFontMetrics().getHeight();
+            g2d.drawString(text, GamePanel.WIDTH / 4 + 50 - 12, y);
+        }
     }
 }

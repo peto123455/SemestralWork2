@@ -2,15 +2,14 @@ package sk.uniza.fri.main;
 
 import sk.uniza.fri.entities.*;
 import sk.uniza.fri.essentials.Direction;
+import sk.uniza.fri.essentials.EItemList;
+import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.map.MapHandler;
 import sk.uniza.fri.map.Portal;
 import sk.uniza.fri.map.PortalGroup;
 import sk.uniza.fri.ui.GamePanel;
 
-import javax.sound.sampled.Port;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -107,29 +106,10 @@ public class Game {
     }
 
     private void createKeyListener() {
-        this.panel.createKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == Character.toLowerCase('c')) {
-                    Game.this.enterPortal();
-                } else if (e.getKeyChar() == Character.toLowerCase('i')) {
-                    Game.this.switchInventory();
-                }
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                Game.this.keyHandler.keyUpdate(Character.toLowerCase(e.getKeyChar()), true);
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                Game.this.keyHandler.keyUpdate(Character.toLowerCase(e.getKeyChar()), false);
-            }
-        });
+        this.panel.createKeyListener(this.keyHandler);
     }
 
-    private void enterPortal() {
+    public void enterPortal() {
         for (Portal portal : this.getMapHandler().getPortals()) {
             if (Position.getDistance(portal.getPosition(), this.player.getPosition()) < 80) {
                 portal.teleport(this.player, this.mapHandler);
@@ -139,7 +119,11 @@ public class Game {
         return;
     }
 
-    private void switchInventory() {
+    public void useHealthPotion() {
+        this.getPlayer().getInventory().useItem(new ItemStack(EItemList.HEALTH_POTION, 1), this);
+    }
+
+    public void switchInventory() {
         this.panel.switchInventory();
     }
 

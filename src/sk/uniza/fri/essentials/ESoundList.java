@@ -34,15 +34,15 @@ public enum ESoundList {
         new Thread() {
             public void run() {
                 try {
-                    Clip clip = (Clip) AudioSystem.getLine(new Line.Info(Clip.class));
+                    Clip clip = (Clip)AudioSystem.getLine(new Line.Info(Clip.class));
                     clip.addLineListener(event -> {
                         if (event.getType() == LineEvent.Type.STOP) {
                             clip.close();
+                            this.interrupt();
                         }
                     });
                     clip.open(sound.getAudioInputStream());
                     clip.start();
-                    //clip.close();
                 } catch (Exception e) {
                     System.err.println(e.getMessage());
                 }

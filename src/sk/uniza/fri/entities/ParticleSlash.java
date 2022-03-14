@@ -4,6 +4,7 @@ import sk.uniza.fri.essentials.Direction;
 import sk.uniza.fri.essentials.EImageList;
 import sk.uniza.fri.essentials.ImageTools;
 import sk.uniza.fri.essentials.Position;
+import sk.uniza.fri.ui.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -25,4 +26,9 @@ public class ParticleSlash extends Particle {
 
         return super.getImage();
     }
+
+    /*@Override
+    public void draw(Graphics2D g2d) {
+        g2d.drawImage(this.getImage(), super.getPosition().getCoordX() - GamePanel.TILE_SIZE / 2, super.getPosition().getCoordY() - GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+    }*/
 }

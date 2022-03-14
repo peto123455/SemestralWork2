@@ -1,5 +1,7 @@
 package sk.uniza.fri.main;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -8,11 +10,11 @@ import java.util.HashMap;
  *
  * @author peto1
  */
-public class KeyHandler {
+public class KeyHandler implements KeyListener {
     private HashMap<Character, Boolean> pressed;
     private Game game;
 
-    public KeyHandler(Game panel) {
+    public KeyHandler(Game game) {
         this.pressed = new HashMap<Character, Boolean>();
 
 
@@ -41,5 +43,33 @@ public class KeyHandler {
         if (this.pressed.containsKey(c)) {
             this.pressed.put(c, pressed);
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyChar() == Character.toLowerCase('c')) {
+            game.enterPortal();
+            return;
+        }
+        if (e.getKeyChar() == Character.toLowerCase('i')) {
+            game.switchInventory();
+            return;
+        }
+        if (e.getKeyChar() == Character.toLowerCase('q')) {
+            game.useHealthPotion();
+            return;
+        }
+
+        this.keyUpdate(Character.toLowerCase(e.getKeyChar()), true);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        this.keyUpdate(Character.toLowerCase(e.getKeyChar()), false);
     }
 }

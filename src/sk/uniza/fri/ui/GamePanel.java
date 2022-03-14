@@ -6,7 +6,6 @@ import sk.uniza.fri.essentials.EImageList;
 import sk.uniza.fri.essentials.EItemList;
 import sk.uniza.fri.main.Game;
 import sk.uniza.fri.entities.Item;
-import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.map.Portal;
 
 import javax.swing.JPanel;
@@ -53,32 +52,24 @@ public class GamePanel extends JPanel {
         Graphics2D g2d = (Graphics2D)g;
 
         g2d.setColor(Color.WHITE);
-        g2d.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
+        //g2d.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
         //Políčka
         this.drawTiles(g2d);
 
         //Itemy
         for (Item item : this.game.getMapHandler().getItems()) {
-            g2d.drawImage(item.getImage(), item.getPosition().getCoordX() - GamePanel.TILE_SIZE / 2, item.getPosition().getCoordY() - GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+            item.draw(g2d);
         }
 
         //Portal
         for (Portal portal : this.game.getMapHandler().getPortals()) {
-            g2d.drawImage(portal.getImage(), portal.getPosition().getCoordX() - 29 / 2, portal.getPosition().getCoordY() - 126 / 2, 29, 126, null);
+            portal.draw(g2d);
         }
 
-        //Nepriatelia
-        this.drawEnemies(g2d);
-
-        //Hráč
-        Position position = this.game.getPlayer().getPosition();
-        g2d.drawImage(this.game.getPlayer().getImage(), position.getCoordX() - GamePanel.TILE_SIZE / 2, position.getCoordY() - GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
-
-        //Particles
-        for (Particle particle : Particle.getParticles()) {
-            g2d.drawImage(particle.getImage(), particle.getPosition().getCoordX() - (particle.getImage().getWidth() * 3) / 2, particle.getPosition().getCoordY() - (particle.getImage().getHeight() * 3) / 2, particle.getImage().getWidth() * 3, particle.getImage().getHeight() * 3, null);
-        }
+        this.drawEnemies(g2d); //Nepriatelia
+        this.game.getPlayer().draw(g2d); //Hráč
+        Particle.drawParticles(g2d); //Particles
 
         //UI
         g2d.setFont(new Font("SansSerif", Font.BOLD, 25));
@@ -97,8 +88,8 @@ public class GamePanel extends JPanel {
 
     private void drawEnemies(Graphics2D g2d) {
         ArrayList<Enemy> enemies = this.game.getMapHandler().getEnemies();
-        for (int i = 0; i < enemies.size(); ++i) {
-            g2d.drawImage(enemies.get(i).getImage(), enemies.get(i).getPosition().getCoordX() - GamePanel.TILE_SIZE / 2, enemies.get(i).getPosition().getCoordY() - GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+        for (Enemy enemy : enemies) {
+            enemy.draw(g2d);
         }
     }
 
@@ -109,7 +100,7 @@ public class GamePanel extends JPanel {
                     continue;
                 }
 
-                g2d.drawImage(this.game.getMapHandler().getTile(j, i).getImage(), j * GamePanel.TILE_SIZE, i * GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+                this.game.getMapHandler().getTile(j, i).draw(g2d, i, j);
 
             }
         }

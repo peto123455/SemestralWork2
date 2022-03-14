@@ -4,6 +4,7 @@ import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.essentials.EImageList;
 import sk.uniza.fri.essentials.Position;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public class Portal {
@@ -42,5 +43,9 @@ public class Portal {
 
     public Map getMap() {
         return this.map;
+    }
+
+    public void draw(Graphics2D g2d) {
+        g2d.drawImage(this.getImage(), this.getPosition().getCoordX() - 29 / 2, this.getPosition().getCoordY() - 126 / 2, 29, 126, null);
     }
 }

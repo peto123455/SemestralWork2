@@ -1,5 +1,7 @@
 package sk.uniza.fri.essentials;
 
+import sk.uniza.fri.main.Game;
+
 import java.util.ArrayList;
 
 public class Inventory {
@@ -16,6 +18,21 @@ public class Inventory {
             return;
         }
         this.inventory.add(item);
+    }
+
+    public boolean removeItemStack(ItemStack item) {
+        ItemStack itemStack = this.containsItem(item);
+        if (itemStack == null || item.getAmount() > itemStack.getAmount()) {
+            return false;
+        }
+
+        itemStack.setAmount(itemStack.getAmount() - item.getAmount());
+
+        if (itemStack.getAmount() <= 0) {
+            this.inventory.remove(itemStack);
+        }
+
+        return true;
     }
 
     private ItemStack containsItem(ItemStack item) {
@@ -47,5 +64,19 @@ public class Inventory {
             string += String.format("%s: %dx\n", item.getItem().getName(), item.getAmount());
         }
         return string;
+    }
+
+    public boolean useItem(ItemStack item, Game game) {
+        switch (item.getItem()) {
+            case HEALTH_POTION -> {
+                if (!game.getPlayer().isMaxHearts() && this.removeItemStack(item)) {
+                    game.getPlayer().addHeart();
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        return false;
     }
 }

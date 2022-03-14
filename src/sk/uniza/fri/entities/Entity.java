@@ -2,7 +2,9 @@ package sk.uniza.fri.entities;
 
 import sk.uniza.fri.essentials.EImageList;
 import sk.uniza.fri.essentials.Position;
+import sk.uniza.fri.ui.GamePanel;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -51,6 +53,10 @@ public abstract class Entity {
         for (int i = 0; i < images.length; ++i) {
             this.images[i] = images[i].getImage();
         }
+    }
+
+    public void draw(Graphics2D g2d) {
+        g2d.drawImage(this.getImage(), this.getPosition().getCoordX() - GamePanel.TILE_SIZE / 2, this.getPosition().getCoordY() - GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
     }
 
     protected BufferedImage[] getImages() {

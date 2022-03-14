@@ -5,6 +5,7 @@ import sk.uniza.fri.essentials.Direction;
 import sk.uniza.fri.essentials.EImageList;
 import sk.uniza.fri.essentials.Position;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -43,5 +44,11 @@ public class Particle extends Entity {
 
     public static ArrayList<Particle> getParticles() {
         return particles;
+    }
+
+    public static void drawParticles(Graphics2D g2d) {
+        for (Particle particle : Particle.getParticles()) {
+            particle.draw(g2d);
+        }
     }
 }

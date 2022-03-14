@@ -28,4 +28,8 @@ public class HealthSystem {
     public int getHearts() {
         return this.hearts;
     }
+
+    public boolean isHaxHearts() {
+        return this.hearts >= this.maxHearts;
+    }
 }
