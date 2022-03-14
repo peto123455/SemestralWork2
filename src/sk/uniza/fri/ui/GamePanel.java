@@ -77,6 +77,10 @@ public class GamePanel extends JPanel {
         this.drawHearts(1223, 24, this.game.getPlayer().getHearths(), g2d);
         this.inventoryRenderer.draw(g2d, this.game.getPlayer().getInventory());
 
+        for (MessageBox message : MessageBox.getMessageBoxes()) {
+            message.draw(g2d);
+        }
+
         g2d.dispose();
     }
 

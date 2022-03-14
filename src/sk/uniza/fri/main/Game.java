@@ -13,6 +13,7 @@ import sk.uniza.fri.map.MapHandler;
 import sk.uniza.fri.map.Portal;
 import sk.uniza.fri.map.PortalGroup;
 import sk.uniza.fri.ui.GamePanel;
+import sk.uniza.fri.ui.MessageBox;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -53,6 +54,7 @@ public class Game {
                 Game.this.updateGame();
             }
         }, 50, 20);
+        new MessageBox("This is game", 5000);
     }
 
     public MapHandler getMapHandler() {
@@ -99,14 +101,9 @@ public class Game {
 
         this.updateParticles();
 
-        panel.repaint();
-    }
+        this.checkMessages();
 
-    private void updateParticles() {
-        ArrayList<Particle> particles = Particle.getParticles();
-        for (int i = 0; i < particles.size(); ++i) {
-            particles.get(i).update();
-        }
+        panel.repaint();
     }
 
     private void createKeyListener() {
@@ -159,6 +156,19 @@ public class Game {
         ArrayList<Enemy> enemies = this.getMapHandler().getEnemies();
         for (Enemy enemy : enemies) {
             enemy.update(this);
+        }
+    }
+
+    private void updateParticles() {
+        ArrayList<Particle> particles = Particle.getParticles();
+        for (int i = 0; i < particles.size(); ++i) {
+            particles.get(i).update();
+        }
+    }
+
+    private void checkMessages() {
+        for (int i = 0; i < MessageBox.getMessageBoxes().size(); ++i) {
+            MessageBox.getMessageBoxes().get(i).update();
         }
     }
 }
