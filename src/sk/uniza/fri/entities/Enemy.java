@@ -43,6 +43,7 @@ public class Enemy extends Entity implements IEntityAlive {
         mapHandler.getMap(1).getEnemies().add(enemy);
 
         enemy = new Enemy(new Position(1000, 200), mapHandler.getMap(1));
+        enemy.addDropItem(new ItemStack(EItemList.HEALTH_POTION, 1));
         enemy.addDropItem(new ItemStack(EItemList.COINS, 100));
         enemy.follow(player);
         mapHandler.getMap(1).getEnemies().add(enemy);

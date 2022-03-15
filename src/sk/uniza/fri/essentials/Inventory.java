@@ -70,6 +70,7 @@ public class Inventory {
         switch (item.getItem()) {
             case HEALTH_POTION -> {
                 if (!game.getPlayer().isMaxHearts() && this.removeItemStack(item)) {
+                    ESoundList.playSound(ESoundList.POTION_DRINK);
                     game.getPlayer().addHeart();
                     return true;
                 }

@@ -37,7 +37,7 @@ public class Game {
         this.player = new Player();
         this.keyHandler = new KeyHandler(this);
 
-        this.player.getPosition().setPosition(new Position(100, 100));
+        this.player.getPosition().setPosition(new Position(200, 520));
         new ItemCoins(100, 300, 50);
 
         this.createKeyListener();
@@ -54,7 +54,7 @@ public class Game {
                 Game.this.updateGame();
             }
         }, 50, 20);
-        new MessageBox("This is game", 5000);
+        new MessageBox("WASD - pohyb\nC - Vstup do portálu\nQ - Použi elixír života", 5000);
     }
 
     public MapHandler getMapHandler() {

@@ -1,6 +1,8 @@
 package sk.uniza.fri.ui;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 public class MessageBox {
@@ -24,11 +26,19 @@ public class MessageBox {
     }
 
     public void draw(Graphics2D g2d) {
+        String[] strings = this.text.split("\n");
+
         g2d.setColor(Color.WHITE);
-        g2d.fillRect(50, 70, 100, 50);
+        g2d.fillRect(50, 70, 300, 25 * strings.length);
         g2d.setColor(Color.BLACK);
         g2d.setFont(new Font("SansSerif", Font.BOLD, 15));
-        g2d.drawString(this.text, 55, 90);
+
+        //Rozdelenie riadkov
+        int y = 70;
+        for (String string : strings) {
+            y += g2d.getFontMetrics().getHeight();
+            g2d.drawString(string, 53, y);
+        }
     }
 
     public static ArrayList<MessageBox> getMessageBoxes() {
