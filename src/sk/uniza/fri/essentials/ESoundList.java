@@ -15,6 +15,7 @@ public enum ESoundList {
     SWORD_SLASH("/sounds/swordSlash.wav"),
     PICKUP("/sounds/pickup.wav"),
     POTION_DRINK("/sounds/potion.wav"),
+    PORTAL("/sounds/portal.wav"),
     SOWRD_STAB("/sounds/swordStab.wav");
 
     private static final double VOLUME = 0.3; // Ovládanie hlasitosti 0 - 1

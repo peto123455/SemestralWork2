@@ -2,6 +2,7 @@ package sk.uniza.fri.map;
 
 import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.essentials.EImageList;
+import sk.uniza.fri.essentials.ESoundList;
 import sk.uniza.fri.essentials.Position;
 
 import java.awt.Graphics2D;
@@ -36,6 +37,7 @@ public class Portal {
     }
 
     public void teleport(Player player, MapHandler mapHandler) {
+        ESoundList.playSound(ESoundList.PORTAL);
         Portal portal = this.portalGroup.getTheOtherPortal(this);
         mapHandler.changeMap(portal.getMap());
         player.getPosition().setPosition(portal.getPosition());
