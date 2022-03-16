@@ -1,0 +1,30 @@
+{
+  "enemies": [
+    {
+      "map": 0,
+      "x": 1100,
+      "y": 500,
+      "hearts": 3,
+      "followPlayer": true,
+      "items": [
+        {
+          "name": "COINS",
+          "amount": 100
+        }
+      ]
+    },
+    {
+      "map": 1,
+      "x": 1100,
+      "y": 200,
+      "hearts": 3,
+      "followPlayer": true,
+      "items": [
+        {
+          "name": "COINS",
+          "amount": 50
+        }
+      ]
+    }
+  ]
+}

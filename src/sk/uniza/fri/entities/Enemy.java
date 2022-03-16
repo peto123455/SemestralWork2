@@ -1,5 +1,9 @@
 package sk.uniza.fri.entities;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import sk.uniza.fri.essentials.Direction;
 import sk.uniza.fri.essentials.EImageList;
 import sk.uniza.fri.essentials.EItemList;
@@ -16,6 +20,10 @@ import sk.uniza.fri.map.Map;
 import sk.uniza.fri.map.MapHandler;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -31,22 +39,35 @@ public class Enemy extends Entity implements IEntityAlive {
     private Map map;
 
     public static void createEnemies(MapHandler mapHandler, Player player) {
-        Enemy enemy = new Enemy(new Position(1100, 500), mapHandler.getMap(0));
-        enemy.addDropItem(new ItemStack(EItemList.COINS, 50));
-        enemy.goToPos(new Position(1100, 100));
-        enemy.follow(player);
-        mapHandler.getMap(0).getEnemies().add(enemy);
+        JSONObject json = null;
 
-        enemy = new Enemy(new Position(1100, 500), mapHandler.getMap(1));
-        enemy.addDropItem(new ItemStack(EItemList.COINS, 100));
-        enemy.follow(player);
-        mapHandler.getMap(1).getEnemies().add(enemy);
+        try {
+            InputStream is = Enemy.class.getResourceAsStream("/maps/entities.json");
+            JSONParser jsonParser = new JSONParser();
+            json = (JSONObject)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
 
-        enemy = new Enemy(new Position(1000, 200), mapHandler.getMap(1));
-        enemy.addDropItem(new ItemStack(EItemList.HEALTH_POTION, 1));
-        enemy.addDropItem(new ItemStack(EItemList.COINS, 100));
-        enemy.follow(player);
-        mapHandler.getMap(1).getEnemies().add(enemy);
+        } catch (IOException e) {
+
+        } catch (ParseException e) {
+
+        }
+
+        for (Object enemyObject : (JSONArray)json.get("enemies")) {
+            JSONObject enemy = (JSONObject)enemyObject;
+            Position position = new Position(((Long)enemy.get("x")).intValue(), ((Long)enemy.get("y")).intValue());
+
+            Enemy enemyI = new Enemy(position, mapHandler.getMap(((Long)enemy.get("map")).intValue()));
+            if (enemy.get("followPlayer") != null && (Boolean)enemy.get("followPlayer")) {
+                enemyI.follow(player);
+            }
+            for (Object itemObject : (JSONArray)enemy.get("items")) {
+                JSONObject item = (JSONObject)itemObject;
+                enemyI.addDropItem(new ItemStack(EItemList.valueOf((String)item.get("name")), ((Long)item.get("amount")).intValue()));
+            }
+            mapHandler.getMap(((Long)enemy.get("map")).intValue()).getEnemies().add(enemyI);
+        }
+
     }
 
     public Enemy(Map map) {
