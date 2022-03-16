@@ -38,38 +38,6 @@ public class Enemy extends Entity implements IEntityAlive {
     private ArrayList<ItemStack> drops;
     private Map map;
 
-    public static void createEnemies(MapHandler mapHandler, Player player) {
-        JSONObject json = null;
-
-        try {
-            InputStream is = Enemy.class.getResourceAsStream("/maps/entities.json");
-            JSONParser jsonParser = new JSONParser();
-            json = (JSONObject)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-
-        } catch (IOException e) {
-
-        } catch (ParseException e) {
-
-        }
-
-        for (Object enemyObject : (JSONArray)json.get("enemies")) {
-            JSONObject enemy = (JSONObject)enemyObject;
-            Position position = new Position(((Long)enemy.get("x")).intValue(), ((Long)enemy.get("y")).intValue());
-
-            Enemy enemyI = new Enemy(position, mapHandler.getMap(((Long)enemy.get("map")).intValue()));
-            if (enemy.get("followPlayer") != null && (Boolean)enemy.get("followPlayer")) {
-                enemyI.follow(player);
-            }
-            for (Object itemObject : (JSONArray)enemy.get("items")) {
-                JSONObject item = (JSONObject)itemObject;
-                enemyI.addDropItem(new ItemStack(EItemList.valueOf((String)item.get("name")), ((Long)item.get("amount")).intValue()));
-            }
-            mapHandler.getMap(((Long)enemy.get("map")).intValue()).getEnemies().add(enemyI);
-        }
-
-    }
-
     public Enemy(Map map) {
         this(new Position(0, 0), map);
     }
@@ -224,7 +192,11 @@ public class Enemy extends Entity implements IEntityAlive {
     private void dropItems() {
         for (ItemStack item : this.drops) {
             Random rand = new Random();
-            Item.spawnItem(this.map, item, this.getPosition().getCoordX() + rand.nextInt(50) - 25, this.getPosition().getCoordY() + rand.nextInt(50) - 25);
+            Item.spawnItem(this.map, item, new Position(this.getPosition().getCoordX() + rand.nextInt(50) - 25, this.getPosition().getCoordY() + rand.nextInt(50) - 25));
         }
+    }
+
+    public void setHearts(int amount) {
+        this.healthSystem.setHearts(amount);
     }
 }

@@ -31,4 +31,8 @@ public class HealthSystem {
     public boolean isHaxHearts() {
         return this.hearts >= this.maxHearts;
     }
+
+    public void setHearts (int hearts) {
+        this.hearts = hearts;
+    }
 }

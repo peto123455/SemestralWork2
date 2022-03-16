@@ -4,8 +4,12 @@
       "map": 0,
       "x": 1100,
       "y": 500,
-      "hearts": 3,
+      "hearts": 2,
       "followPlayer": true,
+      "goToPos": {
+        "x": 1050,
+        "y": 100
+      },
       "items": [
         {
           "name": "COINS",
@@ -17,7 +21,7 @@
       "map": 1,
       "x": 1100,
       "y": 200,
-      "hearts": 3,
+      "hearts": 2,
       "followPlayer": true,
       "items": [
         {
@@ -25,6 +29,15 @@
           "amount": 50
         }
       ]
+    }
+  ],
+  "items": [
+    {
+      "map": 0,
+      "x": 400,
+      "y": 200,
+      "item": "HEALTH_POTION",
+      "amount": 1
     }
   ]
 }

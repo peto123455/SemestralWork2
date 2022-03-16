@@ -33,7 +33,7 @@ public class Game {
         this.panel = panel;
         this.panel.setGame(this);
 
-        this.mapHandler = new MapHandler();
+        this.mapHandler = new MapHandler(this);
         this.player = new Player();
         this.keyHandler = new KeyHandler(this);
 
@@ -43,7 +43,6 @@ public class Game {
         this.createKeyListener();
         this.createMouseListener();
 
-        Enemy.createEnemies(mapHandler, player);
         PortalGroup.createPortals(this.mapHandler);
     }
 
