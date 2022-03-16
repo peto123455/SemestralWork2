@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MapHandler {
-    private static final int MAPS_COUNT = 2;
+    private static final int MAPS_COUNT = 3;
 
     private Map[] maps;
     private Map currentMap;
