@@ -1,6 +1,12 @@
 package sk.uniza.fri.entities;
 
-import sk.uniza.fri.essentials.*;
+import sk.uniza.fri.essentials.Direction;
+import sk.uniza.fri.essentials.EImageList;
+import sk.uniza.fri.essentials.ESoundList;
+import sk.uniza.fri.essentials.HealthSystem;
+import sk.uniza.fri.essentials.IEntityAlive;
+import sk.uniza.fri.essentials.ImageTools;
+import sk.uniza.fri.essentials.Inventory;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

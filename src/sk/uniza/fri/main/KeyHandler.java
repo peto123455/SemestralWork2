@@ -48,15 +48,15 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == Character.toLowerCase('c')) {
-            game.enterPortal();
+            this.game.enterPortal();
             return;
         }
         if (e.getKeyChar() == Character.toLowerCase('i')) {
-            game.switchInventory();
+            this.game.switchInventory();
             return;
         }
         if (e.getKeyChar() == Character.toLowerCase('q')) {
-            game.useHealthPotion();
+            this.game.useHealthPotion();
             return;
         }
 

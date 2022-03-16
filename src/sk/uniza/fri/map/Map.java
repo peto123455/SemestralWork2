@@ -30,7 +30,7 @@ public class Map {
     }
 
     public GameTile getTile(int x, int y) {
-        return mapLayout[x][y];
+        return this.mapLayout[x][y];
     }
 
     public int getSizeX() {

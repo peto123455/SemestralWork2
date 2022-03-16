@@ -6,7 +6,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Item;
-import sk.uniza.fri.entities.ItemHealthPotion;
 import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.essentials.EItemList;
 import sk.uniza.fri.essentials.ItemStack;
@@ -15,7 +14,7 @@ import sk.uniza.fri.main.Game;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.essentials.ETileList;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -30,7 +29,6 @@ public class MapHandler {
     private Map currentMap;
 
     public MapHandler(Game game) {
-        //this.currentMap = 0;
         this.maps = new Map[MapHandler.MAPS_COUNT];
 
         this.loadMaps(game);

@@ -1,12 +1,7 @@
 package sk.uniza.fri.entities;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import sk.uniza.fri.essentials.Direction;
 import sk.uniza.fri.essentials.EImageList;
-import sk.uniza.fri.essentials.EItemList;
 import sk.uniza.fri.essentials.ESoundList;
 import sk.uniza.fri.essentials.HealthSystem;
 import sk.uniza.fri.essentials.IEntityAlive;
@@ -20,10 +15,6 @@ import sk.uniza.fri.map.Map;
 import sk.uniza.fri.map.MapHandler;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -59,7 +50,7 @@ public class Enemy extends Entity implements IEntityAlive {
     }
 
     public void update(Game game) {
-        if (dead) {
+        if (this.dead) {
             return;
         }
 
@@ -85,13 +76,13 @@ public class Enemy extends Entity implements IEntityAlive {
 
     public void hit(IEntityAlive entity) {
         long temp = System.currentTimeMillis();
-        if (temp < lastHit + cooldown) {
+        if (temp < this.lastHit + this.cooldown) {
             return;
         }
         ESoundList.playSound(ESoundList.SOWRD_STAB);
         new ParticleSlash(super.getPosition(), this.direction);
         entity.takeHeart();
-        this.lastHit = temp + cooldown;
+        this.lastHit = temp + this.cooldown;
     }
 
     public int getHearts() {
@@ -131,7 +122,7 @@ public class Enemy extends Entity implements IEntityAlive {
         Position position;
 
         if (this.follow != null && this.canSeePlayer(game.getPlayer(), game.getMapHandler())) {
-            if (this.isNearEntity(follow, 40)) {
+            if (this.isNearEntity(this.follow, 40)) {
                 return;
             }
             position = this.follow.getPosition();

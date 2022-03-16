@@ -22,19 +22,19 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Game {
-    private Timer timer = new Timer();
-    private GamePanel panel;
+    private final Timer timer = new Timer();
+    private final GamePanel panel;
 
-    private MapHandler mapHandler;
-    private Player player;
-    private KeyHandler keyHandler;
+    private final MapHandler mapHandler;
+    private final Player player;
+    private final KeyHandler keyHandler;
 
     public Game(GamePanel panel) {
         this.panel = panel;
         this.panel.setGame(this);
 
-        this.mapHandler = new MapHandler(this);
         this.player = new Player();
+        this.mapHandler = new MapHandler(this);
         this.keyHandler = new KeyHandler(this);
 
         this.player.getPosition().setPosition(new Position(200, 520));
@@ -47,7 +47,7 @@ public class Game {
     }
 
     public void startGame() {
-        timer.scheduleAtFixedRate(new TimerTask() {
+        this.timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 Game.this.updateGame();
@@ -65,8 +65,6 @@ public class Game {
     }
 
     public void updateGame() {
-        Position pos = this.player.getPositionRelativeToGrid();
-
         Position finalPosition = new Position();
 
         for (Character c : this.keyHandler.getPressedKeys()) {
@@ -102,7 +100,7 @@ public class Game {
 
         this.checkMessages();
 
-        panel.repaint();
+        this.panel.repaint();
     }
 
     private void createKeyListener() {
@@ -116,7 +114,6 @@ public class Game {
                 return;
             }
         }
-        return;
     }
 
     public void useHealthPotion() {

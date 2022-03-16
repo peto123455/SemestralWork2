@@ -1,7 +1,6 @@
 package sk.uniza.fri.entities;
 
 import sk.uniza.fri.essentials.EImageList;
-import sk.uniza.fri.essentials.EItemList;
 import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.map.Map;

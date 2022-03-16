@@ -28,7 +28,7 @@ public class Particle extends Entity {
         if (this.nextUpdate > System.currentTimeMillis()) {
             return;
         }
-        if (stage < super.getImages().length - 1) {
+        if (this.stage < super.getImages().length - 1) {
             ++this.stage;
             this.nextUpdate = System.currentTimeMillis() + this.frameDuration;
             return;
