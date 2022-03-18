@@ -83,7 +83,7 @@ public class Game {
             if (direction == Direction.RIGHT || direction == Direction.LEFT) {
                 this.player.setDirection(direction);
             }
-            finalPosition.addPosition(direction.getPosByChar(c, 4));
+            finalPosition.addPosition(Direction.getPosByChar(c, 4));
 
             this.checkForItems();
         }

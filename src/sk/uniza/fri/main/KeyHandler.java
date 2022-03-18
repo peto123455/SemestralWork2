@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class KeyHandler implements KeyListener {
-    private HashMap<Character, Boolean> pressed;
-    private Game game;
+    private final HashMap<Character, Boolean> pressed;
+    private final Game game;
 
     public KeyHandler(Game game) {
         this.pressed = new HashMap<Character, Boolean>();
