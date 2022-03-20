@@ -34,9 +34,9 @@ public enum ESoundList {
         try {
             return AudioSystem.getAudioInputStream(this.getClass().getResource(this.getRoute()));
         } catch (IOException e) {
-            //Nič
+            e.printStackTrace();
         } catch (UnsupportedAudioFileException e) {
-            //Nič
+            e.printStackTrace();
         }
         return null;
     }
@@ -61,7 +61,7 @@ public enum ESoundList {
                     //Prehratie zvuku
                     clip.start();
                 } catch (Exception e) {
-                    //Nič
+                    e.printStackTrace();
                 }
             }
         }.start();

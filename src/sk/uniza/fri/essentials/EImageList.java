@@ -22,7 +22,7 @@ public enum EImageList {
         try {
             this.image = ImageIO.read(this.getClass().getResourceAsStream(route));
         } catch (IOException e) {
-            //Nič
+            e.printStackTrace();
         }
     }
 

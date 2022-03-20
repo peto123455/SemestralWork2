@@ -34,7 +34,7 @@ public enum ETileList {
         try {
             this.image = ImageIO.read(this.getClass().getResourceAsStream(route));
         } catch (IOException e) {
-            //Nič
+            e.printStackTrace();
         }
         this.id = id;
         this.hasCollision = hasCollision;

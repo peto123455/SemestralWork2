@@ -18,16 +18,14 @@ import sk.uniza.fri.ui.MessageBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Game {
-    private final Timer timer = new Timer();
     private final GamePanel panel;
 
     private final MapHandler mapHandler;
     private final Player player;
     private final KeyHandler keyHandler;
+    private final GameThread gameThread;
 
     public Game(GamePanel panel) {
         this.panel = panel;
@@ -36,6 +34,7 @@ public class Game {
         this.player = new Player();
         this.mapHandler = new MapHandler(this);
         this.keyHandler = new KeyHandler(this);
+        this.gameThread = new GameThread(this);
 
         this.player.getPosition().setPosition(new Position(200, 520));
         new ItemCoins(100, 300, 50);
@@ -46,7 +45,7 @@ public class Game {
         PortalGroup.createPortals(this.mapHandler);
     }
 
-    public void startGame() {
+    /*public void startGame() {
         this.timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -54,6 +53,10 @@ public class Game {
             }
         }, 50, 20);
         new MessageBox("WASD - pohyb\nC - Vstup do portálu\nQ - Použi elixír života", 5000);
+    }*/
+
+    public void startGame() {
+        this.gameThread.start();
     }
 
     public MapHandler getMapHandler() {
