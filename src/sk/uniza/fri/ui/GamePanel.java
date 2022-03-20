@@ -16,7 +16,6 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
 
@@ -67,7 +66,7 @@ public class GamePanel extends JPanel {
             portal.draw(g2d);
         }
 
-        this.drawEnemies(g2d); //Nepriatelia
+        Enemy.drawEnemies(g2d, this.game.getMapHandler()); //Nepriatelia
         this.game.getPlayer().draw(g2d); //Hráč
         Particle.drawParticles(g2d); //Particles
 
@@ -87,13 +86,6 @@ public class GamePanel extends JPanel {
     private void drawHearts(int x, int y, int amount, Graphics2D g2d) {
         for (int i = 0; i < amount; ++i) {
             g2d.drawImage(EImageList.HEART.getImage(), x -  39 / 2 - 50 * i, y - 36 / 2, 39, 36, null);
-        }
-    }
-
-    private void drawEnemies(Graphics2D g2d) {
-        ArrayList<Enemy> enemies = this.game.getMapHandler().getEnemies();
-        for (Enemy enemy : enemies) {
-            enemy.draw(g2d);
         }
     }
 

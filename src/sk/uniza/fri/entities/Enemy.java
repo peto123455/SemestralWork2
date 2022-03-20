@@ -14,6 +14,7 @@ import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.map.Map;
 import sk.uniza.fri.map.MapHandler;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
@@ -31,6 +32,13 @@ public class Enemy extends Entity implements IEntityAlive {
 
     public Enemy(Map map) {
         this(new Position(0, 0), map);
+    }
+
+    public static void drawEnemies(Graphics2D g2d, MapHandler mapHandler) {
+        ArrayList<Enemy> enemies = mapHandler.getEnemies();
+        for (Enemy enemy : enemies) {
+            enemy.draw(g2d);
+        }
     }
 
     public Enemy(Position position, Map map) {
