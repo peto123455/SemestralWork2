@@ -5,7 +5,6 @@ import sk.uniza.fri.essentials.Position;
 public class PortalGroup {
     private Portal[] group;
 
-
     public static void createPortals(MapHandler mapHandler) {
         Portal portal1 = new Portal(new Position(1000, 600), mapHandler.getMap(0));
         Portal portal2 = new Portal(new Position(100, 600), mapHandler.getMap(1));

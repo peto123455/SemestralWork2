@@ -9,10 +9,10 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public class Portal {
-    private BufferedImage image;
-    private Position position;
+    private final BufferedImage image;
+    private final Position position;
     private PortalGroup portalGroup;
-    private Map map;
+    private final Map map;
 
     public Portal(Position position, Map map) {
         this.image = EImageList.PORTAL.getImage();

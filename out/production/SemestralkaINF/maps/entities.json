@@ -59,12 +59,25 @@
           "amount": 50
         }
       ]
+    },
+    {
+      "map": 2,
+      "x": 450,
+      "y": 500,
+      "hearts": 2,
+      "followPlayer": true,
+      "items": [
+        {
+          "name": "COINS",
+          "amount": 75
+        }
+      ]
     }
   ],
   "items": [
     {
       "map": 0,
-      "x": 400,
+      "x": 450,
       "y": 200,
       "item": "HEALTH_POTION",
       "amount": 1

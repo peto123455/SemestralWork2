@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Enemy extends Entity implements IEntityAlive {
-    private HealthSystem healthSystem;
+    private final HealthSystem healthSystem;
     private long lastHit;
     private int cooldown;
     private Direction direction;
@@ -61,7 +61,6 @@ public class Enemy extends Entity implements IEntityAlive {
     private boolean canSeePlayer(Player player, MapHandler mapHandler) {
         Vector vector = new Vector(player.getPosition().getCoordX() - super.getPosition().getCoordX(), player.getPosition().getCoordY() - super.getPosition().getCoordY());
         for (int i = 1; i < (int)vector.length() / 20; ++i) {
-            Position position = new Position(super.getPosition().getCoordX(), super.getPosition().getCoordY());
             Vector vectorPart = new Vector(vector.getX(), vector.getY());
             vectorPart.normalize();
             Position girdPos = Position.getPositionRelativeToGrid(new Position(this.getPosition().getCoordX() + (int)(vectorPart.getX() * i * 20), this.getPosition().getCoordY() + (int)(vectorPart.getY() * i * 20)));
