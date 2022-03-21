@@ -1,13 +1,16 @@
 package sk.uniza.fri.ui;
 
+import sk.uniza.fri.essentials.EImageList;
+
 import javax.swing.JFrame;
 
 public class GameFrame extends JFrame {
 
     public GameFrame() {
-        this.setTitle("Semestralka");
-        this.setResizable(false);
-        this.setVisible(true);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        super.setTitle("Semestralka");
+        super.setResizable(false);
+        super.setIconImage(EImageList.KNIGHT.getImage());
+        super.setVisible(true);
+        super.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 }

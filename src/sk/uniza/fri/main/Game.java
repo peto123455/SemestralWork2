@@ -2,7 +2,6 @@ package sk.uniza.fri.main;
 
 import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Item;
-import sk.uniza.fri.entities.ItemCoins;
 import sk.uniza.fri.entities.Particle;
 import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.essentials.Direction;
@@ -15,6 +14,7 @@ import sk.uniza.fri.map.PortalGroup;
 import sk.uniza.fri.ui.GamePanel;
 import sk.uniza.fri.ui.MessageBox;
 
+import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -50,6 +50,13 @@ public class Game {
 
         this.player.getPosition().setPosition(new Position(200, 520));
         PortalGroup.createPortals(this.mapHandler);
+    }
+
+    public void restartGame(boolean died) {
+        this.restartGame();
+        if (died) {
+            JOptionPane.showMessageDialog(null, "You died");
+        }
     }
 
     public MapHandler getMapHandler() {
@@ -166,6 +173,6 @@ public class Game {
     }
 
     public void onDeath() {
-        this.restartGame();
+        this.restartGame(true);
     }
 }

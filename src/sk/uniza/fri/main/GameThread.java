@@ -6,7 +6,6 @@ public class GameThread extends Thread {
     private long lastFrame = System.currentTimeMillis();
 
     public GameThread(Game game) {
-        super();
         this.game = game;
     }
 
