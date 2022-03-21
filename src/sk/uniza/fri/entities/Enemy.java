@@ -14,7 +14,7 @@ import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.map.Map;
 import sk.uniza.fri.map.MapHandler;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;

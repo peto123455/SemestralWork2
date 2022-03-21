@@ -22,8 +22,8 @@ import java.util.ArrayList;
 public class Game {
     private final GamePanel panel;
 
-    private final MapHandler mapHandler;
-    private final Player player;
+    private MapHandler mapHandler;
+    private Player player;
     private final KeyHandler keyHandler;
     private final GameThread gameThread;
 
@@ -31,32 +31,25 @@ public class Game {
         this.panel = panel;
         this.panel.setGame(this);
 
-        this.player = new Player();
-        this.mapHandler = new MapHandler(this);
+        this.restartGame();
         this.keyHandler = new KeyHandler(this);
         this.gameThread = new GameThread(this);
-
-        this.player.getPosition().setPosition(new Position(200, 520));
-        new ItemCoins(100, 300, 50);
 
         this.createKeyListener();
         this.createMouseListener();
 
-        PortalGroup.createPortals(this.mapHandler);
     }
-
-    /*public void startGame() {
-        this.timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                Game.this.updateGame();
-            }
-        }, 50, 20);
-        new MessageBox("WASD - pohyb\nC - Vstup do portálu\nQ - Použi elixír života", 5000);
-    }*/
 
     public void startGame() {
         this.gameThread.start();
+    }
+
+    public void restartGame() {
+        this.player = new Player(this);
+        this.mapHandler = new MapHandler(this);
+
+        this.player.getPosition().setPosition(new Position(200, 520));
+        PortalGroup.createPortals(this.mapHandler);
     }
 
     public MapHandler getMapHandler() {
@@ -68,6 +61,7 @@ public class Game {
     }
 
     public void updateGame() {
+
         Position finalPosition = new Position();
 
         for (Character c : this.keyHandler.getPressedKeys()) {
@@ -169,5 +163,9 @@ public class Game {
         for (int i = 0; i < MessageBox.getMessageBoxes().size(); ++i) {
             MessageBox.getMessageBoxes().get(i).update();
         }
+    }
+
+    public void onDeath() {
+        this.restartGame();
     }
 }

@@ -7,6 +7,7 @@ import sk.uniza.fri.essentials.HealthSystem;
 import sk.uniza.fri.essentials.IEntityAlive;
 import sk.uniza.fri.essentials.ImageTools;
 import sk.uniza.fri.essentials.Inventory;
+import sk.uniza.fri.main.Game;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -15,13 +16,15 @@ public class Player extends Entity implements IEntityAlive {
     private Direction direction;
     private Inventory inventory;
     private HealthSystem healthSystem;
+    private Game game;
 
-    public Player() {
+    public Player(Game game) {
         super(new EImageList[] {EImageList.PLAYER});
 
         this.direction = Direction.RIGHT;
         this.inventory = new Inventory();
         this.healthSystem = new HealthSystem(5);
+        this.game = game;
     }
 
     @Override
@@ -45,7 +48,12 @@ public class Player extends Entity implements IEntityAlive {
     }
 
     public boolean takeHeart() {
-        return this.healthSystem.takeHeart();
+        boolean taken = this.healthSystem.takeHeart();
+        if (taken && this.healthSystem.getHearts() <= 0) {
+            this.onDeath();
+            return false;
+        }
+        return true;
     }
 
     public int getHearths() {
@@ -61,6 +69,10 @@ public class Player extends Entity implements IEntityAlive {
                 enemy.takeHeart();
             }
         }
+    }
+
+    private void onDeath() {
+        this.game.onDeath();
     }
 
     public boolean isMaxHearts() {
