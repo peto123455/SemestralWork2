@@ -1,4 +1,4 @@
-package sk.uniza.fri.essentials;
+package sk.uniza.fri.enums;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;

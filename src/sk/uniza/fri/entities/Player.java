@@ -1,8 +1,8 @@
 package sk.uniza.fri.entities;
 
-import sk.uniza.fri.essentials.Direction;
-import sk.uniza.fri.essentials.EImageList;
-import sk.uniza.fri.essentials.ESoundList;
+import sk.uniza.fri.enums.EDirection;
+import sk.uniza.fri.enums.EImageList;
+import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.HealthSystem;
 import sk.uniza.fri.essentials.IEntityAlive;
 import sk.uniza.fri.essentials.ImageTools;
@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Player extends Entity implements IEntityAlive {
-    private Direction direction;
+    private EDirection EDirection;
     private Inventory inventory;
     private HealthSystem healthSystem;
     private Game game;
@@ -21,7 +21,7 @@ public class Player extends Entity implements IEntityAlive {
     public Player(Game game) {
         super(new EImageList[] {EImageList.PLAYER});
 
-        this.direction = Direction.RIGHT;
+        this.EDirection = EDirection.RIGHT;
         this.inventory = new Inventory();
         this.healthSystem = new HealthSystem(5);
         this.game = game;
@@ -29,14 +29,14 @@ public class Player extends Entity implements IEntityAlive {
 
     @Override
     public BufferedImage getImage() {
-        if (this.direction == Direction.LEFT) {
+        if (this.EDirection == EDirection.LEFT) {
             return ImageTools.flip(super.getImage());
         }
         return super.getImage();
     }
 
-    public void setDirection(Direction direction) {
-        this.direction = direction;
+    public void setDirection(EDirection EDirection) {
+        this.EDirection = EDirection;
     }
 
     public Inventory getInventory() {
@@ -62,7 +62,7 @@ public class Player extends Entity implements IEntityAlive {
 
     public void hit(ArrayList<Enemy> enemies) {
         ESoundList.playSound(ESoundList.SWORD_SLASH);
-        new ParticleSlash(this.getPosition(), this.direction);
+        new ParticleSlash(this.getPosition(), this.EDirection);
 
         for (Enemy enemy : enemies) {
             if (super.isNearEntity(enemy, 50)) {

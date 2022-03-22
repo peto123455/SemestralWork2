@@ -1,6 +1,6 @@
 package sk.uniza.fri.ui;
 
-import sk.uniza.fri.essentials.EImageList;
+import sk.uniza.fri.enums.EImageList;
 
 import javax.swing.JFrame;
 

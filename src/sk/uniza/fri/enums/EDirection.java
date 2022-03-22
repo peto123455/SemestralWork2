@@ -1,6 +1,8 @@
-package sk.uniza.fri.essentials;
+package sk.uniza.fri.enums;
 
-public enum Direction {
+import sk.uniza.fri.essentials.Position;
+
+public enum EDirection {
     UP(new Position(0, -1), 'w'),
     DOWN(new Position(0, 1), 's'),
     LEFT(new Position(-1, 0), 'a'),
@@ -9,7 +11,7 @@ public enum Direction {
     private Position pos;
     private char character;
 
-    Direction(Position pos, char character) {
+    EDirection(Position pos, char character) {
         this.pos = pos;
         this.character = character;
     }
@@ -23,17 +25,17 @@ public enum Direction {
     }
 
     public static Position getPosByChar(char c) {
-        return Direction.getPosByChar(c, 1);
+        return EDirection.getPosByChar(c, 1);
     }
 
     public static Position getPosByChar(char c, int i) {
-        return Direction.getDirByChar(c).getPos(i);
+        return EDirection.getDirByChar(c).getPos(i);
     }
 
-    public static Direction getDirByChar(char c) {
-        for (Direction direction : Direction.values()) {
-            if (direction.character == c) {
-                return direction;
+    public static EDirection getDirByChar(char c) {
+        for (EDirection EDirection : EDirection.values()) {
+            if (EDirection.character == c) {
+                return EDirection;
             }
         }
         return null;

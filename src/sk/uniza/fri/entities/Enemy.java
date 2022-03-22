@@ -1,8 +1,8 @@
 package sk.uniza.fri.entities;
 
-import sk.uniza.fri.essentials.Direction;
-import sk.uniza.fri.essentials.EImageList;
-import sk.uniza.fri.essentials.ESoundList;
+import sk.uniza.fri.enums.EDirection;
+import sk.uniza.fri.enums.EImageList;
+import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.HealthSystem;
 import sk.uniza.fri.essentials.IEntityAlive;
 import sk.uniza.fri.essentials.ImageTools;
@@ -23,7 +23,7 @@ public class Enemy extends Entity implements IEntityAlive {
     private final HealthSystem healthSystem;
     private long lastHit;
     private int cooldown;
-    private Direction direction;
+    private EDirection EDirection;
     private Position toPos;
     private Entity follow;
     private boolean dead;
@@ -53,7 +53,7 @@ public class Enemy extends Entity implements IEntityAlive {
         this.lastHit = System.currentTimeMillis();
         this.cooldown = 1000;
 
-        this.direction = Direction.LEFT;
+        this.EDirection = EDirection.LEFT;
         this.dead = false;
     }
 
@@ -87,7 +87,7 @@ public class Enemy extends Entity implements IEntityAlive {
             return;
         }
         ESoundList.playSound(ESoundList.SOWRD_STAB);
-        new ParticleSlash(super.getPosition(), this.direction);
+        new ParticleSlash(super.getPosition(), this.EDirection);
         entity.takeHeart();
         this.lastHit = temp + this.cooldown;
     }
@@ -150,9 +150,9 @@ public class Enemy extends Entity implements IEntityAlive {
         if (pos.getCoordX() != 0 || pos.getCoordY() != 0) {
             //Zmena smeru
             if (pos.getCoordX() < 0) {
-                this.direction = Direction.LEFT;
+                this.EDirection = EDirection.LEFT;
             } else if (pos.getCoordX() > 0) {
-                this.direction = Direction.RIGHT;
+                this.EDirection = EDirection.RIGHT;
             }
 
             this.move(new Position(pos.getCoordX(), 0), game.getMapHandler());
@@ -177,7 +177,7 @@ public class Enemy extends Entity implements IEntityAlive {
 
     @Override
     public BufferedImage getImage() {
-        if (this.direction == Direction.LEFT) {
+        if (this.EDirection == EDirection.LEFT) {
             return ImageTools.flip(super.getImage());
         }
         return super.getImage();

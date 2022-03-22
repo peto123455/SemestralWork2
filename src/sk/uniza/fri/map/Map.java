@@ -3,7 +3,7 @@ package sk.uniza.fri.map;
 import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.main.GameTile;
-import sk.uniza.fri.essentials.ETileList;
+import sk.uniza.fri.enums.ETileList;
 
 import java.util.ArrayList;
 

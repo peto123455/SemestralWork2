@@ -7,6 +7,7 @@ import org.json.simple.parser.ParseException;
 import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.entities.Player;
+import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.map.Map;
 import sk.uniza.fri.map.MapHandler;
 

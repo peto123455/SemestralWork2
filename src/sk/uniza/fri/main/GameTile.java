@@ -1,6 +1,6 @@
 package sk.uniza.fri.main;
 
-import sk.uniza.fri.essentials.ETileList;
+import sk.uniza.fri.enums.ETileList;
 import sk.uniza.fri.ui.GamePanel;
 
 import java.awt.Graphics2D;

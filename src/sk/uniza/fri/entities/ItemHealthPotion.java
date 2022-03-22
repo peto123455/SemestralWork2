@@ -1,8 +1,8 @@
 package sk.uniza.fri.entities;
 
-import sk.uniza.fri.essentials.EImageList;
-import sk.uniza.fri.essentials.EItemList;
-import sk.uniza.fri.essentials.ESoundList;
+import sk.uniza.fri.enums.EImageList;
+import sk.uniza.fri.enums.EItemList;
+import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;
 

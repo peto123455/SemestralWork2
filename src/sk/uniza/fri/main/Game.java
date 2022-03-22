@@ -4,8 +4,8 @@ import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.entities.Particle;
 import sk.uniza.fri.entities.Player;
-import sk.uniza.fri.essentials.Direction;
-import sk.uniza.fri.essentials.EItemList;
+import sk.uniza.fri.enums.EDirection;
+import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.map.MapHandler;
@@ -74,7 +74,7 @@ public class Game {
 
         for (Character c : this.keyHandler.getPressedKeys()) {
             //Systém kolízií
-            Position futurePosition = Direction.getPosByChar(c, 16);
+            Position futurePosition = EDirection.getPosByChar(c, 16);
             futurePosition.addPosition(this.player.getPosition());
             futurePosition = Position.getPositionRelativeToGrid(futurePosition);
 
@@ -84,11 +84,11 @@ public class Game {
             }
 
             //Pohyb hráča
-            Direction direction = Direction.getDirByChar(c);
-            if (direction == Direction.RIGHT || direction == Direction.LEFT) {
-                this.player.setDirection(direction);
+            EDirection eDirection = EDirection.getDirByChar(c);
+            if (eDirection == EDirection.RIGHT || eDirection == EDirection.LEFT) {
+                this.player.setDirection(eDirection);
             }
-            finalPosition.addPosition(Direction.getPosByChar(c, 4));
+            finalPosition.addPosition(EDirection.getPosByChar(c, 4));
 
             this.checkForItems();
         }
@@ -129,17 +129,21 @@ public class Game {
         this.panel.switchInventory();
     }
 
-    private void mouseClicked(MouseEvent e) {
+    private void attack(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
-            this.player.hit(this.mapHandler.getEnemies());
+            this.attack();
         }
+    }
+
+    public void attack() {
+        this.player.hit(this.mapHandler.getEnemies());
     }
 
     private void createMouseListener() {
         this.panel.createMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                Game.this.mouseClicked(e);
+                Game.this.attack(e);
             }
         });
     }

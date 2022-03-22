@@ -22,12 +22,13 @@ public class KeyHandler implements KeyListener {
         this.pressed.put('a', false);
         this.pressed.put('s', false);
         this.pressed.put('d', false);
+        this.pressed.put('k', false);
     }
 
     public ArrayList<Character> getPressedKeys() {
         ArrayList<Character> list = new ArrayList<>();
         this.pressed.forEach((kluc, hodnota) -> {
-            if (hodnota) {
+            if (hodnota && kluc != 'k') {
                 list.add(kluc);
             }
         });
@@ -36,6 +37,9 @@ public class KeyHandler implements KeyListener {
 
     public void keyUpdate(char c, boolean pressed) {
         if (this.pressed.containsKey(c)) {
+            if (c == 'k' && !this.pressed.get(c)) {
+                this.game.attack();
+            }
             this.pressed.put(c, pressed);
         }
     }

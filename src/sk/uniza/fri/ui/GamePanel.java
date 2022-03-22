@@ -2,8 +2,8 @@ package sk.uniza.fri.ui;
 
 import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Particle;
-import sk.uniza.fri.essentials.EImageList;
-import sk.uniza.fri.essentials.EItemList;
+import sk.uniza.fri.enums.EImageList;
+import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.main.Game;
 import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.map.Portal;

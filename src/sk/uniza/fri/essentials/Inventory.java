@@ -1,5 +1,7 @@
 package sk.uniza.fri.essentials;
 
+import sk.uniza.fri.enums.EItemList;
+import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.main.Game;
 
 import java.util.ArrayList;

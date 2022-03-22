@@ -1,4 +1,4 @@
-package sk.uniza.fri.essentials;
+package sk.uniza.fri.enums;
 
 
 public enum EItemList {

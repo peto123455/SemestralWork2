@@ -1,5 +1,7 @@
 package sk.uniza.fri.essentials;
 
+import sk.uniza.fri.enums.EItemList;
+
 public class ItemStack {
     private EItemList item;
     private int amount;

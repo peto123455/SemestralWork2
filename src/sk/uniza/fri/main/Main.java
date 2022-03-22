@@ -1,6 +1,6 @@
 package sk.uniza.fri.main;
 
-import sk.uniza.fri.essentials.EGameStatus;
+import sk.uniza.fri.enums.EGameStatus;
 import sk.uniza.fri.ui.GameFrame;
 import sk.uniza.fri.ui.GamePanel;
 import sk.uniza.fri.ui.MenuPanel;

@@ -1,7 +1,7 @@
 package sk.uniza.fri.entities;
 
 
-import sk.uniza.fri.essentials.EImageList;
+import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.essentials.Position;
 
 import java.awt.Graphics2D;
