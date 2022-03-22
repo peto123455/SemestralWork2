@@ -11,7 +11,7 @@ public class ParticleSlash extends Particle {
     private Direction direction;
 
     public ParticleSlash(Position position, Direction direction) {
-        super(position, new EImageList[]{EImageList.SLASH1, EImageList.SLASH2, EImageList.SLASH3}, 150);
+        super(position, new EImageList[]{EImageList.SLASH1, EImageList.SLASH2, EImageList.SLASH3}, 3);
         super.getPosition().addPosition(direction.getPos(20));
         this.direction = direction;
     }

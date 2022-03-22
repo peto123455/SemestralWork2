@@ -14,7 +14,7 @@ import sk.uniza.fri.map.PortalGroup;
 import sk.uniza.fri.ui.GamePanel;
 import sk.uniza.fri.ui.MessageBox;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class Game {
         this.panel = panel;
         this.panel.setGame(this);
 
-        this.restartGame();
+        this.initGame();
         this.keyHandler = new KeyHandler(this);
         this.gameThread = new GameThread(this);
 
@@ -44,7 +44,7 @@ public class Game {
         this.gameThread.start();
     }
 
-    public void restartGame() {
+    public void initGame() {
         this.player = new Player(this);
         this.mapHandler = new MapHandler(this);
 
@@ -52,11 +52,12 @@ public class Game {
         PortalGroup.createPortals(this.mapHandler);
     }
 
-    public void restartGame(boolean died) {
-        this.restartGame();
+    public void initGame(boolean died) {
         if (died) {
+            this.panel.repaint();
             JOptionPane.showMessageDialog(null, "You died");
         }
+        this.initGame();
     }
 
     public MapHandler getMapHandler() {
@@ -173,6 +174,6 @@ public class Game {
     }
 
     public void onDeath() {
-        this.restartGame(true);
+        this.initGame(true);
     }
 }

@@ -7,7 +7,6 @@ import org.json.simple.parser.ParseException;
 import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.entities.Player;
-import sk.uniza.fri.main.Game;
 import sk.uniza.fri.map.Map;
 import sk.uniza.fri.map.MapHandler;
 
@@ -26,11 +25,11 @@ public class EntityLoader {
             JSONParser jsonParser = new JSONParser();
             json = (JSONObject)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
         } catch (UnsupportedEncodingException e) {
-
+            e.printStackTrace();
         } catch (IOException e) {
-
+            e.printStackTrace();
         } catch (ParseException e) {
-
+            e.printStackTrace();
         }
 
         EntityLoader.loadItems(json, mapHandler);

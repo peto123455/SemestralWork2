@@ -8,10 +8,10 @@ import sk.uniza.fri.essentials.ETileList;
 import java.util.ArrayList;
 
 public class Map {
-    private GameTile[][] mapLayout;
-    private ArrayList<Item> items;
-    private ArrayList<Enemy> enemies;
-    private ArrayList<Portal> portals;
+    private final GameTile[][] mapLayout;
+    private final ArrayList<Item> items;
+    private final ArrayList<Enemy> enemies;
+    private final ArrayList<Portal> portals;
 
     public Map(int sizeX, int sizeY) {
         this.mapLayout = new GameTile[sizeX][sizeY];

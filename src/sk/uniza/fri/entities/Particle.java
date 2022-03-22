@@ -9,8 +9,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Particle extends Entity {
-    private long nextUpdate;
     private int frameDuration;
+    private int currentFrame;
     private int stage;
 
     private static ArrayList<Particle> particles = new ArrayList<>();
@@ -18,19 +18,28 @@ public class Particle extends Entity {
     public Particle(Position position, EImageList[] images, int frameDuration) {
         super(images);
         this.getPosition().setPosition(position);
-        this.nextUpdate = System.currentTimeMillis() + this.frameDuration;
+        //this.nextUpdate = System.currentTimeMillis() + this.frameDuration;
         this.frameDuration = frameDuration;
         this.stage = 0;
+        this.currentFrame = 0;
         Particle.particles.add(this);
     }
 
     public void update() {
-        if (this.nextUpdate > System.currentTimeMillis()) {
+        /*if (this.nextUpdate > System.currentTimeMillis()) {
             return;
         }
         if (this.stage < super.getImages().length - 1) {
             ++this.stage;
             this.nextUpdate = System.currentTimeMillis() + this.frameDuration;
+            return;
+        }*/
+        ++this.currentFrame;
+        if (this.frameDuration > this.currentFrame) {
+            return;
+        } else if (this.stage < super.getImages().length - 1) {
+            ++this.stage;
+            this.currentFrame = 0;
             return;
         }
         Particle.particles.remove(this);
