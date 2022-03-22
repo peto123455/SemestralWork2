@@ -7,10 +7,13 @@ import java.util.HashMap;
 
 public class KeyHandler implements KeyListener {
     private final HashMap<Character, Boolean> pressed;
+    private final HashMap<Character, Boolean> pressable;
+
     private final Game game;
 
     public KeyHandler(Game game) {
         this.pressed = new HashMap<Character, Boolean>();
+        this.pressable = new HashMap<Character, Boolean>();
 
 
         this.game = game;
@@ -22,13 +25,14 @@ public class KeyHandler implements KeyListener {
         this.pressed.put('a', false);
         this.pressed.put('s', false);
         this.pressed.put('d', false);
-        this.pressed.put('k', false);
+
+        this.pressable.put('k', false);
     }
 
     public ArrayList<Character> getPressedKeys() {
         ArrayList<Character> list = new ArrayList<>();
         this.pressed.forEach((kluc, hodnota) -> {
-            if (hodnota && kluc != 'k') {
+            if (hodnota) {
                 list.add(kluc);
             }
         });
@@ -37,10 +41,14 @@ public class KeyHandler implements KeyListener {
 
     public void keyUpdate(char c, boolean pressed) {
         if (this.pressed.containsKey(c)) {
-            if (c == 'k' && !this.pressed.get(c)) {
+            this.pressed.put(c, pressed);
+        }
+
+        if (this.pressable.containsKey(c)) {
+            if (c == 'k' && !this.pressable.get(c)) {
                 this.game.attack();
             }
-            this.pressed.put(c, pressed);
+            this.pressable.put(c, pressed);
         }
     }
 

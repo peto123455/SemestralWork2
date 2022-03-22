@@ -4,7 +4,6 @@ import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.entities.Particle;
 import sk.uniza.fri.entities.Player;
-import sk.uniza.fri.enums.EDirection;
 import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;
@@ -69,42 +68,11 @@ public class Game {
     }
 
     public void updateGame() {
-
-        Position finalPosition = new Position();
-
-        for (Character c : this.keyHandler.getPressedKeys()) {
-            //Systém kolízií
-            Position futurePosition = EDirection.getPosByChar(c, 16);
-            futurePosition.addPosition(this.player.getPosition());
-            futurePosition = Position.getPositionRelativeToGrid(futurePosition);
-
-            GameTile tile = this.mapHandler.getTile(futurePosition.getCoordX(), futurePosition.getCoordY());
-            if (tile != null && tile.hasCollision()) {
-                continue;
-            }
-
-            //Pohyb hráča
-            EDirection eDirection = EDirection.getDirByChar(c);
-            if (eDirection == EDirection.RIGHT || eDirection == EDirection.LEFT) {
-                this.player.setDirection(eDirection);
-            }
-            finalPosition.addPosition(EDirection.getPosByChar(c, 4));
-
-            this.checkForItems();
-        }
-
-        /*if (finalPosition.getCoordX() != 0 && finalPosition.getCoordY() != 0) {
-            finalPosition = new Position(finalPosition.getCoordX() / 2, finalPosition.getCoordY() / 2);
-        }*/
-
-        this.player.getPosition().addPosition(finalPosition);
-
+        this.player.handleKeys(this.keyHandler.getPressedKeys(), this.mapHandler.getMap());
+        this.checkForItems();
         this.handleEnemies();
-
         this.updateParticles();
-
         this.checkMessages();
-
         this.panel.repaint();
     }
 

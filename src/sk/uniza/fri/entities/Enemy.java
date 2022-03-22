@@ -23,7 +23,7 @@ public class Enemy extends Entity implements IEntityAlive {
     private final HealthSystem healthSystem;
     private long lastHit;
     private int cooldown;
-    private EDirection EDirection;
+    private EDirection eDirection;
     private Position toPos;
     private Entity follow;
     private boolean dead;
@@ -53,7 +53,7 @@ public class Enemy extends Entity implements IEntityAlive {
         this.lastHit = System.currentTimeMillis();
         this.cooldown = 1000;
 
-        this.EDirection = EDirection.LEFT;
+        this.eDirection = EDirection.LEFT;
         this.dead = false;
     }
 
@@ -87,7 +87,7 @@ public class Enemy extends Entity implements IEntityAlive {
             return;
         }
         ESoundList.playSound(ESoundList.SOWRD_STAB);
-        new ParticleSlash(super.getPosition(), this.EDirection);
+        new ParticleSlash(super.getPosition(), this.eDirection);
         entity.takeHeart();
         this.lastHit = temp + this.cooldown;
     }
@@ -150,9 +150,9 @@ public class Enemy extends Entity implements IEntityAlive {
         if (pos.getCoordX() != 0 || pos.getCoordY() != 0) {
             //Zmena smeru
             if (pos.getCoordX() < 0) {
-                this.EDirection = EDirection.LEFT;
+                this.eDirection = EDirection.LEFT;
             } else if (pos.getCoordX() > 0) {
-                this.EDirection = EDirection.RIGHT;
+                this.eDirection = EDirection.RIGHT;
             }
 
             this.move(new Position(pos.getCoordX(), 0), game.getMapHandler());
@@ -177,7 +177,7 @@ public class Enemy extends Entity implements IEntityAlive {
 
     @Override
     public BufferedImage getImage() {
-        if (this.EDirection == EDirection.LEFT) {
+        if (this.eDirection == EDirection.LEFT) {
             return ImageTools.flip(super.getImage());
         }
         return super.getImage();

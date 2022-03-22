@@ -33,9 +33,9 @@ public enum EDirection {
     }
 
     public static EDirection getDirByChar(char c) {
-        for (EDirection EDirection : EDirection.values()) {
-            if (EDirection.character == c) {
-                return EDirection;
+        for (EDirection eDirection : EDirection.values()) {
+            if (eDirection.character == c) {
+                return eDirection;
             }
         }
         return null;
