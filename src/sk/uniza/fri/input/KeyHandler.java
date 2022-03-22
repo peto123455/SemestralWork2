@@ -17,21 +17,20 @@ public class KeyHandler implements KeyListener {
         this.pressed = new HashMap<>();
         this.pressable = new HashMap<>();
 
-
         this.game = game;
         this.registerKeys();
     }
 
     private void registerKeys() {
-        this.pressed.put('w', false);
-        this.pressed.put('a', false);
-        this.pressed.put('s', false);
-        this.pressed.put('d', false);
+        this.pressed.put('w', false); //Pohyb hore
+        this.pressed.put('a', false); //Pohyb doľava
+        this.pressed.put('s', false); //Pohyb dole
+        this.pressed.put('d', false); //Pohyb doprava
 
-        this.pressable.put('k', new PressableKeyAttack());
-        this.pressable.put('c', new PressableKeyEnterPortal());
-        this.pressable.put('i', new PressableKeyInventory());
-        this.pressable.put('q', new PressableKeyHealthPotion());
+        this.pressable.put('k', new PressableKeyAttack()); //Útok
+        this.pressable.put('c', new PressableKeyEnterPortal()); //Vstúpenie do portálu
+        this.pressable.put('i', new PressableKeyInventory()); //Otvorenie inventáru
+        this.pressable.put('q', new PressableKeyHealthPotion()); //Použitie elixíru života
     }
 
     public void resetKeys() {

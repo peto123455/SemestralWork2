@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class Player extends EntityAlive {
     private EDirection eDirection;
     private Inventory inventory;
-    //private HealthSystem healthSystem;
     private Game game;
 
     public Player(Game game) {

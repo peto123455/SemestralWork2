@@ -18,7 +18,6 @@ public class Particle extends Entity {
     public Particle(Position position, EImageList[] images, int frameDuration) {
         super(images);
         this.getPosition().setPosition(position);
-        //this.nextUpdate = System.currentTimeMillis() + this.frameDuration;
         this.frameDuration = frameDuration;
         this.stage = 0;
         this.currentFrame = 0;
@@ -26,14 +25,6 @@ public class Particle extends Entity {
     }
 
     public void update() {
-        /*if (this.nextUpdate > System.currentTimeMillis()) {
-            return;
-        }
-        if (this.stage < super.getImages().length - 1) {
-            ++this.stage;
-            this.nextUpdate = System.currentTimeMillis() + this.frameDuration;
-            return;
-        }*/
         ++this.currentFrame;
         if (this.frameDuration > this.currentFrame) {
             return;

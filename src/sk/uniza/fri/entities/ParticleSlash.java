@@ -8,17 +8,17 @@ import sk.uniza.fri.essentials.Position;
 import java.awt.image.BufferedImage;
 
 public class ParticleSlash extends Particle {
-    private EDirection EDirection;
+    private EDirection direction;
 
-    public ParticleSlash(Position position, EDirection EDirection) {
+    public ParticleSlash(Position position, EDirection direction) {
         super(position, new EImageList[]{EImageList.SLASH1, EImageList.SLASH2, EImageList.SLASH3}, 3);
-        super.getPosition().addPosition(EDirection.getPos(20));
-        this.EDirection = EDirection;
+        super.getPosition().addPosition(direction.getPos(27));
+        this.direction = direction;
     }
 
     @Override
     public BufferedImage getImage() {
-        if (this.EDirection == EDirection.LEFT) {
+        if (this.direction == EDirection.LEFT) {
             return ImageTools.flip(super.getImage());
         }
 
