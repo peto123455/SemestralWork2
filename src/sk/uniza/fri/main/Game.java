@@ -7,6 +7,7 @@ import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;
+import sk.uniza.fri.input.KeyHandler;
 import sk.uniza.fri.map.MapHandler;
 import sk.uniza.fri.map.Portal;
 import sk.uniza.fri.map.PortalGroup;
@@ -57,6 +58,7 @@ public class Game {
             JOptionPane.showMessageDialog(null, "You died");
         }
         this.initGame();
+        this.keyHandler.resetKeys();
     }
 
     public MapHandler getMapHandler() {

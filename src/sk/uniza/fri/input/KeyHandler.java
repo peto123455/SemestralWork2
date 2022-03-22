@@ -1,4 +1,6 @@
-package sk.uniza.fri.main;
+package sk.uniza.fri.input;
+
+import sk.uniza.fri.main.Game;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -7,13 +9,13 @@ import java.util.HashMap;
 
 public class KeyHandler implements KeyListener {
     private final HashMap<Character, Boolean> pressed;
-    private final HashMap<Character, Boolean> pressable;
+    private final HashMap<Character, PressableKey> pressable;
 
     private final Game game;
 
     public KeyHandler(Game game) {
-        this.pressed = new HashMap<Character, Boolean>();
-        this.pressable = new HashMap<Character, Boolean>();
+        this.pressed = new HashMap<>();
+        this.pressable = new HashMap<>();
 
 
         this.game = game;
@@ -26,7 +28,14 @@ public class KeyHandler implements KeyListener {
         this.pressed.put('s', false);
         this.pressed.put('d', false);
 
-        this.pressable.put('k', false);
+        this.pressable.put('k', new PressableKeyAttack());
+        this.pressable.put('c', new PressableKeyEnterPortal());
+        this.pressable.put('i', new PressableKeyInventory());
+        this.pressable.put('q', new PressableKeyHealthPotion());
+    }
+
+    public void resetKeys() {
+        this.registerKeys();
     }
 
     public ArrayList<Character> getPressedKeys() {
@@ -45,10 +54,11 @@ public class KeyHandler implements KeyListener {
         }
 
         if (this.pressable.containsKey(c)) {
-            if (c == 'k' && !this.pressable.get(c)) {
-                this.game.attack();
+            PressableKey key = this.pressable.get(c);
+            if (!key.isPressed()) {
+                key.action(this.game);
             }
-            this.pressable.put(c, pressed);
+            key.setPressed(pressed);
         }
     }
 
@@ -59,19 +69,6 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyChar() == Character.toLowerCase('c')) {
-            this.game.enterPortal();
-            return;
-        }
-        if (e.getKeyChar() == Character.toLowerCase('i')) {
-            this.game.switchInventory();
-            return;
-        }
-        if (e.getKeyChar() == Character.toLowerCase('q')) {
-            this.game.useHealthPotion();
-            return;
-        }
-
         this.keyUpdate(Character.toLowerCase(e.getKeyChar()), true);
     }
 
