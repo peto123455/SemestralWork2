@@ -3,7 +3,9 @@ package sk.uniza.fri.entities;
 import sk.uniza.fri.enums.EDirection;
 import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.enums.ESoundList;
-import sk.uniza.fri.essentials.*;
+import sk.uniza.fri.essentials.ImageTools;
+import sk.uniza.fri.essentials.Inventory;
+import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.main.Game;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.map.Map;
@@ -11,18 +13,17 @@ import sk.uniza.fri.map.Map;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class Player extends Entity implements IEntityAlive {
+public class Player extends EntityAlive {
     private EDirection eDirection;
     private Inventory inventory;
-    private HealthSystem healthSystem;
+    //private HealthSystem healthSystem;
     private Game game;
 
     public Player(Game game) {
-        super(new EImageList[] {EImageList.PLAYER});
+        super(new EImageList[] {EImageList.PLAYER}, 5);
 
         this.eDirection = EDirection.RIGHT;
         this.inventory = new Inventory();
-        this.healthSystem = new HealthSystem(5);
         this.game = game;
     }
 
@@ -42,23 +43,6 @@ public class Player extends Entity implements IEntityAlive {
         return this.inventory;
     }
 
-    public int getHearts() {
-        return this.healthSystem.getHearts();
-    }
-
-    public boolean takeHeart() {
-        boolean taken = this.healthSystem.takeHeart();
-        if (taken && this.healthSystem.getHearts() <= 0) {
-            this.onDeath();
-            return false;
-        }
-        return true;
-    }
-
-    public int getHearths() {
-        return this.healthSystem.getHearts();
-    }
-
     public void hit(ArrayList<Enemy> enemies) {
         ESoundList.playSound(ESoundList.SWORD_SLASH);
         new ParticleSlash(this.getPosition(), this.eDirection);
@@ -70,16 +54,9 @@ public class Player extends Entity implements IEntityAlive {
         }
     }
 
-    private void onDeath() {
+    @Override
+    protected void onDeath() {
         this.game.onDeath();
-    }
-
-    public boolean isMaxHearts() {
-        return this.healthSystem.isHaxHearts();
-    }
-
-    public void addHeart() {
-        this.healthSystem.addHeart();
     }
 
     public void handleKeys(ArrayList<Character> keys, Map map) {

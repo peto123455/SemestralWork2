@@ -3,8 +3,6 @@ package sk.uniza.fri.entities;
 import sk.uniza.fri.enums.EDirection;
 import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.enums.ESoundList;
-import sk.uniza.fri.essentials.HealthSystem;
-import sk.uniza.fri.essentials.IEntityAlive;
 import sk.uniza.fri.essentials.ImageTools;
 import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;
@@ -19,14 +17,12 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Enemy extends Entity implements IEntityAlive {
-    private final HealthSystem healthSystem;
+public class Enemy extends EntityAlive {
     private long lastHit;
     private int cooldown;
     private EDirection eDirection;
     private Position toPos;
     private Entity follow;
-    private boolean dead;
     private ArrayList<ItemStack> drops;
     private Map map;
 
@@ -42,11 +38,10 @@ public class Enemy extends Entity implements IEntityAlive {
     }
 
     public Enemy(Position position, Map map) {
-        super(new EImageList[] {EImageList.KNIGHT});
+        super(new EImageList[] {EImageList.KNIGHT}, 2);
 
         super.getPosition().setPosition(position);
 
-        this.healthSystem = new HealthSystem(2);
         this.drops = new ArrayList<>();
         this.map = map;
 
@@ -54,11 +49,10 @@ public class Enemy extends Entity implements IEntityAlive {
         this.cooldown = 1000;
 
         this.eDirection = EDirection.LEFT;
-        this.dead = false;
     }
 
     public void update(Game game) {
-        if (this.dead) {
+        if (super.isDead()) {
             return;
         }
 
@@ -81,7 +75,7 @@ public class Enemy extends Entity implements IEntityAlive {
         return true;
     }
 
-    public void hit(IEntityAlive entity) {
+    public void hit(EntityAlive entity) {
         long temp = System.currentTimeMillis();
         if (temp < this.lastHit + this.cooldown) {
             return;
@@ -92,20 +86,8 @@ public class Enemy extends Entity implements IEntityAlive {
         this.lastHit = temp + this.cooldown;
     }
 
-    public int getHearts() {
-        return this.healthSystem.getHearts();
-    }
-
-    public boolean takeHeart() {
-        boolean taken = this.healthSystem.takeHeart();
-        if (taken && this.healthSystem.getHearts() <= 0) {
-            this.onDeath();
-        }
-        return taken;
-    }
-
-    private void onDeath() {
-        this.dead = true;
+    @Override
+    protected void onDeath() {
         ESoundList.playSound(ESoundList.DEATH);
         super.changeImages(new EImageList[] {EImageList.KNIGHT_DEAD});
         this.dropItems();
@@ -192,9 +174,5 @@ public class Enemy extends Entity implements IEntityAlive {
             Random rand = new Random();
             Item.spawnItem(this.map, item, new Position(this.getPosition().getCoordX() + rand.nextInt(50) - 25, this.getPosition().getCoordY() + rand.nextInt(50) - 25));
         }
-    }
-
-    public void setHearts(int amount) {
-        this.healthSystem.setHearts(amount);
     }
 }

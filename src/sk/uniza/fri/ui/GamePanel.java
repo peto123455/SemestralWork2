@@ -73,7 +73,7 @@ public class GamePanel extends JPanel {
         //UI
         g2d.setFont(new Font("SansSerif", Font.BOLD, 25));
         g2d.drawString(String.format("Coins: %d", this.game.getPlayer().getInventory().getItemAmount(EItemList.COINS)), 5, 35);
-        this.drawHearts(1223, 24, this.game.getPlayer().getHearths(), g2d);
+        this.drawHearts(1223, 24, this.game.getPlayer().getHearts(), g2d);
         this.inventoryRenderer.draw(g2d, this.game.getPlayer().getInventory());
 
         for (MessageBox message : MessageBox.getMessageBoxes()) {
