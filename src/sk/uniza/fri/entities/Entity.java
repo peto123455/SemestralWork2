@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 public abstract class Entity {
     private BufferedImage[] images;
 
-    private Position position;
+    private final Position position;
 
     public Entity(EImageList[] images) {
         this.images = new BufferedImage[images.length];

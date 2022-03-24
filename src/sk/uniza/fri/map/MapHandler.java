@@ -83,7 +83,7 @@ public class MapHandler {
     }
 
     public ArrayList<Portal> getPortals() {
-        return this.getPortals(currentMap);
+        return this.getPortals(this.currentMap);
     }
 
     public void drawTiles(Graphics2D g2d) {

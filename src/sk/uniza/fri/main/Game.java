@@ -10,7 +10,6 @@ import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.input.KeyHandler;
 import sk.uniza.fri.map.MapHandler;
 import sk.uniza.fri.map.Portal;
-import sk.uniza.fri.map.PortalGroup;
 import sk.uniza.fri.ui.GamePanel;
 import sk.uniza.fri.ui.MessageBox;
 

@@ -23,8 +23,8 @@ public class Enemy extends EntityAlive {
     private EDirection eDirection;
     private Position toPos;
     private Entity follow;
-    private ArrayList<ItemStack> drops;
-    private Map map;
+    private final ArrayList<ItemStack> drops;
+    private final Map map;
 
     public Enemy(Map map) {
         this(new Position(0, 0), map);

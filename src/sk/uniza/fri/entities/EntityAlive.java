@@ -4,7 +4,7 @@ import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.essentials.HealthSystem;
 
 public abstract class EntityAlive extends Entity {
-    private HealthSystem healthSystem;
+    private final HealthSystem healthSystem;
 
     public EntityAlive(EImageList[] images, int maxHearts) {
         super(images);

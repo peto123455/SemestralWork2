@@ -20,6 +20,8 @@ import java.io.UnsupportedEncodingException;
 
 public class EntityLoader {
 
+    public static final int PORTALS_PER_GROUP = 2;
+
     public static void loadEntities(MapHandler mapHandler, Player player) {
         JSONObject json = null;
 
@@ -84,9 +86,9 @@ public class EntityLoader {
         for (Object groupObject : (JSONArray)json.get("portal-groups")) {
             JSONArray group = (JSONArray)groupObject;
 
-            Portal[] portals = new Portal[2];
+            Portal[] portals = new Portal[EntityLoader.PORTALS_PER_GROUP];
 
-            for (int i = 0; i < 2; ++i) {
+            for (int i = 0; i < portals.length; ++i) {
                 JSONObject portal = (JSONObject)group.get(i);
                 int x = ((Long)portal.get("x")).intValue();
                 int y = ((Long)portal.get("y")).intValue();
