@@ -50,7 +50,7 @@ public class Main {
 
     private void registerListeners() {
         this.menuPanel.registerAction(e -> this.startGame(), 0); //Zavolá startGame() pri stlačení tlačiala
-        this.menuPanel.registerAction(e -> JOptionPane.showMessageDialog(null, "W,A,S,D - Movement\nC - Enter portal\nQ - Use health potion"), 1);
+        this.menuPanel.registerAction(e -> JOptionPane.showMessageDialog(null, "W,A,S,D - Movement\nC - Enter portal\nQ - Use health potion\nLMB / K - attack"), 1);
         this.menuPanel.registerAction(e -> System.exit(0), 2);
     }
 }

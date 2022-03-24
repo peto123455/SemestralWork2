@@ -18,9 +18,9 @@ public class MenuPanel extends JPanel {
 
         super.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         super.setPreferredSize(new Dimension(250, 250));
-        this.buttons.add(new JButton("Začať hru"));
-        this.buttons.add(new JButton("Pomoc"));
-        this.buttons.add(new JButton("Koniec"));
+        this.buttons.add(new JButton("Start game"));
+        this.buttons.add(new JButton("Help"));
+        this.buttons.add(new JButton("Exit"));
 
         for (JButton button : this.buttons) {
             button.setAlignmentX(Component.CENTER_ALIGNMENT);

@@ -10,6 +10,8 @@ import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.map.Map;
 import sk.uniza.fri.map.MapHandler;
+import sk.uniza.fri.map.Portal;
+import sk.uniza.fri.map.PortalGroup;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,6 +37,7 @@ public class EntityLoader {
 
         EntityLoader.loadItems(json, mapHandler);
         EntityLoader.loadEnemies(json, mapHandler, player);
+        EntityLoader.loadPortals(json, mapHandler);
     }
 
 
@@ -74,6 +77,26 @@ public class EntityLoader {
                 enemyI.addDropItem(new ItemStack(EItemList.valueOf((String)item.get("name")), ((Long)item.get("amount")).intValue()));
             }
             mapHandler.getMap(((Long)enemy.get("map")).intValue()).getEnemies().add(enemyI);
+        }
+    }
+
+    private static void loadPortals(JSONObject json, MapHandler mapHandler) {
+        for (Object groupObject : (JSONArray)json.get("portal-groups")) {
+            JSONArray group = (JSONArray)groupObject;
+
+            Portal[] portals = new Portal[2];
+
+            for (int i = 0; i < 2; ++i) {
+                JSONObject portal = (JSONObject)group.get(i);
+                int x = ((Long)portal.get("x")).intValue();
+                int y = ((Long)portal.get("y")).intValue();
+                int map = ((Long)portal.get("map")).intValue();
+
+                portals[i] = new Portal(new Position(x, y), mapHandler.getMap(map));
+                mapHandler.getMap(map).getPortals().add(portals[i]);
+            }
+
+            new PortalGroup(portals[0], portals[1]);
         }
     }
 }

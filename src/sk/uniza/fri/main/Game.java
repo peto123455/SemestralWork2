@@ -49,7 +49,6 @@ public class Game {
         this.mapHandler = new MapHandler(this);
 
         this.player.getPosition().setPosition(new Position(200, 520));
-        PortalGroup.createPortals(this.mapHandler);
     }
 
     public void initGame(boolean died) {

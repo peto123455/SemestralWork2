@@ -40,8 +40,6 @@ public class MapHandler {
         }
 
         this.currentMap = this.maps[0];
-
-        //this.spawnEntities(game);
     }
 
     public void setTile(int x, int y, ETileList tile) {
