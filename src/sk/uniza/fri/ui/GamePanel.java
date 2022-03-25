@@ -59,6 +59,9 @@ public class GamePanel extends JPanel {
         g2d.drawString(String.format("Coins: %d", this.game.getPlayer().getInventory().getItemAmount(EItemList.COINS)), 5, 35);
         this.drawHearts(1223, 24, this.game.getPlayer().getHearts(), g2d);
         this.inventoryRenderer.draw(g2d, this.game.getPlayer().getInventory());
+        if (this.game.getPlayer().getQuestHandler().isQuest()) {
+            this.game.getPlayer().getQuestHandler().draw(g2d);
+        }
 
         for (MessageBox message : MessageBox.getMessageBoxes()) {
             message.draw(g2d);

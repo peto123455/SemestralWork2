@@ -18,7 +18,7 @@ public class GameFrame extends JFrame {
         super.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 if (JOptionPane.showConfirmDialog(GameFrame.this, "Do you really want to quit the game ?", "Semestralka - Game exit", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    GameFrame.super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    GameFrame.super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     return;
                 }
                 GameFrame.super.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

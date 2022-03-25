@@ -29,15 +29,15 @@ public class MessageBox {
         String[] strings = this.text.split("\n");
 
         g2d.setColor(Color.WHITE);
-        g2d.fillRect(50, 70, 300, 25 * strings.length);
+        g2d.fillRect(900, 70, 250, 25 * strings.length + 50);
         g2d.setColor(Color.BLACK);
         g2d.setFont(new Font("SansSerif", Font.BOLD, 15));
 
         //Rozdelenie riadkov
-        int y = 70;
+        int y = 70 + 25;
         for (String string : strings) {
             y += g2d.getFontMetrics().getHeight();
-            g2d.drawString(string, 53, y);
+            g2d.drawString(string, 925, y);
         }
     }
 
