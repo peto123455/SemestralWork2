@@ -4,11 +4,8 @@ import sk.uniza.fri.entities.Chest;
 import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Entity;
 import sk.uniza.fri.entities.Item;
-import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.enums.ETileList;
 import sk.uniza.fri.essentials.EntityLoader;
-import sk.uniza.fri.essentials.ItemStack;
-import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.main.Game;
 import sk.uniza.fri.main.GameTile;
 
@@ -28,9 +25,6 @@ public class MapHandler {
 
         this.loadMaps(game);
         EntityLoader.loadEntities(this, game.getPlayer());
-
-        this.getMap().addChest(new Chest(this.getMap(), new Position(200, 200), new ItemStack[] {new ItemStack(EItemList.COINS, 50)}));
-        //TODO: Načítanie chestiek z jsonu
     }
 
     private void loadMaps(Game game) {

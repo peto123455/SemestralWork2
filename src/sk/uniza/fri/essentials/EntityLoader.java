@@ -4,6 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import sk.uniza.fri.entities.Chest;
 import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.entities.Player;
@@ -40,6 +41,7 @@ public class EntityLoader {
         EntityLoader.loadItems(json, mapHandler);
         EntityLoader.loadEnemies(json, mapHandler, player);
         EntityLoader.loadPortals(json, mapHandler);
+        EntityLoader.loadChests(json, mapHandler);
     }
 
 
@@ -99,6 +101,26 @@ public class EntityLoader {
             }
 
             new PortalGroup(portals[0], portals[1]);
+        }
+    }
+
+    private static void loadChests(JSONObject json, MapHandler mapHandler) {
+        for (Object chestObject : (JSONArray)json.get("chests")) {
+            JSONObject chest = (JSONObject)chestObject;
+            Position position = new Position(((Long)chest.get("x")).intValue(), ((Long)chest.get("y")).intValue());
+            Map map = mapHandler.getMap(((Long)chest.get("map")).intValue());
+
+            Chest chestInstance = new Chest(map, position);
+
+            JSONArray items = (JSONArray)chest.get("items");
+
+            for (Object itemObject : items) {
+                JSONObject item = (JSONObject)itemObject;
+                ItemStack itemStack = new ItemStack(EItemList.valueOf((String)item.get("item")), ((Long)item.get("amount")).intValue());
+                chestInstance.addItem(itemStack);
+            }
+
+            map.addChest(chestInstance);
         }
     }
 }

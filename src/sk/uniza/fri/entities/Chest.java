@@ -20,11 +20,19 @@ public class Chest extends Entity {
         super(new EImageList[] { EImageList.CHEST, EImageList.CHEST_OPEN });
 
         this.items = new ArrayList<>();
-        this.addItems(items);
         this.isOpen = false;
         super.getPosition().setPosition(position);
         this.map = map;
+
+        if (items != null) {
+            this.addItems(items);
+        }
+
         this.map.addChest(this);
+    }
+
+    public Chest(Map map, Position position) {
+        this(map, position, null);
     }
 
     public boolean openChest() {
@@ -46,6 +54,10 @@ public class Chest extends Entity {
 
     private void addItems(ItemStack[] items) {
         this.items.addAll(Arrays.asList(items));
+    }
+
+    public void addItem(ItemStack item) {
+        this.items.add(item);
     }
 
     @Override
