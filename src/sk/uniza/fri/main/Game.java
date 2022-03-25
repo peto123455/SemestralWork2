@@ -1,6 +1,10 @@
 package sk.uniza.fri.main;
 
-import sk.uniza.fri.entities.*;
+import sk.uniza.fri.entities.Chest;
+import sk.uniza.fri.entities.Enemy;
+import sk.uniza.fri.entities.Item;
+import sk.uniza.fri.entities.Particle;
+import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;
@@ -79,7 +83,7 @@ public class Game {
 
     public void enterPortal() {
         for (Portal portal : this.getMapHandler().getPortals()) {
-            if (Position.getDistance(portal.getPosition(), this.player.getPosition()) < 80) {
+            if (this.player.isNearEntity(portal, 80)) {
                 portal.teleport(this.player, this.mapHandler);
                 return;
             }

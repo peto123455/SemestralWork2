@@ -50,7 +50,6 @@ public class GamePanel extends JPanel {
         Graphics2D g2d = (Graphics2D)g;
 
         g2d.setColor(Color.WHITE);
-        //g2d.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
         //Políčka
         this.game.getMapHandler().drawTiles(g2d);
@@ -60,7 +59,6 @@ public class GamePanel extends JPanel {
             entity.draw(g2d);
         }
 
-        Enemy.drawEnemies(g2d, this.game.getMapHandler()); //Nepriatelia
         this.game.getPlayer().draw(g2d); //Hráč
         Particle.drawParticles(g2d); //Particles
 
