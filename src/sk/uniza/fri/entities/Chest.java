@@ -1,12 +1,14 @@
 package sk.uniza.fri.entities;
 
 import sk.uniza.fri.enums.EImageList;
+import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.map.Map;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Chest extends Entity {
@@ -36,13 +38,13 @@ public class Chest extends Entity {
             Item.spawnItem(this.map, item, new Position(super.getPosition().getCoordX() + rand.nextInt(100) - 50, super.getPosition().getCoordY() + rand.nextInt(100) - 50));
         }
 
+        ESoundList.playSound(ESoundList.CHEST);
+
         this.isOpen = true;
     }
 
     private void addItems(ItemStack[] items) {
-        for (ItemStack item : items) {
-            this.items.add(item);
-        }
+        this.items.addAll(Arrays.asList(items));
     }
 
     @Override

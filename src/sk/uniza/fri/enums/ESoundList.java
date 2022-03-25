@@ -16,11 +16,12 @@ public enum ESoundList {
     PICKUP("/sounds/pickup.wav"),
     POTION_DRINK("/sounds/potion.wav"),
     PORTAL("/sounds/portal.wav"),
+    CHEST("/sounds/chest.wav"),
     SOWRD_STAB("/sounds/swordStab.wav");
 
     private static final double VOLUME = 0.3; // Ovládanie hlasitosti 0 - 1
 
-    private String route;
+    private final String route;
 
     ESoundList(String route) {
         this.route = route;

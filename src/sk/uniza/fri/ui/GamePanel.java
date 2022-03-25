@@ -1,7 +1,5 @@
 package sk.uniza.fri.ui;
 
-import sk.uniza.fri.entities.Enemy;
-import sk.uniza.fri.entities.Entity;
 import sk.uniza.fri.entities.Particle;
 import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.enums.EItemList;
@@ -49,20 +47,14 @@ public class GamePanel extends JPanel {
 
         Graphics2D g2d = (Graphics2D)g;
 
+        /* Hra */
+        this.game.getMapHandler().drawTiles(g2d);       //Políčka
+        this.game.getMapHandler().drawEntities(g2d);    //Entity (Nepriatelia, predmety, bedne, portále)
+        this.game.getPlayer().draw(g2d);                //Hráč
+        Particle.drawParticles(g2d);                    //Efekty
+
+        /* UI */
         g2d.setColor(Color.WHITE);
-
-        //Políčka
-        this.game.getMapHandler().drawTiles(g2d);
-
-        //Entity
-        for (Entity entity : this.game.getMapHandler().getMap().getEntityList()) {
-            entity.draw(g2d);
-        }
-
-        this.game.getPlayer().draw(g2d); //Hráč
-        Particle.drawParticles(g2d); //Particles
-
-        //UI
         g2d.setFont(new Font("SansSerif", Font.BOLD, 25));
         g2d.drawString(String.format("Coins: %d", this.game.getPlayer().getInventory().getItemAmount(EItemList.COINS)), 5, 35);
         this.drawHearts(1223, 24, this.game.getPlayer().getHearts(), g2d);

@@ -2,6 +2,7 @@ package sk.uniza.fri.map;
 
 import sk.uniza.fri.entities.Chest;
 import sk.uniza.fri.entities.Enemy;
+import sk.uniza.fri.entities.Entity;
 import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.enums.ETileList;
@@ -27,7 +28,9 @@ public class MapHandler {
 
         this.loadMaps(game);
         EntityLoader.loadEntities(this, game.getPlayer());
+
         this.getMap().addChest(new Chest(this.getMap(), new Position(200, 200), new ItemStack[] {new ItemStack(EItemList.COINS, 50)}));
+        //TODO: Načítanie chestiek z jsonu
     }
 
     private void loadMaps(Game game) {
@@ -101,6 +104,12 @@ public class MapHandler {
                 this.getTile(j, i).draw(g2d, i, j);
 
             }
+        }
+    }
+
+    public void drawEntities(Graphics2D g2d) {
+        for (Entity entity : this.getMap().getEntityList()) {
+            entity.draw(g2d);
         }
     }
 
