@@ -27,9 +27,9 @@ public class Chest extends Entity {
         this.map.addChest(this);
     }
 
-    public void openChest() {
+    public boolean openChest() {
         if (this.isOpen) {
-            return;
+            return false;
         }
 
         Random rand = new Random();
@@ -41,6 +41,7 @@ public class Chest extends Entity {
         ESoundList.playSound(ESoundList.CHEST);
 
         this.isOpen = true;
+        return true;
     }
 
     private void addItems(ItemStack[] items) {

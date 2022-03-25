@@ -77,9 +77,9 @@ public class Map {
         ArrayList<Entity> entities = new ArrayList<>();
 
         entities.addAll(this.items);
-        entities.addAll(this.enemies);
-        entities.addAll(this.portals);
         entities.addAll(this.chests);
+        entities.addAll(this.portals);
+        entities.addAll(this.enemies);
 
         return entities;
     }

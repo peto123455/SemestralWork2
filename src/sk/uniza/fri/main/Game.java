@@ -81,15 +81,6 @@ public class Game {
         this.panel.createKeyListener(this.keyHandler);
     }
 
-    public void enterPortal() {
-        for (Portal portal : this.getMapHandler().getPortals()) {
-            if (this.player.isNearEntity(portal, 80)) {
-                portal.teleport(this.player, this.mapHandler);
-                return;
-            }
-        }
-    }
-
     public void useHealthPotion() {
         this.getPlayer().getInventory().useItem(new ItemStack(EItemList.HEALTH_POTION, 1), this);
     }
@@ -108,10 +99,17 @@ public class Game {
         this.player.hit(this.mapHandler.getEnemies());
     }
 
-    public void openChest() {
+    public void useAction() {
         for (Chest chest : this.getMapHandler().getChests()) {
-            if (this.player.isNearEntity(chest, 30)) {
-                chest.openChest();
+            if (this.player.isNearEntity(chest, 30) && chest.openChest()) {
+                return;
+            }
+        }
+
+        for (Portal portal : this.getMapHandler().getPortals()) {
+            if (this.player.isNearEntity(portal, 80)) {
+                portal.teleport(this.player, this.mapHandler);
+                return;
             }
         }
     }
