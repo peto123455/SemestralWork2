@@ -1,9 +1,6 @@
 package sk.uniza.fri.main;
 
-import sk.uniza.fri.entities.Enemy;
-import sk.uniza.fri.entities.Item;
-import sk.uniza.fri.entities.Particle;
-import sk.uniza.fri.entities.Player;
+import sk.uniza.fri.entities.*;
 import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;
@@ -108,7 +105,11 @@ public class Game {
     }
 
     public void openChest() {
-
+        for (Chest chest : this.getMapHandler().getChests()) {
+            if (this.player.isNearEntity(chest, 30)) {
+                chest.openChest();
+            }
+        }
     }
 
     private void createMouseListener() {

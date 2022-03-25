@@ -1,12 +1,11 @@
 package sk.uniza.fri.ui;
 
 import sk.uniza.fri.entities.Enemy;
+import sk.uniza.fri.entities.Entity;
 import sk.uniza.fri.entities.Particle;
 import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.main.Game;
-import sk.uniza.fri.entities.Item;
-import sk.uniza.fri.map.Portal;
 
 import javax.swing.JPanel;
 import java.awt.Font;
@@ -56,14 +55,9 @@ public class GamePanel extends JPanel {
         //Políčka
         this.game.getMapHandler().drawTiles(g2d);
 
-        //Itemy
-        for (Item item : this.game.getMapHandler().getItems()) {
-            item.draw(g2d);
-        }
-
-        //Portal
-        for (Portal portal : this.game.getMapHandler().getPortals()) {
-            portal.draw(g2d);
+        //Entity
+        for (Entity entity : this.game.getMapHandler().getMap().getEntityList()) {
+            entity.draw(g2d);
         }
 
         Enemy.drawEnemies(g2d, this.game.getMapHandler()); //Nepriatelia

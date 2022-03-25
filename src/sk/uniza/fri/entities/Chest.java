@@ -5,7 +5,7 @@ import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.map.Map;
 
-import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,7 +15,7 @@ public class Chest extends Entity {
     private Map map;
 
     public Chest(Map map, Position position, ItemStack[] items) {
-        super(new EImageList[] { null }); //TODO: Pridať obrázky
+        super(new EImageList[] { EImageList.CHEST, EImageList.CHEST_OPEN });
 
         this.items = new ArrayList<>();
         this.addItems(items);
@@ -33,7 +33,7 @@ public class Chest extends Entity {
         Random rand = new Random();
 
         for (ItemStack item : this.items) {
-            Item.spawnItem(this.map, item, new Position(super.getPosition().getCoordX() + rand.nextInt(50) - 25, super.getPosition().getCoordY() + rand.nextInt(50) - 25));
+            Item.spawnItem(this.map, item, new Position(super.getPosition().getCoordX() + rand.nextInt(100) - 50, super.getPosition().getCoordY() + rand.nextInt(100) - 50));
         }
 
         this.isOpen = true;
@@ -46,11 +46,10 @@ public class Chest extends Entity {
     }
 
     @Override
-    public void draw(Graphics2D g2d) {
+    public BufferedImage getImage () {
         if (this.isOpen) {
-            //TODO: Vykreslovanie
-            return;
+            return super.getImage(1);
         }
-        //TODO: Vykreslovanie
+        return super.getImage(0);
     }
 }

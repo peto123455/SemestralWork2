@@ -1,31 +1,21 @@
 package sk.uniza.fri.map;
 
+import sk.uniza.fri.entities.Entity;
 import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.Position;
 
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 
-public class Portal {
-    private final BufferedImage image;
-    private final Position position;
+public class Portal extends Entity {
     private PortalGroup portalGroup;
     private final Map map;
 
     public Portal(Position position, Map map) {
-        this.image = EImageList.PORTAL.getImage();
-        this.position = position;
+        super(new EImageList[] { EImageList.PORTAL });
+        super.getPosition().setPosition(position);
         this.map = map;
-    }
-
-    public BufferedImage getImage() {
-        return this.image;
-    }
-
-    public Position getPosition() {
-        return this.position;
     }
 
     public PortalGroup getPortalGroup() {
@@ -47,6 +37,7 @@ public class Portal {
         return this.map;
     }
 
+    @Override
     public void draw(Graphics2D g2d) {
         g2d.drawImage(this.getImage(), this.getPosition().getCoordX() - 29 / 2, this.getPosition().getCoordY() - 126 / 2, 29, 126, null);
     }

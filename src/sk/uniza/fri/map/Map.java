@@ -2,6 +2,7 @@ package sk.uniza.fri.map;
 
 import sk.uniza.fri.entities.Chest;
 import sk.uniza.fri.entities.Enemy;
+import sk.uniza.fri.entities.Entity;
 import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.enums.ETileList;
@@ -66,5 +67,20 @@ public class Map {
         }
 
         this.chests.add(chest);
+    }
+
+    public ArrayList<Chest> getChests() {
+        return this.chests;
+    }
+
+    public ArrayList<Entity> getEntityList() {
+        ArrayList<Entity> entities = new ArrayList<>();
+
+        entities.addAll(this.items);
+        entities.addAll(this.enemies);
+        entities.addAll(this.portals);
+        entities.addAll(this.chests);
+
+        return entities;
     }
 }
