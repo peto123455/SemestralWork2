@@ -1,5 +1,6 @@
 package sk.uniza.fri.map;
 
+import sk.uniza.fri.entities.Chest;
 import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.main.GameTile;
@@ -12,12 +13,14 @@ public class Map {
     private final ArrayList<Item> items;
     private final ArrayList<Enemy> enemies;
     private final ArrayList<Portal> portals;
+    private final ArrayList<Chest> chests;
 
     public Map(int sizeX, int sizeY) {
         this.mapLayout = new GameTile[sizeX][sizeY];
         this.items = new ArrayList<>();
         this.enemies = new ArrayList<>();
         this.portals = new ArrayList<>();
+        this.chests = new ArrayList<>();
     }
 
     public void setTile(int x, int y, ETileList tile) {
@@ -55,5 +58,13 @@ public class Map {
 
     public ArrayList<Portal> getPortals() {
         return this.portals;
+    }
+
+    public void addChest(Chest chest) {
+        if (this.chests.contains(chest)) {
+            return;
+        }
+
+        this.chests.add(chest);
     }
 }

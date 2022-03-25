@@ -107,6 +107,10 @@ public class Game {
         this.player.hit(this.mapHandler.getEnemies());
     }
 
+    public void openChest() {
+
+    }
+
     private void createMouseListener() {
         this.panel.createMouseListener(new MouseAdapter() {
             @Override

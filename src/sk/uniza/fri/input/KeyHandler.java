@@ -31,6 +31,7 @@ public class KeyHandler implements KeyListener {
         this.pressable.put('c', new PressableKeyEnterPortal()); //Vstúpenie do portálu
         this.pressable.put('i', new PressableKeyInventory()); //Otvorenie inventáru
         this.pressable.put('q', new PressableKeyHealthPotion()); //Použitie elixíru života
+        this.pressable.put('e', new PressableKeyOpenChest()); //Použitie elixíru života
     }
 
     public void resetKeys() {
