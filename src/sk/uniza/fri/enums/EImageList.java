@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public enum EImageList {
+    MENU("/textures/menu.png"),
     PLAYER("/textures/player.png"),
     KNIGHT("/textures/knight.png"),
     KNIGHT_DEAD("/textures/knight_dead.png"),
