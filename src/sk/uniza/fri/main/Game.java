@@ -3,6 +3,7 @@ package sk.uniza.fri.main;
 import sk.uniza.fri.entities.Chest;
 import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Item;
+import sk.uniza.fri.entities.Npc;
 import sk.uniza.fri.entities.Particle;
 import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.enums.EItemList;
@@ -104,6 +105,14 @@ public class Game {
             if (this.player.isNearEntity(chest, 30) && chest.openChest()) {
                 return;
             }
+        }
+
+        for (Npc npc : this.getMapHandler().getNpcs()) {
+            if (this.player.isNearEntity(npc, 30) && npc.checkQuest(this.player.getQuestHandler().getCurrentQuest())) {
+                System.out.println("Yes");
+                return;
+            }
+            System.out.println("No");
         }
 
         for (Portal portal : this.getMapHandler().getPortals()) {

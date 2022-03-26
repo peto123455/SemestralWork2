@@ -13,7 +13,7 @@ public class QuestWelcome extends Quest {
 
     @Override
     public void onComplete() {
-        this.onRewardPickup();
+        super.onRewardPickup("The wizard gave you some coins for your heroism\nHe promised more if you kill 3 more");
         super.getQuestHandler().setCurrentQuest(new QuestSecond(super.getQuestHandler()));
     }
 

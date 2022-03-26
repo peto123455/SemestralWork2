@@ -48,8 +48,20 @@ public abstract class Quest {
     }
 
     public void onRewardPickup() {
+        this.onRewardPickup("Quest finished !");
+    }
+
+    public void onRewardPickup(String message) {
+        this.giveItems();
+        new MessageBox(message, 2000);
+        this.finishQuest();
+    }
+
+    protected void giveItems() {
         this.questHandler.onRewardPickup(this.itemRewards);
-        new MessageBox("Quest finished !", 2000);
+    }
+
+    protected void finishQuest() {
         this.questHandler.removeQuest();
     }
 
@@ -105,5 +117,13 @@ public abstract class Quest {
 
     public QuestHandler getQuestHandler() {
         return this.questHandler;
+    }
+
+    public void onNonQuestNpcReact() {
+        new MessageBox("Not part of current quest !", 2000);
+    }
+
+    public void onQuestNpcReact() {
+        new MessageBox("Quest not complete yet !", 2000);
     }
 }

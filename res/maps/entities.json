@@ -121,5 +121,14 @@
         }
       ]
     }
+  ],
+  "npcs": [
+    {
+      "image": "WIZARD",
+      "x": 100,
+      "y": 100,
+      "map": 1,
+      "quest": "sk.uniza.fri.quests.QuestSecond"
+    }
   ]
 }

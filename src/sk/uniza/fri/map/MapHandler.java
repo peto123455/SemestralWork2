@@ -4,6 +4,7 @@ import sk.uniza.fri.entities.Chest;
 import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Entity;
 import sk.uniza.fri.entities.Item;
+import sk.uniza.fri.entities.Npc;
 import sk.uniza.fri.enums.ETileList;
 import sk.uniza.fri.essentials.EntityLoader;
 import sk.uniza.fri.main.Game;
@@ -102,6 +103,11 @@ public class MapHandler {
     }
 
     public void drawEntities(Graphics2D g2d) {
+        /*ArrayList<Entity> entities = new ArrayList<>();
+
+        entities.addAll(this.getMap().getEntityList());
+        entities.addAll(ENpcs.getNpcs(Arrays.asList(maps).indexOf(this.currentMap)));*/
+
         for (Entity entity : this.getMap().getEntityList()) {
             entity.draw(g2d);
         }
@@ -109,6 +115,10 @@ public class MapHandler {
 
     public ArrayList<Chest> getChests() {
         return this.getMap().getChests();
+    }
+
+    public ArrayList<Npc> getNpcs() {
+        return this.getMap().getNpcs();
     }
 
 }

@@ -7,7 +7,9 @@ import org.json.simple.parser.ParseException;
 import sk.uniza.fri.entities.Chest;
 import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Item;
+import sk.uniza.fri.entities.Npc;
 import sk.uniza.fri.entities.Player;
+import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.map.Map;
 import sk.uniza.fri.map.MapHandler;
@@ -42,6 +44,7 @@ public class EntityLoader {
         EntityLoader.loadEnemies(json, mapHandler, player);
         EntityLoader.loadPortals(json, mapHandler);
         EntityLoader.loadChests(json, mapHandler);
+        EntityLoader.loadNpcs(json, mapHandler);
     }
 
 
@@ -121,6 +124,25 @@ public class EntityLoader {
             }
 
             map.addChest(chestInstance);
+        }
+    }
+
+    private static void loadNpcs(JSONObject json, MapHandler mapHandler) {
+        for (Object npcObject : (JSONArray)json.get("npcs")) {
+            JSONObject npc = (JSONObject)npcObject;
+            Position position = new Position(((Long)npc.get("x")).intValue(), ((Long)npc.get("y")).intValue());
+            Map map = mapHandler.getMap(((Long)npc.get("map")).intValue());
+            EImageList image = EImageList.valueOf((String)npc.get("image"));
+
+            Npc npcI = new Npc(position, image, map);
+
+            try {
+                npcI.setQuest(Class.forName((String)npc.get("quest")));
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            map.addNpc(npcI);
         }
     }
 }

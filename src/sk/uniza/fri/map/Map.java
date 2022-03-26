@@ -4,6 +4,7 @@ import sk.uniza.fri.entities.Chest;
 import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Entity;
 import sk.uniza.fri.entities.Item;
+import sk.uniza.fri.entities.Npc;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.enums.ETileList;
 
@@ -13,6 +14,7 @@ public class Map {
     private final GameTile[][] mapLayout;
     private final ArrayList<Item> items;
     private final ArrayList<Enemy> enemies;
+    private final ArrayList<Npc> npcs;
     private final ArrayList<Portal> portals;
     private final ArrayList<Chest> chests;
 
@@ -20,6 +22,7 @@ public class Map {
         this.mapLayout = new GameTile[sizeX][sizeY];
         this.items = new ArrayList<>();
         this.enemies = new ArrayList<>();
+        this.npcs = new ArrayList<>();
         this.portals = new ArrayList<>();
         this.chests = new ArrayList<>();
     }
@@ -69,8 +72,20 @@ public class Map {
         this.chests.add(chest);
     }
 
+    public void addNpc(Npc npc) {
+        if (this.npcs.contains(npc)) {
+            return;
+        }
+
+        this.npcs.add(npc);
+    }
+
     public ArrayList<Chest> getChests() {
         return this.chests;
+    }
+
+    public ArrayList<Npc> getNpcs() {
+        return this.npcs;
     }
 
     public ArrayList<Entity> getEntityList() {
@@ -79,6 +94,7 @@ public class Map {
         entities.addAll(this.items);
         entities.addAll(this.chests);
         entities.addAll(this.portals);
+        entities.addAll(this.npcs);
         entities.addAll(this.enemies);
 
         return entities;

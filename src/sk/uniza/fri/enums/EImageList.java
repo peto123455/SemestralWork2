@@ -17,6 +17,7 @@ public enum EImageList {
     HEALTH_POTION("/textures/healthPotion.png"),
     CHEST("/textures/chest.png"),
     CHEST_OPEN("/textures/chest_open.png"),
+    WIZARD("/textures/wizard.png"),
     PORTAL("/textures/portal.png");
 
     private BufferedImage image;
