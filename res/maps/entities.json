@@ -125,8 +125,8 @@
   "npcs": [
     {
       "image": "WIZARD",
-      "x": 100,
-      "y": 100,
+      "x": 400,
+      "y": 300,
       "map": 1,
       "quest": "sk.uniza.fri.quests.QuestSecond"
     }

@@ -12,7 +12,7 @@ public class QuestHandler {
     private Player player;
 
     public QuestHandler(Player player) {
-        this.currentQuest = new QuestWelcome(this);
+        this.currentQuest = new QuestIntro(this);
         this.player = player;
     }
 

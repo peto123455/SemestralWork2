@@ -109,10 +109,8 @@ public class Game {
 
         for (Npc npc : this.getMapHandler().getNpcs()) {
             if (this.player.isNearEntity(npc, 30) && npc.checkQuest(this.player.getQuestHandler().getCurrentQuest())) {
-                System.out.println("Yes");
                 return;
             }
-            System.out.println("No");
         }
 
         for (Portal portal : this.getMapHandler().getPortals()) {

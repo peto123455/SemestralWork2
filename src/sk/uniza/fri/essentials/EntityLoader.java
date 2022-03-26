@@ -134,7 +134,7 @@ public class EntityLoader {
             Map map = mapHandler.getMap(((Long)npc.get("map")).intValue());
             EImageList image = EImageList.valueOf((String)npc.get("image"));
 
-            Npc npcI = new Npc(position, image, map);
+            Npc npcI = new Npc(position, image);
 
             try {
                 npcI.setQuest(Class.forName((String)npc.get("quest")));

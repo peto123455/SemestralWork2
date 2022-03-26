@@ -48,12 +48,12 @@ public abstract class Quest {
     }
 
     public void onRewardPickup() {
-        this.onRewardPickup("Quest finished !");
+        this.onRewardPickup("Quest finished !", 2000);
     }
 
-    public void onRewardPickup(String message) {
+    public void onRewardPickup(String message, int time) {
         this.giveItems();
-        new MessageBox(message, 2000);
+        new MessageBox(message, time);
         this.finishQuest();
     }
 

@@ -29,7 +29,7 @@ public class MessageBox {
         String[] strings = this.text.split("\n");
 
         g2d.setColor(Color.WHITE);
-        g2d.fillRect(900, 70, 250, 25 * strings.length + 50);
+        g2d.fillRect(900, 70, 260, 25 * strings.length + 50);
         g2d.setColor(Color.BLACK);
         g2d.setFont(new Font("SansSerif", Font.BOLD, 15));
 
