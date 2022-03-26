@@ -3,6 +3,7 @@ package sk.uniza.fri.map;
 import sk.uniza.fri.entities.Entity;
 import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.enums.EImageList;
+import sk.uniza.fri.enums.EPortalStatus;
 import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.Position;
 
@@ -11,13 +12,12 @@ import java.awt.Graphics2D;
 public class Portal extends Entity {
     private PortalGroup portalGroup;
     private final Map map;
-    private boolean isEnabled;
+    private EPortalStatus status;
 
     public Portal(Position position, Map map) {
         super(new EImageList[] { EImageList.PORTAL });
         super.getPosition().setPosition(position);
         this.map = map;
-        this.isEnabled = true;
     }
 
     public PortalGroup getPortalGroup() {
@@ -29,7 +29,7 @@ public class Portal extends Entity {
     }
 
     public void teleport(Player player, MapHandler mapHandler) {
-        if (!isEnabled) {
+        if (this.status != null) {
             return;
         }
 
@@ -43,16 +43,20 @@ public class Portal extends Entity {
         return this.map;
     }
 
-    public void setEnabled(boolean isEnabled) {
-        this.isEnabled = isEnabled;
+    public void setStatus(EPortalStatus status) {
+        this.status = status;
     }
 
     @Override
     public void draw(Graphics2D g2d) {
-        if (!isEnabled) {
+        if (this.status != null) {
             return;
         }
 
         g2d.drawImage(this.getImage(), this.getPosition().getCoordX() - 29 / 2, this.getPosition().getCoordY() - 126 / 2, 29, 126, null);
+    }
+
+    public EPortalStatus getStatus() {
+        return this.status;
     }
 }

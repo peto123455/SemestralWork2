@@ -126,4 +126,6 @@ public abstract class Quest {
     public void onQuestNpcReact() {
         new MessageBox("Quest not complete yet !", 2000);
     }
+
+    protected abstract void onStart();
 }

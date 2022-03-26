@@ -4,7 +4,7 @@ import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.enums.EQuestAction;
 import sk.uniza.fri.essentials.ItemStack;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 public class QuestHandler {

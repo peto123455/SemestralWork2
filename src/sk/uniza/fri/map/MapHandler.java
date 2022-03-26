@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MapHandler {
-    private static final int MAPS_COUNT = 3;
+    private static final int MAPS_COUNT = 4;
 
     private final Map[] maps;
     private Map currentMap;

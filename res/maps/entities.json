@@ -89,7 +89,7 @@
         "x": 1000,
         "y": 600,
         "map": 0,
-        "enabled": false
+        "open": "OPEN_ON_ALL_DEAD"
       },
       {
         "x": 100,
@@ -102,12 +102,25 @@
         "x": 1000,
         "y": 600,
         "map": 1,
-        "enabled": false
+        "open": "OPEN_ON_ALL_DEAD"
       },
       {
         "x": 100,
         "y": 200,
         "map": 2
+      }
+    ],
+    [
+      {
+        "x": 1150,
+        "y": 500,
+        "map": 2,
+        "open": "OPEN_ON_ACTION"
+      },
+      {
+        "x": 100,
+        "y": 200,
+        "map": 3
       }
     ]
   ],
@@ -130,7 +143,14 @@
       "x": 400,
       "y": 300,
       "map": 1,
-      "quest": "sk.uniza.fri.quests.QuestSecond"
+      "quest": "sk.uniza.fri.quests.QuestFinishThem"
+    },
+    {
+      "image": "GOBLIN",
+      "x": 400,
+      "y": 300,
+      "map": 2,
+      "quest": "sk.uniza.fri.quests.QuestGoblin"
     }
   ]
 }

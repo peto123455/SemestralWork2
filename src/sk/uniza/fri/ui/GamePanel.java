@@ -63,8 +63,9 @@ public class GamePanel extends JPanel {
             this.game.getPlayer().getQuestHandler().draw(g2d);
         }
 
+        int y = 90;
         for (MessageBox message : MessageBox.getMessageBoxes()) {
-            message.draw(g2d);
+            y += message.draw(g2d, y);
         }
 
         g2d.dispose();

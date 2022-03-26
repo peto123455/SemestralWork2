@@ -1,7 +1,7 @@
 package sk.uniza.fri.main;
 
 import sk.uniza.fri.entities.Chest;
-import sk.uniza.fri.entities.Enemy;
+import sk.uniza.fri.entities.Entity;
 import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.entities.Npc;
 import sk.uniza.fri.entities.Particle;
@@ -32,7 +32,6 @@ public class Game {
         this.panel = panel;
         this.panel.setGame(this);
 
-        this.initGame();
         this.keyHandler = new KeyHandler(this);
         this.gameThread = new GameThread(this);
 
@@ -42,6 +41,8 @@ public class Game {
     }
 
     public void startGame() {
+        this.initGame();
+
         this.gameThread.start();
     }
 
@@ -72,7 +73,7 @@ public class Game {
     public void updateGame() {
         this.player.handleKeys(this.keyHandler.getPressedKeys(), this.mapHandler.getMap());
         this.checkForItems();
-        this.handleEnemies();
+        this.handleUpdate();
         this.updateParticles();
         this.checkMessages();
         this.panel.repaint();
@@ -108,7 +109,7 @@ public class Game {
         }
 
         for (Npc npc : this.getMapHandler().getNpcs()) {
-            if (this.player.isNearEntity(npc, 30) && npc.checkQuest(this.player.getQuestHandler().getCurrentQuest())) {
+            if (this.player.isNearEntity(npc, 30) && npc.checkQuest(this.player)) {
                 return;
             }
         }
@@ -139,10 +140,9 @@ public class Game {
         }
     }
 
-    private void handleEnemies() {
-        ArrayList<Enemy> enemies = this.getMapHandler().getEnemies();
-        for (Enemy enemy : enemies) {
-            enemy.update(this);
+    private void handleUpdate() {
+        for (Entity entity : this.getMapHandler().getMap().getEntityList()) {
+            entity.update(this);
         }
     }
 

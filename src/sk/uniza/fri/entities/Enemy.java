@@ -21,7 +21,6 @@ public class Enemy extends EntityAlive {
     private long lastHit;
     private int cooldown;
     private EDirection eDirection;
-    private Position toPos;
     private Entity follow;
     private final ArrayList<ItemStack> drops;
     private final Map map;
@@ -51,12 +50,13 @@ public class Enemy extends EntityAlive {
         this.eDirection = EDirection.LEFT;
     }
 
+    @Override
     public void update(Game game) {
         if (super.isDead()) {
             return;
         }
 
-        this.updatePos(game);
+        super.update(game);
         this.checkForPlayer(game.getPlayer());
     }
 
@@ -100,62 +100,31 @@ public class Enemy extends EntityAlive {
         }
     }
 
-    public void goToPos(Position toPos) {
-        this.toPos = toPos;
-    }
-
     public void follow(Entity entity) {
         this.follow = entity;
     }
 
-    private void updatePos(Game game) {
+    @Override
+    protected EDirection updatePos(Game game) {
         Position position;
 
         if (this.follow != null && this.canSeePlayer(game.getPlayer(), game.getMapHandler())) {
             if (this.isNearEntity(this.follow, 40)) {
-                return;
+                return null;
             }
             position = this.follow.getPosition();
-        } else if (this.toPos != null) {
-            position = this.toPos;
+        } else if (super.getToPos() != null) {
+            position = super.getToPos();
         } else {
-            return;
+            return null;
         }
 
-        Vector vector = new Vector(position.getCoordX() - super.getPosition().getCoordX(), position.getCoordY() - super.getPosition().getCoordY());
-        //Obmedzenie maximálnej prejdenej vzialenosti na 4px
-        if (vector.length() > 4) {
-            vector.normalize();
-            vector.multiply(4);
+        EDirection direction = super.updatePos(game, position);
+        if (direction != null) {
+            this.eDirection = direction;
         }
 
-        Position pos = new Position((int)vector.getX(), (int)vector.getY());
-        if (pos.getCoordX() != 0 || pos.getCoordY() != 0) {
-            //Zmena smeru
-            if (pos.getCoordX() < 0) {
-                this.eDirection = EDirection.LEFT;
-            } else if (pos.getCoordX() > 0) {
-                this.eDirection = EDirection.RIGHT;
-            }
-
-            this.move(new Position(pos.getCoordX(), 0), game.getMapHandler());
-            this.move(new Position(0, pos.getCoordY()), game.getMapHandler());
-        } else {
-            this.toPos = null;
-        }
-    }
-
-    private void move(Position byPos, MapHandler mapHandler) {
-        //Systém kolízií
-        Position futurePosition = new Position().addPosition(this.getPosition()).addPosition(byPos);
-        futurePosition = Position.getPositionRelativeToGrid(futurePosition);
-        GameTile tile = mapHandler.getTile(futurePosition.getCoordX(), futurePosition.getCoordY());
-        if (tile != null && tile.hasCollision()) {
-            return;
-        }
-
-        //Pohyb
-        this.getPosition().addPosition(byPos);
+        return null;
     }
 
     @Override

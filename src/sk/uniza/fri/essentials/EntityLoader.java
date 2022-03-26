@@ -11,6 +11,7 @@ import sk.uniza.fri.entities.Npc;
 import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.enums.EItemList;
+import sk.uniza.fri.enums.EPortalStatus;
 import sk.uniza.fri.map.Map;
 import sk.uniza.fri.map.MapHandler;
 import sk.uniza.fri.map.Portal;
@@ -101,8 +102,8 @@ public class EntityLoader {
 
                 portals[i] = new Portal(new Position(x, y), mapHandler.getMap(map));
 
-                if (portal.get("enabled") != null) {
-                    portals[i].setEnabled((boolean)portal.get("enabled"));
+                if (portal.get("open") != null) {
+                    portals[i].setStatus(EPortalStatus.valueOf((String)portal.get("open")));
                 }
 
                 mapHandler.getMap(map).getPortals().add(portals[i]);
@@ -139,7 +140,7 @@ public class EntityLoader {
             Map map = mapHandler.getMap(((Long)npc.get("map")).intValue());
             EImageList image = EImageList.valueOf((String)npc.get("image"));
 
-            Npc npcI = new Npc(position, image);
+            Npc npcI = new Npc(position, image, map);
 
             try {
                 npcI.setQuest(Class.forName((String)npc.get("quest")));

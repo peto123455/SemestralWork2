@@ -5,6 +5,7 @@ import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Entity;
 import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.entities.Npc;
+import sk.uniza.fri.enums.EPortalStatus;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.enums.ETileList;
 
@@ -71,7 +72,15 @@ public class Map {
             }
         }
         for (Portal portal : this.portals) {
-            portal.setEnabled(true);
+            if (portal.getStatus() == EPortalStatus.OPEN_ON_ALL_DEAD) {
+                portal.setStatus(null);
+            }
+        }
+    }
+
+    public void openPortals() {
+        for (Portal portal : this.portals) {
+            portal.setStatus(null);
         }
     }
 
