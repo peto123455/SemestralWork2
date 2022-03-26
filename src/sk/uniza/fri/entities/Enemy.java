@@ -91,6 +91,7 @@ public class Enemy extends EntityAlive {
         ESoundList.playSound(ESoundList.DEATH);
         super.changeImages(new EImageList[] {EImageList.KNIGHT_DEAD});
         this.dropItems();
+        this.map.onEnemyDeath();
     }
 
     private void checkForPlayer(Player player) {

@@ -64,6 +64,17 @@ public class Map {
         return this.portals;
     }
 
+    public void onEnemyDeath() {
+        for (Enemy enemy : this.enemies) {
+            if (!enemy.isDead()) {
+                return;
+            }
+        }
+        for (Portal portal : this.portals) {
+            portal.setEnabled(true);
+        }
+    }
+
     public void addChest(Chest chest) {
         if (this.chests.contains(chest)) {
             return;

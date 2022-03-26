@@ -100,6 +100,11 @@ public class EntityLoader {
                 int map = ((Long)portal.get("map")).intValue();
 
                 portals[i] = new Portal(new Position(x, y), mapHandler.getMap(map));
+
+                if (portal.get("enabled") != null) {
+                    portals[i].setEnabled((boolean)portal.get("enabled"));
+                }
+
                 mapHandler.getMap(map).getPortals().add(portals[i]);
             }
 
