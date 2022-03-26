@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class KeyHandler implements KeyListener {
-    private final HashMap<Character, Boolean> pressed;
-    private final HashMap<Character, PressableKey> pressable;
+    private final HashMap<Integer, Boolean> pressed;
+    private final HashMap<Integer, PressableKey> pressable;
 
     private final Game game;
 
@@ -22,23 +22,23 @@ public class KeyHandler implements KeyListener {
     }
 
     private void registerKeys() {
-        this.pressed.put('w', false); //Pohyb hore
-        this.pressed.put('a', false); //Pohyb doľava
-        this.pressed.put('s', false); //Pohyb dole
-        this.pressed.put('d', false); //Pohyb doprava
+        this.pressed.put(KeyEvent.VK_W, false); //Pohyb hore
+        this.pressed.put(KeyEvent.VK_A, false); //Pohyb doľava
+        this.pressed.put(KeyEvent.VK_S, false); //Pohyb dole
+        this.pressed.put(KeyEvent.VK_D, false); //Pohyb doprava
 
-        this.pressable.put('k', new PressableKeyAttack()); //Útok
-        this.pressable.put('i', new PressableKeyInventory()); //Otvorenie inventáru
-        this.pressable.put('q', new PressableKeyHealthPotion()); //Použitie elixíru života
-        this.pressable.put('e', new PressableKeyUseAction()); //Klávesa akcie
+        this.pressable.put(KeyEvent.VK_K, new PressableKeyAttack()); //Útok
+        this.pressable.put(KeyEvent.VK_I, new PressableKeyInventory()); //Otvorenie inventáru
+        this.pressable.put(KeyEvent.VK_Q, new PressableKeyHealthPotion()); //Použitie elixíru života
+        this.pressable.put(KeyEvent.VK_E, new PressableKeyUseAction()); //Klávesa akcie
     }
 
     public void resetKeys() {
         this.registerKeys();
     }
 
-    public ArrayList<Character> getPressedKeys() {
-        ArrayList<Character> list = new ArrayList<>();
+    public ArrayList<Integer> getPressedKeys() {
+        ArrayList<Integer> list = new ArrayList<>();
         this.pressed.forEach((kluc, hodnota) -> {
             if (hodnota) {
                 list.add(kluc);
@@ -47,7 +47,7 @@ public class KeyHandler implements KeyListener {
         return list;
     }
 
-    public void keyUpdate(char c, boolean pressed) {
+    public void keyUpdate(int c, boolean pressed) {
         if (this.pressed.containsKey(c)) {
             this.pressed.put(c, pressed);
         }
@@ -68,11 +68,11 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        this.keyUpdate(Character.toLowerCase(e.getKeyChar()), true);
+        this.keyUpdate(e.getKeyCode(), true);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        this.keyUpdate(Character.toLowerCase(e.getKeyChar()), false);
+        this.keyUpdate(e.getKeyCode(), false);
     }
 }

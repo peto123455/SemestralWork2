@@ -64,12 +64,12 @@ public class Player extends EntityAlive {
         this.game.onDeath();
     }
 
-    public void handleKeys(ArrayList<Character> keys, Map map) {
+    public void handleKeys(ArrayList<Integer> keys, Map map) {
         Position finalPosition = new Position();
 
-        for (Character c : keys) {
+        for (Integer c : keys) {
             //Systém kolízií
-            Position futurePosition = EDirection.getPosByChar(c, 16);
+            Position futurePosition = EDirection.getPosByInt(c, 16);
             futurePosition.addPosition(this.getPosition());
             futurePosition = Position.getPositionRelativeToGrid(futurePosition);
 
@@ -79,11 +79,11 @@ public class Player extends EntityAlive {
             }
 
             //Pohyb hráča
-            EDirection direction = EDirection.getDirByChar(c);
+            EDirection direction = EDirection.getDirByInt(c);
             if (direction == EDirection.RIGHT || direction == EDirection.LEFT) {
                 this.setDirection(direction);
             }
-            finalPosition.addPosition(EDirection.getPosByChar(c, 4));
+            finalPosition.addPosition(EDirection.getPosByInt(c, 4));
         }
 
         this.getPosition().addPosition(finalPosition);
