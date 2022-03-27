@@ -7,6 +7,7 @@ import sk.uniza.fri.essentials.Vector;
 import sk.uniza.fri.main.Game;
 import sk.uniza.fri.main.GameThread;
 import sk.uniza.fri.main.GameTile;
+import sk.uniza.fri.map.Map;
 import sk.uniza.fri.map.MapHandler;
 import sk.uniza.fri.ui.GamePanel;
 
@@ -79,8 +80,9 @@ public abstract class Entity {
         this.toPos = toPos;
     }
 
-    public void update(Game game) {
+    public boolean update(Game game) {
         this.updatePos(game);
+        return true;
     }
 
     protected EDirection updatePos(Game game) {
@@ -121,14 +123,22 @@ public abstract class Entity {
 
         //Systém kolízií
         Position futurePosition = new Position().addPosition(this.getPosition()).addPosition(byPos);
-        futurePosition = Position.getPositionRelativeToGrid(futurePosition);
-        GameTile tile = mapHandler.getTile(futurePosition.getIntCoordX(), futurePosition.getIntCoordY());
-        if (tile != null && tile.hasCollision()) {
+
+        if (this.isCollision(futurePosition, mapHandler.getMap())) {
             return;
         }
 
         //Pohyb
         this.getPosition().addPosition(byPos);
+    }
+
+    protected boolean isCollision(Position futurePosition, Map map) {
+        futurePosition = Position.getPositionRelativeToGrid(futurePosition);
+        GameTile tile = map.getTile(futurePosition.getIntCoordX(), futurePosition.getIntCoordY());
+        if (tile != null && tile.hasCollision()) {
+            return true;
+        }
+        return false;
     }
 
     public void setSpeed(int speed) {

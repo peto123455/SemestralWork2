@@ -1,6 +1,7 @@
 package sk.uniza.fri.ui;
 
 import sk.uniza.fri.entities.Particle;
+import sk.uniza.fri.entities.Projectile;
 import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.main.Game;
@@ -51,6 +52,7 @@ public class GamePanel extends JPanel {
         this.game.getMapHandler().drawTiles(g2d);       //Políčka
         this.game.getMapHandler().drawEntities(g2d);    //Entity (Nepriatelia, predmety, bedne, portále)
         this.game.getPlayer().draw(g2d);                //Hráč
+        this.drawProjectiles(g2d);
         Particle.drawParticles(g2d);                    //Efekty
 
         /* UI */
@@ -74,6 +76,12 @@ public class GamePanel extends JPanel {
     private void drawHearts(int x, int y, int amount, Graphics2D g2d) {
         for (int i = 0; i < amount; ++i) {
             g2d.drawImage(EImageList.HEART.getImage(), x -  39 / 2 - 50 * i, y - 36 / 2, 39, 36, null);
+        }
+    }
+
+    private void drawProjectiles(Graphics2D g2d) {
+        for (Projectile projectile : Projectile.getProjectiles()) {
+            projectile.draw(g2d);
         }
     }
 

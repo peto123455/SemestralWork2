@@ -24,6 +24,7 @@ public abstract class Enemy extends EntityAlive {
     private Entity follow;
     private final ArrayList<ItemStack> drops;
     private final Map map;
+    private int followDistance;
 
     public static void drawEnemies(Graphics2D g2d, MapHandler mapHandler) {
         ArrayList<Enemy> enemies = mapHandler.getEnemies();
@@ -42,6 +43,7 @@ public abstract class Enemy extends EntityAlive {
 
         this.lastHit = System.currentTimeMillis();
         this.cooldown = 1000;
+        this.followDistance = 40;
 
         this.eDirection = EDirection.LEFT;
     }
@@ -51,16 +53,16 @@ public abstract class Enemy extends EntityAlive {
     }
 
     @Override
-    public void update(Game game) {
+    public boolean update(Game game) {
         if (super.isDead()) {
-            return;
+            return false;
         }
 
         super.update(game);
-        this.checkForPlayer(game.getPlayer());
+        return true;
     }
 
-    private boolean canSeePlayer(Player player, MapHandler mapHandler) {
+    protected boolean canSeePlayer(Player player, MapHandler mapHandler) {
         Vector vector = new Vector(player.getPosition().getIntCoordX() - super.getPosition().getIntCoordX(), player.getPosition().getIntCoordY() - super.getPosition().getIntCoordY());
         for (int i = 1; i < (int)vector.length() / 20; ++i) {
             Vector vectorPart = new Vector(vector.getX(), vector.getY());
@@ -75,15 +77,17 @@ public abstract class Enemy extends EntityAlive {
         return true;
     }
 
-    public void hit(EntityAlive entity) {
+    public boolean canHit() {
         long temp = System.currentTimeMillis();
         if (temp < this.lastHit + this.cooldown) {
-            return;
+            return false;
         }
-        ESoundList.playSound(ESoundList.SOWRD_STAB);
-        new ParticleSlash(super.getPosition(), this.eDirection);
-        entity.takeHeart();
         this.lastHit = temp + this.cooldown;
+        return true;
+    }
+
+    public EDirection getDirection() {
+        return this.eDirection;
     }
 
     @Override
@@ -91,12 +95,6 @@ public abstract class Enemy extends EntityAlive {
         ESoundList.playSound(ESoundList.DEATH);
         this.dropItems();
         this.map.onEnemyDeath();
-    }
-
-    private void checkForPlayer(Player player) {
-        if (this.isNearEntity(player, 50)) {
-            this.hit(player);
-        }
     }
 
     public void follow(Entity entity) {
@@ -108,7 +106,7 @@ public abstract class Enemy extends EntityAlive {
         Position position;
 
         if (this.follow != null && this.canSeePlayer(game.getPlayer(), game.getMapHandler())) {
-            if (this.isNearEntity(this.follow, 40)) {
+            if (this.isNearEntity(this.follow, this.followDistance)) {
                 return null;
             }
             position = this.follow.getPosition();
@@ -144,4 +142,10 @@ public abstract class Enemy extends EntityAlive {
             Item.spawnItem(this.map, item, new Position(this.getPosition().getIntCoordX() + rand.nextInt(50) - 25, this.getPosition().getIntCoordY() + rand.nextInt(50) - 25));
         }
     }
+
+    public void setFollowDistance(int followDistance) {
+        this.followDistance = followDistance;
+    }
+
+
 }

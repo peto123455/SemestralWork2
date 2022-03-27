@@ -6,6 +6,7 @@ import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.entities.Npc;
 import sk.uniza.fri.entities.Particle;
 import sk.uniza.fri.entities.Player;
+import sk.uniza.fri.entities.Projectile;
 import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;
@@ -74,6 +75,7 @@ public class Game {
         this.handleUpdate();
         this.updateParticles();
         this.checkMessages();
+        this.updateProjectiles();
         this.panel.repaint();
     }
 
@@ -148,6 +150,13 @@ public class Game {
         ArrayList<Particle> particles = Particle.getParticles();
         for (int i = 0; i < particles.size(); ++i) {
             particles.get(i).update();
+        }
+    }
+
+    private void updateProjectiles() {
+        ArrayList<Projectile> projectiles = Projectile.getProjectiles();
+        for (int i = 0; i < projectiles.size(); ++i) {
+            projectiles.get(i).update(this);
         }
     }
 

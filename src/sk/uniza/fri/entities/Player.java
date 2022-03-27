@@ -9,7 +9,6 @@ import sk.uniza.fri.essentials.Inventory;
 import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.main.Game;
 import sk.uniza.fri.main.GameThread;
-import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.map.Map;
 import sk.uniza.fri.quests.QuestHandler;
 
@@ -72,10 +71,8 @@ public class Player extends EntityAlive {
             //Systém kolízií
             Position futurePosition = EDirection.getPosByInt(c, 16);
             futurePosition.addPosition(this.getPosition());
-            futurePosition = Position.getPositionRelativeToGrid(futurePosition);
 
-            GameTile tile = map.getTile((int)futurePosition.getCoordX(), (int)futurePosition.getCoordY());
-            if (tile != null && tile.hasCollision()) {
+            if (super.isCollision(futurePosition, map)) {
                 continue;
             }
 

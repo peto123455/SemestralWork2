@@ -2,6 +2,7 @@ package sk.uniza.fri.entities;
 
 import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.essentials.Position;
+import sk.uniza.fri.main.Game;
 import sk.uniza.fri.map.Map;
 
 import java.awt.Graphics2D;
@@ -12,7 +13,21 @@ public class EnemyMageBoss extends Enemy {
         super(position, map, new EImageList[] {EImageList.MAGE_BOSS}, 2);
         super.setSpeed(2);
 
-        super.setCooldown(1000);
+        super.setCooldown(400);
+        super.setFollowDistance(350);
+    }
+
+    @Override
+    public boolean update(Game game) {
+        if (!super.update(game)) {
+            return false;
+        }
+
+        if (super.canSeePlayer(game.getPlayer(), game.getMapHandler()) && super.canHit()) {
+            new ProjectileMage(super.getPosition(), game.getPlayer().getPosition());
+        }
+
+        return true;
     }
 
     @Override
