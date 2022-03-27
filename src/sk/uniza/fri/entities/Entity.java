@@ -18,6 +18,7 @@ public abstract class Entity {
 
     private final Position position;
     private Position toPos;
+    private int speed;
 
     public Entity(EImageList[] images) {
         this.images = new BufferedImage[images.length];
@@ -26,6 +27,7 @@ public abstract class Entity {
             this.images[i] = images[i].getImage();
         }
 
+        this.speed = 4;
         this.position = new Position();
     }
 
@@ -92,9 +94,9 @@ public abstract class Entity {
 
         Vector vector = new Vector(position.getCoordX() - this.position.getCoordX(), position.getCoordY() - this.position.getCoordY());
         //Obmedzenie maximálnej prejdenej vzialenosti na 4px
-        if (vector.length() > 50 * 4 * GameThread.getInstance().getDeltaTime()) {
+        if (vector.length() > 50 * this.speed * GameThread.getInstance().getDeltaTime()) {
             vector.normalize();
-            vector.multiply(50 * 4 * GameThread.getInstance().getDeltaTime());
+            vector.multiply(50 * this.speed * GameThread.getInstance().getDeltaTime());
         }
 
         Position pos = new Position(vector.getX(), vector.getY());
@@ -114,7 +116,6 @@ public abstract class Entity {
         return null;
     }
 
-
     protected void move(Position byPos, MapHandler mapHandler) {
         //byPos.multiply(GameThread.getInstance().getDeltaTime() * 50);
 
@@ -128,5 +129,9 @@ public abstract class Entity {
 
         //Pohyb
         this.getPosition().addPosition(byPos);
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 }

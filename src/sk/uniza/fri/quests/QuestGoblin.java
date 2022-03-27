@@ -30,7 +30,7 @@ public class QuestGoblin extends Quest {
 
     @Override
     protected void onStart() {
-        new MessageBox("I need small favor. Do it, and I\nwill give you 3 health potions.", 3000);
+        new MessageBox("I need small favor. Do it, and I\nwill give you 3 health potions.\nLet me open you a portal.", 3000);
         this.goblin.goToPos(new Position(1100, 500));
         new Timer().schedule(new TimerTask() {
             @Override

@@ -17,17 +17,13 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Enemy extends EntityAlive {
+public abstract class Enemy extends EntityAlive {
     private long lastHit;
     private int cooldown;
     private EDirection eDirection;
     private Entity follow;
     private final ArrayList<ItemStack> drops;
     private final Map map;
-
-    public Enemy(Map map) {
-        this(new Position(0, 0), map);
-    }
 
     public static void drawEnemies(Graphics2D g2d, MapHandler mapHandler) {
         ArrayList<Enemy> enemies = mapHandler.getEnemies();
@@ -36,8 +32,8 @@ public class Enemy extends EntityAlive {
         }
     }
 
-    public Enemy(Position position, Map map) {
-        super(new EImageList[] {EImageList.KNIGHT}, 2);
+    public Enemy(Position position, Map map, EImageList[] images, int maxHearts) {
+        super(images, maxHearts);
 
         super.getPosition().setPosition(position);
 
@@ -48,6 +44,10 @@ public class Enemy extends EntityAlive {
         this.cooldown = 1000;
 
         this.eDirection = EDirection.LEFT;
+    }
+
+    public void setCooldown(int cooldown) {
+        this.cooldown = cooldown;
     }
 
     @Override
@@ -89,7 +89,6 @@ public class Enemy extends EntityAlive {
     @Override
     protected void onDeath() {
         ESoundList.playSound(ESoundList.DEATH);
-        super.changeImages(new EImageList[] {EImageList.KNIGHT_DEAD});
         this.dropItems();
         this.map.onEnemyDeath();
     }

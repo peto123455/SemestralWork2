@@ -11,7 +11,7 @@ public class ImageTools {
         Graphics2D g = imageFliped.createGraphics();
 
         at.concatenate(AffineTransform.getScaleInstance(-1, 1));
-        at.concatenate(AffineTransform.getTranslateInstance(-image.getHeight(), 0));
+        at.concatenate(AffineTransform.getTranslateInstance(-image.getWidth(), 0));
 
         g.transform(at);
         g.drawImage(image, 0, 0, null);

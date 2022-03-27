@@ -6,6 +6,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import sk.uniza.fri.entities.Chest;
 import sk.uniza.fri.entities.Enemy;
+import sk.uniza.fri.entities.EnemyKnight;
+import sk.uniza.fri.entities.EnemyMageBoss;
 import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.entities.Npc;
 import sk.uniza.fri.entities.Player;
@@ -46,6 +48,10 @@ public class EntityLoader {
         EntityLoader.loadPortals(json, mapHandler);
         EntityLoader.loadChests(json, mapHandler);
         EntityLoader.loadNpcs(json, mapHandler);
+
+        Enemy enemy = new EnemyMageBoss(new Position(200, 300), mapHandler.getMap(0));
+        enemy.follow(player);
+        mapHandler.getMap(0).getEnemies().add(enemy);
     }
 
 
@@ -66,7 +72,7 @@ public class EntityLoader {
             JSONObject enemy = (JSONObject)enemyObject;
             Position position = new Position(((Long)enemy.get("x")).intValue(), ((Long)enemy.get("y")).intValue());
 
-            Enemy enemyI = new Enemy(position, mapHandler.getMap(((Long)enemy.get("map")).intValue()));
+            Enemy enemyI = new EnemyKnight(position, mapHandler.getMap(((Long)enemy.get("map")).intValue()));
             if (enemy.get("followPlayer") != null && (Boolean)enemy.get("followPlayer")) {
                 enemyI.follow(player);
             }

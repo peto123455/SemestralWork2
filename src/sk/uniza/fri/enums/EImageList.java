@@ -19,6 +19,8 @@ public enum EImageList {
     CHEST_OPEN("/textures/chest_open.png"),
     WIZARD("/textures/wizard.png"),
     GOBLIN("/textures/goblin.png"),
+    MAGE_BOSS("/textures/mageBoss.png"),
+    MAGE_BOSS_DEAD("/textures/mageBossDead.png"),
     PORTAL("/textures/portal.png");
 
     private BufferedImage image;
