@@ -41,10 +41,14 @@ public abstract class Projectile extends Entity {
         vector.normalize();
         vector.multiply(1280);
 
-        super.goToPos(new Position(vector.getX(), vector.getY()));
+        super.goToPos(new Position(vector.getX(), vector.getY()).addPosition(super.getPosition()));
     }
 
     public static ArrayList<Projectile> getProjectiles() {
         return Projectile.projectiles;
+    }
+
+    public static void resetProjectiles() {
+        Projectile.projectiles = new ArrayList<>();
     }
 }

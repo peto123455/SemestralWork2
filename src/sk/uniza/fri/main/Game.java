@@ -56,6 +56,7 @@ public class Game {
         if (died) {
             this.panel.repaint();
             JOptionPane.showMessageDialog(null, "You died");
+            Projectile.resetProjectiles();
         }
         this.initGame();
         this.keyHandler.resetKeys();

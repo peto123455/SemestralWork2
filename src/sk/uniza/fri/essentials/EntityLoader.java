@@ -49,9 +49,9 @@ public class EntityLoader {
         EntityLoader.loadChests(json, mapHandler);
         EntityLoader.loadNpcs(json, mapHandler);
 
-        Enemy enemy = new EnemyMageBoss(new Position(200, 300), mapHandler.getMap(0));
+        Enemy enemy = new EnemyMageBoss(new Position(800, 400), mapHandler.getMap(3));
         enemy.follow(player);
-        mapHandler.getMap(0).getEnemies().add(enemy);
+        mapHandler.getMap(3).getEnemies().add(enemy);
     }
 
 
