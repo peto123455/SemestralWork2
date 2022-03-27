@@ -5,6 +5,7 @@ import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.essentials.Vector;
 import sk.uniza.fri.main.Game;
+import sk.uniza.fri.main.GameThread;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.map.MapHandler;
 import sk.uniza.fri.ui.GamePanel;
@@ -61,7 +62,7 @@ public abstract class Entity {
     }
 
     public void draw(Graphics2D g2d) {
-        g2d.drawImage(this.getImage(), this.getPosition().getCoordX() - GamePanel.TILE_SIZE / 2, this.getPosition().getCoordY() - GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+        g2d.drawImage(this.getImage(), this.getPosition().getIntCoordX() - GamePanel.TILE_SIZE / 2, this.getPosition().getIntCoordY() - GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
     }
 
     protected BufferedImage[] getImages() {
@@ -91,12 +92,12 @@ public abstract class Entity {
 
         Vector vector = new Vector(position.getCoordX() - this.position.getCoordX(), position.getCoordY() - this.position.getCoordY());
         //Obmedzenie maximálnej prejdenej vzialenosti na 4px
-        if (vector.length() > 4) {
+        if (vector.length() > 50 * 4 * GameThread.getInstance().getDeltaTime()) {
             vector.normalize();
-            vector.multiply(4);
+            vector.multiply(50 * 4 * GameThread.getInstance().getDeltaTime());
         }
 
-        Position pos = new Position((int)vector.getX(), (int)vector.getY());
+        Position pos = new Position(vector.getX(), vector.getY());
 
         if (pos.getCoordX() != 0 || pos.getCoordY() != 0) {
             this.move(new Position(pos.getCoordX(), 0), game.getMapHandler());
@@ -115,10 +116,12 @@ public abstract class Entity {
 
 
     protected void move(Position byPos, MapHandler mapHandler) {
+        //byPos.multiply(GameThread.getInstance().getDeltaTime() * 50);
+
         //Systém kolízií
         Position futurePosition = new Position().addPosition(this.getPosition()).addPosition(byPos);
         futurePosition = Position.getPositionRelativeToGrid(futurePosition);
-        GameTile tile = mapHandler.getTile(futurePosition.getCoordX(), futurePosition.getCoordY());
+        GameTile tile = mapHandler.getTile(futurePosition.getIntCoordX(), futurePosition.getIntCoordY());
         if (tile != null && tile.hasCollision()) {
             return;
         }

@@ -26,24 +26,22 @@ public class Game {
     private MapHandler mapHandler;
     private Player player;
     private final KeyHandler keyHandler;
-    private final GameThread gameThread;
 
     public Game(GamePanel panel) {
         this.panel = panel;
         this.panel.setGame(this);
 
         this.keyHandler = new KeyHandler(this);
-        this.gameThread = new GameThread(this);
 
         this.createKeyListener();
         this.createMouseListener();
-
     }
 
     public void startGame() {
         this.initGame();
 
-        this.gameThread.start();
+        GameThread.getInstance().setGame(this);
+        GameThread.getInstance().start();
     }
 
     public void initGame() {
@@ -162,6 +160,4 @@ public class Game {
     public void onDeath() {
         this.initGame(true);
     }
-
-
 }

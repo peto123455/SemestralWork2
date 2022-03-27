@@ -3,10 +3,10 @@ package sk.uniza.fri.essentials;
 import sk.uniza.fri.ui.GamePanel;
 
 public class Position {
-    private int[] coords;
+    private double[] coords;
 
-    public Position(int x, int y) {
-        this.coords = new int[2];
+    public Position(double x, double y) {
+        this.coords = new double[2];
 
         this.coords[0] = x;
         this.coords[1] = y;
@@ -16,11 +16,19 @@ public class Position {
         this(0, 0);
     }
 
-    public int getCoordX() {
+    public int getIntCoordX() {
+        return (int)this.coords[0];
+    }
+
+    public int getIntCoordY() {
+        return (int)this.coords[1];
+    }
+
+    public double getCoordX() {
         return this.coords[0];
     }
 
-    public int getCoordY() {
+    public double getCoordY() {
         return this.coords[1];
     }
 
@@ -30,6 +38,11 @@ public class Position {
 
     public void setCoordY(int y) {
         this.coords[1] = y;
+    }
+
+    public void multiply(double constant) {
+        this.coords[0] *= constant;
+        this.coords[1] *= constant;
     }
 
     public Position addPosition(Position pos) {
@@ -44,12 +57,12 @@ public class Position {
     }
 
     public static Position getPositionRelativeToGrid(Position position) {
-        return new Position(position.getCoordX() / GamePanel.TILE_SIZE, position.getCoordY() / GamePanel.TILE_SIZE);
+        return new Position(position.getIntCoordX() / GamePanel.TILE_SIZE, position.getIntCoordY() / GamePanel.TILE_SIZE);
     }
 
     public static double getDistance(Position pos1, Position pos2) {
-        double x = Math.abs((double)pos1.getCoordX() - (double)pos2.getCoordX());
-        double y = Math.abs((double)pos1.getCoordY() - (double)pos2.getCoordY());
+        double x = Math.abs((double)pos1.getIntCoordX() - (double)pos2.getIntCoordX());
+        double y = Math.abs((double)pos1.getIntCoordY() - (double)pos2.getIntCoordY());
         return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     }
 

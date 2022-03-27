@@ -43,7 +43,7 @@ public class Chest extends Entity {
         Random rand = new Random();
 
         for (ItemStack item : this.items) {
-            Item.spawnItem(this.map, item, new Position(super.getPosition().getCoordX() + rand.nextInt(100) - 50, super.getPosition().getCoordY() + rand.nextInt(100) - 50));
+            Item.spawnItem(this.map, item, new Position(super.getPosition().getIntCoordX() + rand.nextInt(100) - 50, super.getPosition().getIntCoordY() + rand.nextInt(100) - 50));
         }
 
         ESoundList.playSound(ESoundList.CHEST);

@@ -8,6 +8,7 @@ import sk.uniza.fri.essentials.ImageTools;
 import sk.uniza.fri.essentials.Inventory;
 import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.main.Game;
+import sk.uniza.fri.main.GameThread;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.map.Map;
 import sk.uniza.fri.quests.QuestHandler;
@@ -73,7 +74,7 @@ public class Player extends EntityAlive {
             futurePosition.addPosition(this.getPosition());
             futurePosition = Position.getPositionRelativeToGrid(futurePosition);
 
-            GameTile tile = map.getTile(futurePosition.getCoordX(), futurePosition.getCoordY());
+            GameTile tile = map.getTile((int)futurePosition.getCoordX(), (int)futurePosition.getCoordY());
             if (tile != null && tile.hasCollision()) {
                 continue;
             }
@@ -86,6 +87,7 @@ public class Player extends EntityAlive {
             finalPosition.addPosition(EDirection.getPosByInt(c, 4));
         }
 
+        finalPosition.multiply(GameThread.getInstance().getDeltaTime() * 50);
         this.getPosition().addPosition(finalPosition);
     }
 

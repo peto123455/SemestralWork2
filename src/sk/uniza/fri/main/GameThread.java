@@ -2,19 +2,38 @@ package sk.uniza.fri.main;
 
 public class GameThread extends Thread {
 
-    private Game game;
-    private long lastFrame = System.currentTimeMillis();
+    private static GameThread instance;
 
-    public GameThread(Game game) {
+    public static GameThread getInstance() {
+        if (GameThread.instance == null) {
+            GameThread.instance = new GameThread();
+        }
+        return GameThread.instance;
+    }
+
+    private Game game;
+    private long lastFrame = System.nanoTime();
+    private long deltaTime;
+
+    private GameThread() {
+        this.deltaTime = System.nanoTime();
+    }
+
+    public void setGame(Game game) {
         this.game = game;
     }
 
     public void run() {
-        while (true) {
-            if (System.currentTimeMillis() - this.lastFrame >= 16.7) {
+        while (this.game != null) {
+            this.deltaTime = System.nanoTime() - this.lastFrame;
+            if (this.deltaTime >= 16700000) {
                 this.game.updateGame();
-                this.lastFrame = System.currentTimeMillis();
+                this.lastFrame = System.nanoTime();
             }
         }
+    }
+
+    public double getDeltaTime() {
+        return (double)this.deltaTime / 1000000000;
     }
 }
