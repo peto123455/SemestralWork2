@@ -1,6 +1,7 @@
 package sk.uniza.fri.main;
 
 import sk.uniza.fri.enums.EGameStatus;
+import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.ui.GameFrame;
 import sk.uniza.fri.ui.GamePanel;
 import sk.uniza.fri.ui.MenuPanel;
@@ -20,6 +21,7 @@ public class Main {
     }
 
     public Main() {
+        ESoundList.playSound(ESoundList.MUSIC, true);
         this.menuPanel = new MenuPanel();
         this.gamePanel = new GamePanel();
         this.game = new Game(this.gamePanel);

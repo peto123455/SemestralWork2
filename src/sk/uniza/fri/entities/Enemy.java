@@ -11,6 +11,7 @@ import sk.uniza.fri.main.Game;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.map.Map;
 import sk.uniza.fri.map.MapHandler;
+import sk.uniza.fri.quests.QuestHandler;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -147,5 +148,5 @@ public abstract class Enemy extends EntityAlive {
         this.followDistance = followDistance;
     }
 
-
+    public abstract void getQuestEvent(QuestHandler questHandler);
 }

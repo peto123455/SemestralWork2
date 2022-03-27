@@ -1,5 +1,7 @@
 package sk.uniza.fri.ui;
 
+import sk.uniza.fri.enums.ESoundList;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -18,6 +20,7 @@ public class MessageBox {
         this.duration = duration;
         this.deleteAt = System.currentTimeMillis() + duration;
         this.text = text;
+        ESoundList.playSound(ESoundList.MESSAGE);
         MessageBox.messageBoxes.add(this);
     }
 

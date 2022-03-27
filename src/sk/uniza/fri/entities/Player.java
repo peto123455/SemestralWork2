@@ -2,7 +2,6 @@ package sk.uniza.fri.entities;
 
 import sk.uniza.fri.enums.EDirection;
 import sk.uniza.fri.enums.EImageList;
-import sk.uniza.fri.enums.EQuestAction;
 import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.ImageTools;
 import sk.uniza.fri.essentials.Inventory;
@@ -53,7 +52,7 @@ public class Player extends EntityAlive {
         for (Enemy enemy : enemies) {
             if (super.isNearEntity(enemy, 50)) {
                 if (!enemy.takeHeart() && this.questHandler.isQuest()) {
-                    this.questHandler.onActionPerformed(EQuestAction.ENEMY_KILLED, 1);
+                    enemy.getQuestEvent(this.questHandler);
                 }
             }
         }

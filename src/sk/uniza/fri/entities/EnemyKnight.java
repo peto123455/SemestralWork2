@@ -1,10 +1,12 @@
 package sk.uniza.fri.entities;
 
 import sk.uniza.fri.enums.EImageList;
+import sk.uniza.fri.enums.EQuestAction;
 import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.main.Game;
 import sk.uniza.fri.map.Map;
+import sk.uniza.fri.quests.QuestHandler;
 
 
 public class EnemyKnight extends Enemy {
@@ -42,5 +44,9 @@ public class EnemyKnight extends Enemy {
             new ParticleSlash(super.getPosition(), super.getDirection());
             player.takeHeart();
         }
+    }
+
+    public void getQuestEvent(QuestHandler questHandler) {
+        questHandler.onActionPerformed(EQuestAction.ENEMY_KILLED, 1);
     }
 }

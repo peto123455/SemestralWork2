@@ -17,9 +17,14 @@ public enum ESoundList {
     POTION_DRINK("/sounds/potion.wav"),
     PORTAL("/sounds/portal.wav"),
     CHEST("/sounds/chest.wav"),
+    MUSIC("/sounds/music.wav"),
+    MESSAGE("/sounds/message.wav"),
+    PROJECTILE_MAGIC("/sounds/projectileMagic.wav"),
+    QUEST_COMPLETE("/sounds/questComplete.wav"),
     SOWRD_STAB("/sounds/swordStab.wav");
 
     private static final double VOLUME = 0.3; // Ovládanie hlasitosti 0 - 1
+    private static final double VOLUME_LOOP = 0.1; // Ovládanie hlasitosti loopov 0 - 1
 
     private final String route;
 
@@ -43,6 +48,10 @@ public enum ESoundList {
     }
 
     public static void playSound(ESoundList sound) {
+        ESoundList.playSound(sound, false);
+    }
+
+    public static void playSound(ESoundList sound, boolean loop) {
         new Thread() {
             public void run() {
                 try {
@@ -57,10 +66,15 @@ public enum ESoundList {
 
                     //Nastavenie hlasitosti
                     FloatControl fc = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
-                    fc.setValue(20f * (float)Math.log10(ESoundList.VOLUME));
 
                     //Prehratie zvuku
-                    clip.start();
+                    if (loop) {
+                        fc.setValue(20f * (float)Math.log10(ESoundList.VOLUME_LOOP));
+                        clip.loop(Clip.LOOP_CONTINUOUSLY);
+                    } else {
+                        fc.setValue(20f * (float)Math.log10(ESoundList.VOLUME));
+                        clip.start();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

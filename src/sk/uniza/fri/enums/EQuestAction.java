@@ -1,7 +1,8 @@
 package sk.uniza.fri.enums;
 
 public enum EQuestAction {
-    ENEMY_KILLED("Enemies killed");
+    ENEMY_KILLED("Enemies killed"),
+    BOSS_KILLED("Bosses killed");
 
     private String string;
 

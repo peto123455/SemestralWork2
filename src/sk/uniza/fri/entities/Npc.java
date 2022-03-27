@@ -26,7 +26,9 @@ public class Npc extends Entity {
         Quest curerentQuest = player.getQuestHandler().getCurrentQuest();
 
         if (curerentQuest == null) {
-            if (QuestGoblin.class.isAssignableFrom(this.quest)) {
+            if (player.getQuestHandler().isQuestCompleted(this.quest)) {
+                return false;
+            } else if (QuestGoblin.class.isAssignableFrom(this.quest)) {
                 player.getQuestHandler().setCurrentQuest(new QuestGoblin(player.getQuestHandler(), this));
             }
 

@@ -15,7 +15,7 @@ public class QuestGoblin extends Quest {
 
     public QuestGoblin(QuestHandler questHandler, Npc goblin) {
         super("Goblin's needs", questHandler);
-        super.addTask(new Task(EQuestAction.ENEMY_KILLED, 2));
+        super.addTask(new Task(EQuestAction.BOSS_KILLED, 1));
         super.addItemReward(new ItemStack(EItemList.HEALTH_POTION, 3));
 
         this.goblin = goblin;
@@ -30,20 +30,20 @@ public class QuestGoblin extends Quest {
 
     @Override
     protected void onStart() {
-        new MessageBox("I need small favor. Do it, and I\nwill give you 3 health potions.\nLet me open you a portal.", 3000);
+        new MessageBox("I need big favor. Do it, and I\nwill give you 3 health potions.\nI need you to kill powerful ghost\nmage, but it's not easy. Let me\nopen a portal for you.", 3000);
         this.goblin.goToPos(new Position(1100, 500));
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
                 QuestGoblin.this.goblin.getMap().openPortals();
                 QuestGoblin.this.goblin.goToPos(new Position(1020, 500));
-                new MessageBox("You may go now.", 1500);
+                new MessageBox("You may go now. Good Luck\nmy friend.", 1500);
             }
         }, 5500);
     }
 
     @Override
     public void onRewardPickup() {
-        super.onRewardPickup("I can't believe it, you really\ndid it ! Here are your coins and\nsmall bonus for your bravery.", 5000);
+        super.onRewardPickup("Wow ! You've actually killed him.\nHere're your 3 potions.", 5000);
     }
 }

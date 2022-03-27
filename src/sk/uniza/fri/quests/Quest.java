@@ -62,7 +62,7 @@ public abstract class Quest {
     }
 
     protected void finishQuest() {
-        this.questHandler.removeQuest();
+        this.questHandler.completeQuest();
     }
 
     public void onActionPerformed(EQuestAction questAction, int amount) {

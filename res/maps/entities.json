@@ -120,7 +120,8 @@
       {
         "x": 100,
         "y": 200,
-        "map": 3
+        "map": 3,
+        "open": "OPEN_ON_ALL_DEAD"
       }
     ]
   ],
