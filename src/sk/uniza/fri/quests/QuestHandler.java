@@ -63,4 +63,8 @@ public class QuestHandler {
     public void draw(Graphics2D g2d) {
         this.currentQuest.draw(g2d);
     }
+
+    public void gameFinished() {
+        this.player.getGame().finishGame();
+    }
 }

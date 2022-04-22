@@ -28,7 +28,10 @@ public class Game {
     private Player player;
     private final KeyHandler keyHandler;
 
+    private boolean isFinished;
+
     public Game(GamePanel panel) {
+        this.isFinished = false;
         this.panel = panel;
         this.panel.setGame(this);
 
@@ -52,6 +55,10 @@ public class Game {
         this.player.getPosition().setPosition(new Position(200, 520));
     }
 
+    public void finishGame() {
+        this.isFinished = true;
+    }
+
     public void initGame(boolean died) {
         if (died) {
             this.panel.repaint();
@@ -71,12 +78,14 @@ public class Game {
     }
 
     public void updateGame() {
-        this.player.handleKeys(this.keyHandler.getPressedKeys(), this.mapHandler.getMap());
-        this.checkForItems();
-        this.handleUpdate();
-        this.updateParticles();
+        if (!isFinished) {
+            this.player.handleKeys(this.keyHandler.getPressedKeys(), this.mapHandler.getMap());
+            this.checkForItems();
+            this.handleUpdate();
+            this.updateParticles();
+            this.updateProjectiles();
+        }
         this.checkMessages();
-        this.updateProjectiles();
         this.panel.repaint();
     }
 
@@ -169,5 +178,9 @@ public class Game {
 
     public void onDeath() {
         this.initGame(true);
+    }
+
+    public boolean isFinished() {
+        return this.isFinished;
     }
 }

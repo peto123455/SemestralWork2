@@ -70,6 +70,10 @@ public class GamePanel extends JPanel {
             y += message.draw(g2d, y);
         }
 
+        if (this.game.isFinished()) {
+            GameComplete.draw(g2d);
+        }
+
         g2d.dispose();
     }
 

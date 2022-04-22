@@ -90,4 +90,8 @@ public class Player extends EntityAlive {
     public QuestHandler getQuestHandler() {
         return this.questHandler;
     }
+
+    public Game getGame() {
+        return this.game;
+    }
 }

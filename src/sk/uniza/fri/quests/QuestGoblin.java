@@ -45,5 +45,6 @@ public class QuestGoblin extends Quest {
     @Override
     public void onRewardPickup() {
         super.onRewardPickup("Wow ! You've actually killed him.\nHere're your 3 potions.", 5000);
+        super.getQuestHandler().gameFinished();
     }
 }
