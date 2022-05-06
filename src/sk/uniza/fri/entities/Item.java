@@ -9,8 +9,8 @@ public abstract class Item extends Entity {
 
     public static void spawnItem(Map map, ItemStack item, Position position) {
         switch (item.getItem()) {
-            case COINS -> map.addItem(new ItemCoins(position.getIntCoordX(), position.getIntCoordY(), item.getAmount()));
-            case HEALTH_POTION -> map.addItem(new ItemHealthPotion(position.getIntCoordX(), position.getIntCoordY()));
+            case COINS -> map.addItem(new ItemCoins((int)position.getX(), (int)position.getY(), item.getAmount()));
+            case HEALTH_POTION -> map.addItem(new ItemHealthPotion((int)position.getX(), (int)position.getY()));
         }
     }
 

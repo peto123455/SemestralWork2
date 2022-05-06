@@ -40,7 +40,7 @@ public class EnemyMageBoss extends Enemy {
 
     @Override
     public void draw(Graphics2D g2d) {
-        g2d.drawImage(super.getImage(), this.getPosition().getIntCoordX() - super.getImage().getWidth(), this.getPosition().getIntCoordY() - super.getImage().getHeight(), super.getImage().getWidth() * 2, super.getImage().getHeight() * 2, null);
+        g2d.drawImage(super.getImage(), (int)this.getPosition().getX() - super.getImage().getWidth(), (int)this.getPosition().getY() - super.getImage().getHeight(), super.getImage().getWidth() * 2, super.getImage().getHeight() * 2, null);
     }
 
     public void getQuestEvent(QuestHandler questHandler) {

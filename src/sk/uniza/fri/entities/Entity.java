@@ -65,7 +65,7 @@ public abstract class Entity {
     }
 
     public void draw(Graphics2D g2d) {
-        g2d.drawImage(this.getImage(), this.getPosition().getIntCoordX() - GamePanel.TILE_SIZE / 2, this.getPosition().getIntCoordY() - GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+        g2d.drawImage(this.getImage(), (int)this.getPosition().getX() - GamePanel.TILE_SIZE / 2, (int)this.getPosition().getY() - GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
     }
 
     protected BufferedImage[] getImages() {
@@ -94,7 +94,7 @@ public abstract class Entity {
             return null;
         }
 
-        Vector vector = new Vector(position.getCoordX() - this.position.getCoordX(), position.getCoordY() - this.position.getCoordY());
+        Vector vector = new Vector(position.getX() - this.position.getX(), position.getY() - this.position.getY());
         //Obmedzenie maximálnej prejdenej vzialenosti na 4px
         if (vector.length() > 50 * this.speed * GameThread.getInstance().getDeltaTime()) {
             vector.normalize();
@@ -103,13 +103,13 @@ public abstract class Entity {
 
         Position pos = new Position(vector.getX(), vector.getY());
 
-        if (pos.getCoordX() != 0 || pos.getCoordY() != 0) {
-            this.move(new Position(pos.getCoordX(), 0), game.getMapHandler());
-            this.move(new Position(0, pos.getCoordY()), game.getMapHandler());
+        if (pos.getX() != 0 || pos.getY() != 0) {
+            this.move(new Position(pos.getX(), 0), game.getMapHandler());
+            this.move(new Position(0, pos.getY()), game.getMapHandler());
 
-            if (pos.getCoordX() < 0) {
+            if (pos.getX() < 0) {
                 return EDirection.LEFT;
-            } else if (pos.getCoordX() > 0) {
+            } else if (pos.getX() > 0) {
                 return EDirection.RIGHT;
             }
         } else {
@@ -134,7 +134,7 @@ public abstract class Entity {
 
     protected boolean isCollision(Position futurePosition, Map map) {
         futurePosition = Position.getPositionRelativeToGrid(futurePosition);
-        GameTile tile = map.getTile(futurePosition.getIntCoordX(), futurePosition.getIntCoordY());
+        GameTile tile = map.getTile((int)futurePosition.getX(), (int)futurePosition.getY());
         if (tile != null && tile.hasCollision()) {
             return true;
         }
