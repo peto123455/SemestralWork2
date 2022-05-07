@@ -25,7 +25,7 @@ public class QuestGoblin extends Quest {
 
     @Override
     public void onComplete() {
-        new MessageBox("Ahh..., you killed them all, return\nto the wizard to collect your\nreward", 5000);
+        new MessageBox("You did it ! Return to the\ngoblin", 5000);
     }
 
     @Override
