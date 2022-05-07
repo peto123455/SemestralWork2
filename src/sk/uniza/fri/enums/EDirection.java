@@ -23,7 +23,7 @@ public enum EDirection {
     }
 
     public Position getPos(int i) {
-        return new Position(this.pos.getIntCoordX() * i, this.pos.getIntCoordY() * i); //Posielam novú inštanciu Pos. aby náhodou nedošlo k jej zmene hodnôt
+        return new Position((int)this.pos.getX() * i, (int)this.pos.getY() * i); //Posielam novú inštanciu Pos. aby náhodou nedošlo k jej zmene hodnôt
     }
 
     public static Position getPosByInt(int c) {

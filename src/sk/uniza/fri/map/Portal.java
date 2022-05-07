@@ -56,7 +56,7 @@ public class Portal extends Entity {
             return;
         }
 
-        g2d.drawImage(this.getImage(), this.getPosition().getIntCoordX() - 29 / 2, this.getPosition().getIntCoordY() - 126 / 2, 29, 126, null);
+        g2d.drawImage(this.getImage(), (int)this.getPosition().getX() - 29 / 2, (int)this.getPosition().getY() - 126 / 2, 29, 126, null);
     }
 
     public EPortalStatus getStatus() {

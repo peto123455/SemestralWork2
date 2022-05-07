@@ -64,13 +64,13 @@ public abstract class Enemy extends EntityAlive {
     }
 
     protected boolean canSeePlayer(Player player, MapHandler mapHandler) {
-        Vector vector = new Vector(player.getPosition().getIntCoordX() - super.getPosition().getIntCoordX(), player.getPosition().getIntCoordY() - super.getPosition().getIntCoordY());
+        Vector vector = new Vector((int)player.getPosition().getX() - (int)super.getPosition().getX(), (int)player.getPosition().getY() - (int)super.getPosition().getY());
         for (int i = 1; i < (int)vector.length() / 20; ++i) {
             Vector vectorPart = new Vector(vector.getX(), vector.getY());
             vectorPart.normalize();
-            Position girdPos = Position.getPositionRelativeToGrid(new Position(this.getPosition().getIntCoordX() + (int)(vectorPart.getX() * i * 20), this.getPosition().getIntCoordY() + (int)(vectorPart.getY() * i * 20)));
+            Position gridPos = Position.getPositionRelativeToGrid(new Position((int)this.getPosition().getX() + (int)(vectorPart.getX() * i * 20), (int)this.getPosition().getY() + (int)(vectorPart.getY() * i * 20)));
 
-            GameTile tile = mapHandler.getTile(girdPos.getIntCoordX(), girdPos.getIntCoordY());
+            GameTile tile = mapHandler.getTile((int)gridPos.getX(), (int)gridPos.getY());
             if (tile != null && tile.hasCollision()) {
                 return false;
             }
@@ -140,7 +140,7 @@ public abstract class Enemy extends EntityAlive {
     private void dropItems() {
         for (ItemStack item : this.drops) {
             Random rand = new Random();
-            Item.spawnItem(this.map, item, new Position(this.getPosition().getIntCoordX() + rand.nextInt(50) - 25, this.getPosition().getIntCoordY() + rand.nextInt(50) - 25));
+            Item.spawnItem(this.map, item, new Position((int)this.getPosition().getX() + rand.nextInt(50) - 25, (int)this.getPosition().getY() + rand.nextInt(50) - 25));
         }
     }
 

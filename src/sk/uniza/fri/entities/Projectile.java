@@ -37,7 +37,7 @@ public abstract class Projectile extends Entity {
     }
 
     private void setDirection(Position toPos) {
-        Vector vector = new Vector(toPos.getCoordX() - super.getPosition().getCoordX(), toPos.getCoordY() - super.getPosition().getCoordY());
+        Vector vector = new Vector(toPos.getX() - super.getPosition().getX(), toPos.getY() - super.getPosition().getY());
         vector.normalize();
         vector.multiply(1280);
 
