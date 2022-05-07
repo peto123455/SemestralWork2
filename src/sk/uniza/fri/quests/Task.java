@@ -43,8 +43,7 @@ public class Task {
     }
 
     /**
-     * Nastaví množstvo
-     * @return Nastaví doteraz dokončené množstvo
+     * Nastaví doteraz dokončené množstvo
      */
     public void setAmount(int amount) {
         this.amount = amount;

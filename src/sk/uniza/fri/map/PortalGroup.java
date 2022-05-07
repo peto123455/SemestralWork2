@@ -7,7 +7,7 @@ public class PortalGroup {
 
     /**
      * Portálová skupina. Slúži na spájanie 2 portálov.
-     * Cestovanie A <-> B
+     * Cestovanie A - B
      * @param portal1 Portál A
      * @param portal2 Portál B
      */
