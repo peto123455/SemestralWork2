@@ -2,18 +2,19 @@ package sk.uniza.fri.entities;
 
 import sk.uniza.fri.enums.EDirection;
 import sk.uniza.fri.enums.EImageList;
+import sk.uniza.fri.enums.ERenderLayer;
 import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.essentials.Vector;
 import sk.uniza.fri.main.Game;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 public abstract class Projectile extends Entity {
     private static ArrayList<Projectile> projectiles = new ArrayList<>();
 
     public Projectile(EImageList[] image, Position position, Position toPos) {
-        super(image);
+        super(image, ERenderLayer.PROJECTILES);
         super.getPosition().setPosition(position);
         super.setSpeed(6);
 

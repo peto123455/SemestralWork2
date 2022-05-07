@@ -1,6 +1,7 @@
 package sk.uniza.fri.entities;
 
 import sk.uniza.fri.enums.EImageList;
+import sk.uniza.fri.enums.ERenderLayer;
 import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;
@@ -17,7 +18,7 @@ public class Chest extends Entity {
     private Map map;
 
     public Chest(Map map, Position position, ItemStack[] items) {
-        super(new EImageList[] { EImageList.CHEST, EImageList.CHEST_OPEN });
+        super(new EImageList[] { EImageList.CHEST, EImageList.CHEST_OPEN }, ERenderLayer.CHESTS);
 
         this.items = new ArrayList<>();
         this.isOpen = false;

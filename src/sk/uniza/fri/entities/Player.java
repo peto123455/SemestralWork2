@@ -2,6 +2,7 @@ package sk.uniza.fri.entities;
 
 import sk.uniza.fri.enums.EDirection;
 import sk.uniza.fri.enums.EImageList;
+import sk.uniza.fri.enums.ERenderLayer;
 import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.ImageTools;
 import sk.uniza.fri.essentials.Inventory;
@@ -22,6 +23,7 @@ public class Player extends EntityAlive {
 
     public Player(Game game) {
         super(new EImageList[] {EImageList.PLAYER}, 5);
+        super.setRenderLayer(ERenderLayer.PLAYER);
 
         this.eDirection = EDirection.RIGHT;
         this.inventory = new Inventory();

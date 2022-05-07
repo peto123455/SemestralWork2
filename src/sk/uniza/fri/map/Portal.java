@@ -5,6 +5,7 @@ import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.entities.Projectile;
 import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.enums.EPortalStatus;
+import sk.uniza.fri.enums.ERenderLayer;
 import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.Position;
 
@@ -16,7 +17,7 @@ public class Portal extends Entity {
     private EPortalStatus status;
 
     public Portal(Position position, Map map) {
-        super(new EImageList[] { EImageList.PORTAL });
+        super(new EImageList[] { EImageList.PORTAL }, ERenderLayer.PORTALS);
         super.getPosition().setPosition(position);
         this.map = map;
     }

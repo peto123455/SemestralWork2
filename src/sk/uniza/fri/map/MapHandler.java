@@ -2,7 +2,6 @@ package sk.uniza.fri.map;
 
 import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Entity;
-import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.enums.ETileList;
 import sk.uniza.fri.essentials.EntityLoader;
@@ -12,6 +11,8 @@ import sk.uniza.fri.main.GameTile;
 import java.awt.Graphics2D;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class MapHandler {
@@ -86,7 +87,16 @@ public class MapHandler {
     }
 
     public void drawEntities(Graphics2D g2d) {
-        for (Entity entity : this.getMap().getEntityList()) {
+        ArrayList<Entity> orderedByLayers = this.getMap().getEntityList();
+
+        Collections.sort(orderedByLayers, new Comparator<Entity>() {
+            @Override
+            public int compare(Entity entity1, Entity entity2) {
+                return entity1.getRenderLayer().ordinal() - entity2.getRenderLayer().ordinal();
+            }
+        });
+
+        for (Entity entity : orderedByLayers) {
             entity.draw(g2d);
         }
     }

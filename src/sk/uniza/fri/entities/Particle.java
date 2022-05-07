@@ -2,6 +2,7 @@ package sk.uniza.fri.entities;
 
 
 import sk.uniza.fri.enums.EImageList;
+import sk.uniza.fri.enums.ERenderLayer;
 import sk.uniza.fri.essentials.Position;
 
 import java.awt.Graphics2D;
@@ -16,7 +17,7 @@ public class Particle extends Entity {
     private static ArrayList<Particle> particles = new ArrayList<>();
 
     public Particle(Position position, EImageList[] images, int frameDuration) {
-        super(images);
+        super(images, ERenderLayer.PARTICLES);
         this.getPosition().setPosition(position);
         this.frameDuration = frameDuration;
         this.stage = 0;

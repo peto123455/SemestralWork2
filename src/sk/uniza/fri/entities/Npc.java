@@ -1,6 +1,7 @@
 package sk.uniza.fri.entities;
 
 import sk.uniza.fri.enums.EImageList;
+import sk.uniza.fri.enums.ERenderLayer;
 import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.map.Map;
 import sk.uniza.fri.quests.Quest;

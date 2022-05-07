@@ -75,10 +75,13 @@ public class GamePanel extends JPanel {
 
     private void drawGame(Graphics2D g2d) {
         this.game.getMapHandler().drawTiles(g2d);       //Políčka
-        this.game.getMapHandler().drawEntities(g2d);    //Entity (Nepriatelia, predmety, bedne, portále)
+
+        //Entity
+        this.game.getMapHandler().drawEntities(g2d);    //Entity spravované map handlerom (Nepriatelia, predmety, bedne, portále)
         this.game.getPlayer().draw(g2d);                //Hráč
         Projectile.drawProjectiles(g2d);                //Projektily
         Particle.drawParticles(g2d);                    //Efekty
+
     }
 
     private void drawUI(Graphics2D g2d) {

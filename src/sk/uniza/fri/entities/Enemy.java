@@ -2,6 +2,7 @@ package sk.uniza.fri.entities;
 
 import sk.uniza.fri.enums.EDirection;
 import sk.uniza.fri.enums.EImageList;
+import sk.uniza.fri.enums.ERenderLayer;
 import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.ImageTools;
 import sk.uniza.fri.essentials.ItemStack;
@@ -93,6 +94,8 @@ public abstract class Enemy extends EntityAlive {
 
     @Override
     protected void onDeath() {
+        super.setRenderLayer(ERenderLayer.CORPSES);
+
         ESoundList.playSound(ESoundList.DEATH);
         this.dropItems();
         this.map.onEnemyDeath();

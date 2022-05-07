@@ -2,6 +2,7 @@ package sk.uniza.fri.entities;
 
 import sk.uniza.fri.enums.EDirection;
 import sk.uniza.fri.enums.EImageList;
+import sk.uniza.fri.enums.ERenderLayer;
 import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.essentials.Vector;
 import sk.uniza.fri.main.Game;
@@ -16,6 +17,7 @@ import java.awt.image.BufferedImage;
 
 public abstract class Entity {
     private BufferedImage[] images;
+    private ERenderLayer renderLayer;
 
     private final Position position;
     private Position toPos;
@@ -28,8 +30,14 @@ public abstract class Entity {
             this.images[i] = images[i].getImage();
         }
 
+        this.renderLayer = ERenderLayer.DEFAULT;
         this.speed = 4;
         this.position = new Position();
+    }
+
+    public Entity(EImageList[] images, ERenderLayer renderLayer) {
+        this(images);
+        this.renderLayer = renderLayer;
     }
 
     public BufferedImage getImage() {
@@ -139,6 +147,14 @@ public abstract class Entity {
             return true;
         }
         return false;
+    }
+
+    public ERenderLayer getRenderLayer() {
+        return this.renderLayer;
+    }
+
+    protected void setRenderLayer(ERenderLayer renderLayer) {
+        this.renderLayer = renderLayer;
     }
 
     public void setSpeed(int speed) {
