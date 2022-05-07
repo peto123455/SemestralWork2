@@ -30,7 +30,7 @@ public class QuestGoblin extends Quest {
 
     @Override
     protected void onStart() {
-        new MessageBox("I need big favor. Do it, and I\nwill give you 3 health potions.\nI need you to kill powerful ghost\nmage, but it's not easy. Let me\nopen a portal for you.", 3000);
+        new MessageBox("Our people need your help.\nHelp us, and we will give you\n3 health potions. I need you\nto kill a powerful ghost mage,\nbut it's not easy. Let me open\na portal for you.", 3000);
         this.goblin.goToPos(new Position(1100, 500));
         new Timer().schedule(new TimerTask() {
             @Override
@@ -44,7 +44,7 @@ public class QuestGoblin extends Quest {
 
     @Override
     public void onRewardPickup() {
-        super.onRewardPickup("Wow ! You've actually killed him.\nHere're your 3 potions.", 5000);
+        super.onRewardPickup("Wow ! You've actually killed him.\nYou're a hero !.", 5000);
         super.getQuestHandler().gameFinished();
     }
 }

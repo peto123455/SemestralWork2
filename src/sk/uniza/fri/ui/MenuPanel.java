@@ -6,13 +6,22 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class MenuPanel extends JPanel {
     private ArrayList<JButton> buttons;
 
+    /**
+     * Menu, do ktorého sa používateľ dostane pri zapnutí hry.
+     */
     public MenuPanel() {
         this.buttons = new ArrayList<>();
 
@@ -36,6 +45,10 @@ public class MenuPanel extends JPanel {
         super.add(Box.createHorizontalStrut(1));
     }
 
+    /**
+     * Vykresluje obrázok na pozadí.
+     * @param g Plátno, na ktoré vykreslí obrázok
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -44,6 +57,11 @@ public class MenuPanel extends JPanel {
         g.drawImage(EImageList.MENU.getImage(), 0, 0, null);
     }
 
+    /**
+     * Zaregistruje akciu na tlačidlo v menu.
+     * @param a Akcia
+     * @param id Id tlačidla
+     */
     public void registerAction(ActionListener a, int id) {
         this.buttons.get(id).addActionListener(a);
     }

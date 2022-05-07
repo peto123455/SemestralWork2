@@ -50,4 +50,10 @@ public class Particle extends Entity {
             particle.draw(g2d);
         }
     }
+
+    public static void updateParticles() {
+        for (int i = 0; i < Particle.particles.size(); ++i) {
+            Particle.particles.get(i).update();
+        }
+    }
 }

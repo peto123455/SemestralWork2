@@ -5,6 +5,7 @@ import sk.uniza.fri.entities.Enemy;
 import sk.uniza.fri.entities.Entity;
 import sk.uniza.fri.entities.Item;
 import sk.uniza.fri.entities.Npc;
+import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.enums.EPortalStatus;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.enums.ETileList;
@@ -65,6 +66,14 @@ public class Map {
         return this.portals;
     }
 
+    public void checkForItems(Player player) {
+        for (int i = 0; i < this.items.size(); ++i) {
+            if (player.isNearEntity(this.items.get(i), 30)) {
+                player.getInventory().addItemStack(this.items.remove(i).pickup());
+            }
+        }
+    }
+
     public void onEnemyDeath() {
         for (Enemy enemy : this.enemies) {
             if (!enemy.isDead()) {
@@ -118,5 +127,28 @@ public class Map {
         entities.addAll(this.enemies);
 
         return entities;
+    }
+
+    public boolean action(Player player, MapHandler mapHandler) {
+        for (Chest chest : this.chests) {
+            if (player.isNearEntity(chest, 30) && chest.openChest()) {
+                return true;
+            }
+        }
+
+        for (Npc npc : this.npcs) {
+            if (player.isNearEntity(npc, 30) && npc.checkQuest(player)) {
+                return true;
+            }
+        }
+
+        for (Portal portal : this.portals) {
+            if (player.isNearEntity(portal, 80)) {
+                portal.teleport(player, mapHandler);
+                return true;
+            }
+        }
+
+        return false;
     }
 }

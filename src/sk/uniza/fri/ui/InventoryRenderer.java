@@ -9,18 +9,33 @@ import java.awt.Graphics2D;
 public class InventoryRenderer {
     private boolean isVisible;
 
+    /**
+     * Slúži na vykresľovanie inventára hráča
+     */
     public InventoryRenderer() {
         this.isVisible = false;
     }
 
+    /**
+     * Zistí či je inventár zobrazený, alebo nie.
+     * @return Či sa okno práve zobrazuje
+     */
     public boolean isVisible() {
         return this.isVisible;
     }
 
+    /**
+     * Vypne / Zapne zobrazenie inventára
+     */
     public void switchVisible() {
         this.isVisible = !this.isVisible;
     }
 
+    /**
+     * Vykresľuje samotný inventár
+     * @param g2d Plátno
+     * @param inventory Inventár hráča
+     */
     public void draw(Graphics2D g2d, Inventory inventory) {
         if (!this.isVisible) {
             return;

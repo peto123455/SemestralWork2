@@ -2,6 +2,7 @@ package sk.uniza.fri.main;
 
 import sk.uniza.fri.enums.EGameStatus;
 import sk.uniza.fri.enums.ESoundList;
+import sk.uniza.fri.essentials.GameAlreadyRunningException;
 import sk.uniza.fri.ui.GameFrame;
 import sk.uniza.fri.ui.GamePanel;
 import sk.uniza.fri.ui.MenuPanel;
@@ -32,11 +33,13 @@ public class Main {
 
         this.gameWindow.add(this.menuPanel);
         this.gameWindow.pack();
+
+        this.gameWindow.setLocationRelativeTo(null);
     }
 
-    private void startGame() {
+    private void startGame() throws GameAlreadyRunningException {
         if (this.status != EGameStatus.MENU) {
-            return;
+            throw new GameAlreadyRunningException();
         }
 
         //Zmena panelov
@@ -48,6 +51,8 @@ public class Main {
 
         this.gameWindow.pack();
         this.gamePanel.requestFocus();
+
+        this.gameWindow.setLocationRelativeTo(null);
     }
 
     private void registerListeners() {

@@ -67,4 +67,5 @@ public class Chest extends Entity {
         }
         return super.getImage(0);
     }
+
 }

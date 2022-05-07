@@ -6,6 +6,7 @@ import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.essentials.Vector;
 import sk.uniza.fri.main.Game;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public abstract class Projectile extends Entity {
@@ -26,12 +27,12 @@ public abstract class Projectile extends Entity {
         for (EDirection direction : EDirection.values()) {
             Position pos = direction.getPos(10).addPosition(super.getPosition());
             if (super.isCollision(pos, game.getMapHandler().getMap())) {
-                Projectile.getProjectiles().remove(this);
+                Projectile.projectiles.remove(this);
             }
         }
         if (super.isNearEntity(game.getPlayer(), 30)) {
             game.getPlayer().takeHeart();
-            Projectile.getProjectiles().remove(this);
+            Projectile.projectiles.remove(this);
         }
         return super.update(game);
     }
@@ -44,11 +45,19 @@ public abstract class Projectile extends Entity {
         super.goToPos(new Position(vector.getX(), vector.getY()).addPosition(super.getPosition()));
     }
 
-    public static ArrayList<Projectile> getProjectiles() {
-        return Projectile.projectiles;
-    }
-
     public static void resetProjectiles() {
         Projectile.projectiles = new ArrayList<>();
+    }
+
+    public static void updateProjectiles(Game game) {
+        for (int i = 0; i < Projectile.projectiles.size(); ++i) {
+            Projectile.projectiles.get(i).update(game);
+        }
+    }
+
+    public static void drawProjectiles(Graphics2D g2d) {
+        for (Projectile projectile : Projectile.projectiles) {
+            projectile.draw(g2d);
+        }
     }
 }

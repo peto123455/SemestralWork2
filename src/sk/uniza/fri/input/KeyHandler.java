@@ -2,12 +2,12 @@ package sk.uniza.fri.input;
 
 import sk.uniza.fri.main.Game;
 
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class KeyHandler implements KeyListener {
+public class KeyHandler extends KeyAdapter {
     private final HashMap<Integer, Boolean> pressed;
     private final HashMap<Integer, PressableKey> pressable;
 
@@ -59,11 +59,6 @@ public class KeyHandler implements KeyListener {
             }
             key.setPressed(pressed);
         }
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
     }
 
     @Override

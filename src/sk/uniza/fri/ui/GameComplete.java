@@ -6,6 +6,10 @@ import java.awt.Graphics2D;
 
 public class GameComplete {
 
+    /**
+     * Vykresluje okno konca hry
+     * @param g2d
+     */
     public static void draw(Graphics2D g2d) {
         g2d.setColor(Color.WHITE);
         g2d.fillRect(GamePanel.WIDTH / 4, GamePanel.HEIGHT / 8, GamePanel.WIDTH / 2, (int)((double)GamePanel.HEIGHT / 1.33));

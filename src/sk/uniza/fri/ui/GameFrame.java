@@ -9,6 +9,9 @@ import java.awt.event.WindowEvent;
 
 public class GameFrame extends JFrame {
 
+    /**
+     * Samotné hlavné okno hry
+     */
     public GameFrame() {
         super.setTitle("Semestralka");
         super.setResizable(false);

@@ -1,9 +1,6 @@
 package sk.uniza.fri.main;
 
-import sk.uniza.fri.entities.Chest;
 import sk.uniza.fri.entities.Entity;
-import sk.uniza.fri.entities.Item;
-import sk.uniza.fri.entities.Npc;
 import sk.uniza.fri.entities.Particle;
 import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.entities.Projectile;
@@ -12,14 +9,12 @@ import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.input.KeyHandler;
 import sk.uniza.fri.map.MapHandler;
-import sk.uniza.fri.map.Portal;
 import sk.uniza.fri.ui.GamePanel;
 import sk.uniza.fri.ui.MessageBox;
 
 import javax.swing.JOptionPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 public class Game {
     private final GamePanel panel;
@@ -78,14 +73,14 @@ public class Game {
     }
 
     public void updateGame() {
-        if (!isFinished) {
+        if (!this.isFinished) {
             this.player.handleKeys(this.keyHandler.getPressedKeys(), this.mapHandler.getMap());
-            this.checkForItems();
+            this.mapHandler.checkForItems(this.player);
             this.handleUpdate();
-            this.updateParticles();
-            this.updateProjectiles();
+            Particle.updateParticles();
+            Projectile.updateProjectiles(this);
         }
-        this.checkMessages();
+        MessageBox.checkMessages();
         this.panel.repaint();
     }
 
@@ -108,28 +103,14 @@ public class Game {
     }
 
     public void attack() {
+        if (this.isFinished) {
+            return;
+        }
         this.player.hit(this.mapHandler.getEnemies());
     }
 
     public void useAction() {
-        for (Chest chest : this.getMapHandler().getChests()) {
-            if (this.player.isNearEntity(chest, 30) && chest.openChest()) {
-                return;
-            }
-        }
-
-        for (Npc npc : this.getMapHandler().getNpcs()) {
-            if (this.player.isNearEntity(npc, 30) && npc.checkQuest(this.player)) {
-                return;
-            }
-        }
-
-        for (Portal portal : this.getMapHandler().getPortals()) {
-            if (this.player.isNearEntity(portal, 80)) {
-                portal.teleport(this.player, this.mapHandler);
-                return;
-            }
-        }
+        this.mapHandler.action(this.player);
     }
 
     private void createMouseListener() {
@@ -141,38 +122,9 @@ public class Game {
         });
     }
 
-    private void checkForItems() {
-        ArrayList<Item> items = this.mapHandler.getItems();
-        for (int i = 0; i < items.size(); ++i) {
-            if (this.player.isNearEntity(items.get(i), 30)) {
-                this.player.getInventory().addItemStack(items.remove(i).pickup());
-            }
-        }
-    }
-
     private void handleUpdate() {
         for (Entity entity : this.getMapHandler().getMap().getEntityList()) {
             entity.update(this);
-        }
-    }
-
-    private void updateParticles() {
-        ArrayList<Particle> particles = Particle.getParticles();
-        for (int i = 0; i < particles.size(); ++i) {
-            particles.get(i).update();
-        }
-    }
-
-    private void updateProjectiles() {
-        ArrayList<Projectile> projectiles = Projectile.getProjectiles();
-        for (int i = 0; i < projectiles.size(); ++i) {
-            projectiles.get(i).update(this);
-        }
-    }
-
-    private void checkMessages() {
-        for (int i = 0; i < MessageBox.getMessageBoxes().size(); ++i) {
-            MessageBox.getMessageBoxes().get(i).update();
         }
     }
 
