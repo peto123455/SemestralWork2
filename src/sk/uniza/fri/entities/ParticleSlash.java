@@ -10,6 +10,11 @@ import java.awt.image.BufferedImage;
 public class ParticleSlash extends Particle {
     private EDirection direction;
 
+    /**
+     * Vytvorí efekt seknutia
+     * @param position Pozícia seknutia
+     * @param direction Smer seknutia
+     */
     public ParticleSlash(Position position, EDirection direction) {
         super(position, new EImageList[]{EImageList.SLASH1, EImageList.SLASH2, EImageList.SLASH3}, 3);
         super.getPosition().addPosition(direction.getPos(27));

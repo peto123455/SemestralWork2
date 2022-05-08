@@ -10,6 +10,8 @@ import sk.uniza.fri.quests.QuestHandler;
 
 
 public class EnemyKnight extends Enemy {
+    private static final int ATTACK_RANGE = 50;
+
     public EnemyKnight(Position position, Map map) {
         super(position, map, new EImageList[] {EImageList.KNIGHT}, 2);
 
@@ -32,15 +34,23 @@ public class EnemyKnight extends Enemy {
         super.onDeath();
     }
 
+    /**
+     * Skontroluje, či je hráč v blízkosti na útok
+     * @param player
+     */
     private void checkForPlayer(Player player) {
-        if (this.isNearEntity(player, 50)) {
+        if (this.isNearEntity(player, EnemyKnight.ATTACK_RANGE)) {
             this.hit(player);
         }
     }
 
+    /**
+     * Útok nepriateľa
+     * @param player Hráč
+     */
     public void hit(Player player) {
         if (super.canHit()) {
-            ESoundList.playSound(ESoundList.SOWRD_STAB);
+            ESoundList.playSound(ESoundList.SWORD_STAB);
             new ParticleSlash(super.getPosition(), super.getDirection());
             player.takeHeart();
         }

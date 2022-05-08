@@ -11,6 +11,11 @@ import java.awt.Graphics2D;
 
 
 public class EnemyMageBoss extends Enemy {
+    /**
+     * Vytvorí bossa mága
+     * @param position Pozícia
+     * @param map Mapa
+     */
     public EnemyMageBoss(Position position, Map map) {
         super(position, map, new EImageList[] {EImageList.MAGE_BOSS}, 2);
         super.setSpeed(2);

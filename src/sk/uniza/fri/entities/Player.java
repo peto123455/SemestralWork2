@@ -21,6 +21,10 @@ public class Player extends EntityAlive {
     private Game game;
     private QuestHandler questHandler;
 
+    /**
+     * Vytvorí hráča
+     * @param game Hra
+     */
     public Player(Game game) {
         super(new EImageList[] {EImageList.PLAYER}, 5);
         super.setRenderLayer(ERenderLayer.PLAYER);
@@ -39,14 +43,25 @@ public class Player extends EntityAlive {
         return super.getImage();
     }
 
+    /**
+     * nastaví hráčov smer
+     * @param eDirection Smer hráča
+     */
     public void setDirection(EDirection eDirection) {
         this.eDirection = eDirection;
     }
 
+    /**
+     * @return Vráti hráčov inventár
+     */
     public Inventory getInventory() {
         return this.inventory;
     }
 
+    /**
+     * Sekne s mečom, hľadá nepriateľov v okolí.
+     * @param enemies Zoznam nepriateľov na mape
+     */
     public void hit(ArrayList<Enemy> enemies) {
         ESoundList.playSound(ESoundList.SWORD_SLASH);
         new ParticleSlash(this.getPosition(), this.eDirection);
@@ -65,6 +80,11 @@ public class Player extends EntityAlive {
         this.game.onDeath();
     }
 
+    /**
+     * Stará sa o spracovanie kláves
+     * @param keys Stlačené klávesy
+     * @param map Mapa
+     */
     public void handleKeys(ArrayList<Integer> keys, Map map) {
         Position finalPosition = new Position();
 
@@ -89,10 +109,16 @@ public class Player extends EntityAlive {
         this.getPosition().addPosition(finalPosition);
     }
 
+    /**
+     * @return Vríti quest handler
+     */
     public QuestHandler getQuestHandler() {
         return this.questHandler;
     }
 
+    /**
+     * @return Vráti hru
+     */
     public Game getGame() {
         return this.game;
     }

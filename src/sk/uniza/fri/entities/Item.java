@@ -8,6 +8,12 @@ import sk.uniza.fri.map.Map;
 
 public abstract class Item extends Entity {
 
+    /**
+     * Vytvorí item v hre (Ako entitu)
+     * @param map
+     * @param item
+     * @param position
+     */
     public static void spawnItem(Map map, ItemStack item, Position position) {
         switch (item.getItem()) {
             case COINS -> map.addItem(new ItemCoins((int)position.getX(), (int)position.getY(), item.getAmount()));
@@ -15,9 +21,17 @@ public abstract class Item extends Entity {
         }
     }
 
+    /**
+     * Item v hre (Ako entita)
+     * @param images Obrázky
+     */
     public Item(EImageList[] images) {
         super(images, ERenderLayer.ITEMS);
     }
 
+    /**
+     * Volá sa pri zobratí
+     * @return Vracia zdvihnutý item
+     */
     public abstract ItemStack pickup();
 }

@@ -13,6 +13,12 @@ import java.util.ArrayList;
 public abstract class Projectile extends Entity {
     private static ArrayList<Projectile> projectiles = new ArrayList<>();
 
+    /**
+     * Vytvorí projektil
+     * @param image Obrázok
+     * @param position Pozícia
+     * @param toPos Na akú pozícu sa má dostať (Smer)
+     */
     public Projectile(EImageList[] image, Position position, Position toPos) {
         super(image, ERenderLayer.PROJECTILES);
         super.getPosition().setPosition(position);
@@ -38,6 +44,10 @@ public abstract class Projectile extends Entity {
         return super.update(game);
     }
 
+    /**
+     * Nastaví pozíciu na ktorú sa strela má dostať
+     * @param toPos Pozícia
+     */
     private void setDirection(Position toPos) {
         Vector vector = new Vector(toPos.getX() - super.getPosition().getX(), toPos.getY() - super.getPosition().getY());
         vector.normalize();
@@ -46,16 +56,27 @@ public abstract class Projectile extends Entity {
         super.goToPos(new Position(vector.getX(), vector.getY()).addPosition(super.getPosition()));
     }
 
+    /**
+     * Zmaže všetky projektily
+     */
     public static void resetProjectiles() {
         Projectile.projectiles = new ArrayList<>();
     }
 
+    /**
+     * Stará sa o aktializáciu všetkých projektilov v hre
+     * @param game Hra
+     */
     public static void updateProjectiles(Game game) {
         for (int i = 0; i < Projectile.projectiles.size(); ++i) {
             Projectile.projectiles.get(i).update(game);
         }
     }
 
+    /**
+     * Stará sa o vykreslenie všetkých projektilov v hre
+     * @param g2d Plátno
+     */
     public static void drawProjectiles(Graphics2D g2d) {
         for (Projectile projectile : Projectile.projectiles) {
             projectile.draw(g2d);

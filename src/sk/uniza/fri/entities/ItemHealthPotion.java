@@ -8,6 +8,11 @@ import sk.uniza.fri.essentials.Position;
 
 public class ItemHealthPotion extends Item {
 
+    /**
+     * Vytvorí elixír života
+     * @param x Súradnica X
+     * @param y Súradnica Y
+     */
     public ItemHealthPotion(int x, int y) {
         super(new EImageList[] {EImageList.HEALTH_POTION});
         super.getPosition().setPosition(new Position(x, y));

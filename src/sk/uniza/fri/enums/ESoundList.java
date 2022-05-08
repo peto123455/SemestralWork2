@@ -21,7 +21,7 @@ public enum ESoundList {
     MESSAGE("/sounds/message.wav"),
     PROJECTILE_MAGIC("/sounds/projectileMagic.wav"),
     QUEST_COMPLETE("/sounds/questComplete.wav"),
-    SOWRD_STAB("/sounds/swordStab.wav");
+    SWORD_STAB("/sounds/swordStab.wav");
 
     private static final double VOLUME = 0.3; // Ovládanie hlasitosti 0 - 1
     private static final double VOLUME_LOOP = 0.1; // Ovládanie hlasitosti loopov 0 - 1

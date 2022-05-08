@@ -17,6 +17,12 @@ public class Chest extends Entity {
     private boolean isOpen;
     private Map map;
 
+    /**
+     * Vytvorí chestku s predmetmi
+     * @param map Mapa
+     * @param position Pozícia
+     * @param items Zoznam predmetov
+     */
     public Chest(Map map, Position position, ItemStack[] items) {
         super(new EImageList[] { EImageList.CHEST, EImageList.CHEST_OPEN }, ERenderLayer.CHESTS);
 
@@ -32,10 +38,19 @@ public class Chest extends Entity {
         this.map.addChest(this);
     }
 
+    /**
+     * Vytvorí prázdnu chestku
+     * @param map Mapa
+     * @param position Pozícia
+     */
     public Chest(Map map, Position position) {
         this(map, position, null);
     }
 
+    /**
+     * Otvorí bedňu
+     * @return Ak bola otvorená
+     */
     public boolean openChest() {
         if (this.isOpen) {
             return false;
@@ -53,10 +68,18 @@ public class Chest extends Entity {
         return true;
     }
 
+    /**
+     * Pridá predmety do bedňe
+     * @param items Predmety
+     */
     private void addItems(ItemStack[] items) {
         this.items.addAll(Arrays.asList(items));
     }
 
+    /**
+     * Pridá predmet do bedňe
+     * @param item Predmet
+     */
     public void addItem(ItemStack item) {
         this.items.add(item);
     }

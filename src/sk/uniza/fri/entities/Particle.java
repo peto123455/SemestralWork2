@@ -16,6 +16,12 @@ public class Particle extends Entity {
 
     private static ArrayList<Particle> particles = new ArrayList<>();
 
+    /**
+     * Vytvorí efekt
+     * @param position Pozícia efektu
+     * @param images Obrázky efektu (Animácia)
+     * @param frameDuration Dĺžka jednej snímky
+     */
     public Particle(Position position, EImageList[] images, int frameDuration) {
         super(images, ERenderLayer.PARTICLES);
         this.getPosition().setPosition(position);
@@ -25,6 +31,9 @@ public class Particle extends Entity {
         Particle.particles.add(this);
     }
 
+    /**
+     * Stará sa o aktualizovanie snímky
+     */
     public void update() {
         ++this.currentFrame;
         if (this.frameDuration > this.currentFrame) {
@@ -37,21 +46,27 @@ public class Particle extends Entity {
         Particle.particles.remove(this);
     }
 
+    /**
+     * @return Vráti aktuálnu smínku
+     */
     @Override
     public BufferedImage getImage() {
         return super.getImage(this.stage);
     }
 
-    public static ArrayList<Particle> getParticles() {
-        return particles;
-    }
-
+    /**
+     * Stará sa o vykresľovanie všetkých efektov
+     * @param g2d Plátno
+     */
     public static void drawParticles(Graphics2D g2d) {
-        for (Particle particle : Particle.getParticles()) {
+        for (Particle particle : Particle.particles) {
             particle.draw(g2d);
         }
     }
 
+    /**
+     * Stará sa o aktualizáciu všetkých efektov
+     */
     public static void updateParticles() {
         for (int i = 0; i < Particle.particles.size(); ++i) {
             Particle.particles.get(i).update();

@@ -9,6 +9,12 @@ import sk.uniza.fri.essentials.Position;
 public class ItemCoins extends Item {
     private int amount;
 
+    /**
+     * Vytvorí peniaze
+     * @param x Súradnica X
+     * @param y Súradnica Y
+     * @param amount Množstvo
+     */
     public ItemCoins(int x, int y, int amount) {
         super(new EImageList[] {EImageList.COINS});
         this.amount = amount;

@@ -23,6 +23,10 @@ public abstract class Entity {
     private Position toPos;
     private int speed;
 
+    /**
+     * Vytvorí entitu
+     * @param images
+     */
     public Entity(EImageList[] images) {
         this.images = new BufferedImage[images.length];
 
@@ -35,15 +39,29 @@ public abstract class Entity {
         this.position = new Position();
     }
 
+    /**
+     * Vytvorí entitu a pridelí jej vykreslovaciu vrstvu
+     * @param images
+     * @param renderLayer
+     */
     public Entity(EImageList[] images, ERenderLayer renderLayer) {
         this(images);
         this.renderLayer = renderLayer;
     }
 
+    /**
+     * Vráti obrázok na vykreslenie
+     * @return Obrázok
+     */
     public BufferedImage getImage() {
         return this.getImage(0);
     }
 
+    /**
+     * Vráti obrázok na vykreslenie s id
+     * @param i ID
+     * @return Obrázok
+     */
     public BufferedImage getImage(int i) {
         if (i < 0 || i >= this.images.length) {
             return null;
@@ -52,18 +70,27 @@ public abstract class Entity {
         return this.images[i];
     }
 
+    /**
+     * @return Vráti pozíciu objektu
+     */
     public Position getPosition() {
         return this.position;
     }
 
-    public Position getPositionRelativeToGrid() {
-        return Position.getPositionRelativeToGrid(this.position);
-    }
-
+    /**
+     * Skontroluje, či sa nachádza v blízkosti zadanej entity
+     * @param entity Entita
+     * @param distance Max. vzdialenosť
+     * @return Je v dosahu
+     */
     public boolean isNearEntity(Entity entity, double distance) {
         return Position.getDistance(this.getPosition(), entity.getPosition()) <= distance;
     }
 
+    /**
+     * Nastaví obrázky
+     * @param images Zoznam obrázkov
+     */
     public void changeImages(EImageList[] images) {
         this.images = new BufferedImage[images.length];
 
@@ -72,31 +99,61 @@ public abstract class Entity {
         }
     }
 
+    /**
+     * Stará sa o vykresľovanie entity
+     * @param g2d Plátno
+     */
     public void draw(Graphics2D g2d) {
         g2d.drawImage(this.getImage(), (int)this.getPosition().getX() - GamePanel.TILE_SIZE / 2, (int)this.getPosition().getY() - GamePanel.TILE_SIZE / 2, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
     }
 
+    /**
+     * @return Vráti zoznam obrázkov
+     */
     protected BufferedImage[] getImages() {
         return this.images;
     }
 
+    /**
+     * @return Vráti pozíciu kam sa Entita snaží dostať
+     */
     protected Position getToPos() {
         return this.toPos;
     }
 
+    /**
+     * Entita dostane pokyn ísť na danú pozíciu
+     * @param toPos Pozícia
+     */
     public void goToPos(Position toPos) {
         this.toPos = toPos;
     }
 
+    /**
+     * Stará sa o aktualizovanie Entity
+     * @param game Hra
+     * @return Či update prebehol
+     */
     public boolean update(Game game) {
         this.updatePos(game);
         return true;
     }
 
+    /**
+     * Aktualizuje pozíciu Entity
+     * @param game hra
+     * @return Ktorým smerom sa entita hýbe
+     */
     protected EDirection updatePos(Game game) {
         return this.updatePos(game, this.toPos);
     }
 
+    /**
+     * Aktualizuje pozíciu Entity
+     * @param game hra
+     * @param position Pozícia kam má ísť
+     * @return Ktorým smerom sa entita hýbe
+     */
     protected EDirection updatePos(Game game, Position position) {
         if (position == null) {
             return null;
@@ -126,6 +183,11 @@ public abstract class Entity {
         return null;
     }
 
+    /**
+     * Stará sa o samotný pohyb entity
+     * @param byPos O akú pozíciu sa má posunúť
+     * @param mapHandler Map Handler
+     */
     protected void move(Position byPos, MapHandler mapHandler) {
         //byPos.multiply(GameThread.getInstance().getDeltaTime() * 50);
 
@@ -140,6 +202,12 @@ public abstract class Entity {
         this.getPosition().addPosition(byPos);
     }
 
+    /**
+     * Či koliduje
+     * @param futurePosition Budúca pozícia
+     * @param map Mapa
+     * @return Koliduje
+     */
     protected boolean isCollision(Position futurePosition, Map map) {
         futurePosition = Position.getPositionRelativeToGrid(futurePosition);
         GameTile tile = map.getTile((int)futurePosition.getX(), (int)futurePosition.getY());
@@ -149,14 +217,25 @@ public abstract class Entity {
         return false;
     }
 
+    /**
+     * @return Vráti vykresľujúcu vrstvu
+     */
     public ERenderLayer getRenderLayer() {
         return this.renderLayer;
     }
 
+    /**
+     * Nastaví vykresľujúcu vrstvu
+     * @param renderLayer Vykresľujúca vrstva
+     */
     protected void setRenderLayer(ERenderLayer renderLayer) {
         this.renderLayer = renderLayer;
     }
 
+    /**
+     * Nastaví rýchlosť
+     * @param speed Rýchlosť
+     */
     public void setSpeed(int speed) {
         this.speed = speed;
     }
