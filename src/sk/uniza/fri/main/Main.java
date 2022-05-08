@@ -21,6 +21,9 @@ public class Main {
         new Main();
     }
 
+    /**
+     * Hlavná trieda
+     */
     public Main() {
         ESoundList.playSound(ESoundList.MUSIC, true);
         this.menuPanel = new MenuPanel();
@@ -37,6 +40,10 @@ public class Main {
         this.gameWindow.setLocationRelativeTo(null);
     }
 
+    /**
+     * Prepne okno z menu na hru
+     * @throws GameAlreadyRunningException Ak už je v hre
+     */
     private void startGame() throws GameAlreadyRunningException {
         if (this.status != EGameStatus.MENU) {
             throw new GameAlreadyRunningException();
@@ -55,6 +62,9 @@ public class Main {
         this.gameWindow.setLocationRelativeTo(null);
     }
 
+    /**
+     * Zaregistruje akcie na tlačidlá
+     */
     private void registerListeners() {
         this.menuPanel.registerAction(e -> this.startGame(), 0); //Zavolá startGame() pri stlačení tlačiala
         this.menuPanel.registerAction(e -> JOptionPane.showMessageDialog(null, "W,A,S,D - Movement\nE - Action key\nQ - Use health potion\nLMB / K - Attack"), 1);

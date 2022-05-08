@@ -6,10 +6,17 @@ public enum EQuestAction {
 
     private String string;
 
+    /**
+     * Typy úloh v queste
+     * @param string
+     */
     EQuestAction(String string) {
         this.string = string;
     }
 
+    /**
+     * @return Vráti popis úlohy
+     */
     public String getString() {
         return this.string;
     }

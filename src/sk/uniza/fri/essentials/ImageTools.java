@@ -5,6 +5,11 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 public class ImageTools {
+    /**
+     * Slúži na preklopenie obrázku horizontálne
+     * @param image Obrázok
+     * @return Prevrátený obrázok
+     */
     public static BufferedImage flip(BufferedImage image) {
         AffineTransform at = new AffineTransform();
         BufferedImage imageFliped = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);

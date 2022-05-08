@@ -9,10 +9,17 @@ import java.util.ArrayList;
 public class Inventory {
     private ArrayList<ItemStack> inventory;
 
+    /**
+     * Inventár hráča
+     */
     public Inventory() {
         this.inventory = new ArrayList<>();
     }
 
+    /**
+     * Pridá item do inventára
+     * @param item Item
+     */
     public void addItemStack(ItemStack item) {
         ItemStack itemStack = this.containsItem(item);
         if (itemStack != null) {
@@ -22,6 +29,11 @@ public class Inventory {
         this.inventory.add(item);
     }
 
+    /**
+     * Odoberie item z inventára
+     * @param item Item
+     * @return Či sa odobralo sa úspešne
+     */
     public boolean removeItemStack(ItemStack item) {
         ItemStack itemStack = this.containsItem(item);
         if (itemStack == null || item.getAmount() > itemStack.getAmount()) {
@@ -37,6 +49,10 @@ public class Inventory {
         return true;
     }
 
+    /**
+     * @param item Item
+     * @return Má item v inventári
+     */
     private ItemStack containsItem(ItemStack item) {
         for (ItemStack itemStack : this.inventory) {
             if (itemStack.getItem() == item.getItem()) {
@@ -46,15 +62,27 @@ public class Inventory {
         return null;
     }
 
+    /**
+     * @param item Item
+     * @return Má item v inventári
+     */
     public ItemStack containsItem(EItemList item) {
         return this.containsItem(new ItemStack(item, 0));
     }
 
+    /**
+     * @param item
+     * @return Vráti množstvo itemu v inventári
+     */
     public int getItemAmount(EItemList item) {
         ItemStack itemStack = this.containsItem(item);
         return (itemStack != null) ? itemStack.getAmount() : 0;
     }
 
+    /**
+     * Výpis inventára
+     * @return
+     */
     @Override
     public String toString() {
         if (this.inventory.isEmpty()) {
@@ -68,6 +96,12 @@ public class Inventory {
         return string;
     }
 
+    /**
+     * Použije item v inventári
+     * @param item Item
+     * @param game Hra
+     * @return Či použilo item
+     */
     public boolean useItem(ItemStack item, Game game) {
         switch (item.getItem()) {
             case HEALTH_POTION -> {

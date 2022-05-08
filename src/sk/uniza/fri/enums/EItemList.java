@@ -7,10 +7,17 @@ public enum EItemList {
 
     private String name;
 
+    /**
+     * Zoznam predmetov
+     * @param name Meno predmetu
+     */
     EItemList(String name) {
         this.name = name;
     }
 
+    /**
+     * @return Vráti meno predmetu
+     */
     public String getName() {
         return this.name;
     }

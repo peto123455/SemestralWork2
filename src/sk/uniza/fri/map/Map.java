@@ -144,6 +144,30 @@ public class Map {
     }
 
     /**
+     * Pridá Portál na mapu
+     * @param portal Portál
+     */
+    public void addPortal(Portal portal) {
+        if (this.portals.contains(portal)) {
+            return;
+        }
+
+        this.portals.add(portal);
+    }
+
+    /**
+     * Pridá Nepriatela na mapu
+     * @param enemy Nepriatel
+     */
+    public void addEnemy(Enemy enemy) {
+        if (this.enemies.contains(enemy)) {
+            return;
+        }
+
+        this.enemies.add(enemy);
+    }
+
+    /**
      * Pridá NPC na mapu
      * @param npc NPC
      */

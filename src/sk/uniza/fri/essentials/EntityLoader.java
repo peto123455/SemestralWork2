@@ -22,24 +22,26 @@ import sk.uniza.fri.map.PortalGroup;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 public class EntityLoader {
 
     public static final int PORTALS_PER_GROUP = 2;
 
+    /**
+     * Stará sa o načítanie všetkých entít na mapu
+     * @param mapHandler Map Handler
+     * @param player Hráč
+     */
     public static void loadEntities(MapHandler mapHandler, Player player) {
+        //Načítanie z JSONu
         JSONObject json = null;
 
         try {
             InputStream is = Enemy.class.getResourceAsStream("/maps/entities.json");
             JSONParser jsonParser = new JSONParser();
-            json = (JSONObject)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+            json = (JSONObject)jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8));
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
 
@@ -49,11 +51,11 @@ public class EntityLoader {
         EntityLoader.loadChests(json, mapHandler);
         EntityLoader.loadNpcs(json, mapHandler);
 
+        //Ručné vytvorenie bossa, zbytočné ho pridávať do JSONu keď je len jeden
         Enemy enemy = new EnemyMageBoss(new Position(800, 400), mapHandler.getMap(3));
         enemy.follow(player);
-        mapHandler.getMap(3).getEnemies().add(enemy);
+        mapHandler.getMap(3).addEnemy(enemy);
     }
-
 
     private static void loadItems(JSONObject json, MapHandler mapHandler) {
         for (Object itemObject : (JSONArray)json.get("items")) {
@@ -71,8 +73,9 @@ public class EntityLoader {
         for (Object enemyObject : (JSONArray)json.get("enemies")) {
             JSONObject enemy = (JSONObject)enemyObject;
             Position position = new Position(((Long)enemy.get("x")).intValue(), ((Long)enemy.get("y")).intValue());
+            Map map = mapHandler.getMap(((Long)enemy.get("map")).intValue());
 
-            Enemy enemyI = new EnemyKnight(position, mapHandler.getMap(((Long)enemy.get("map")).intValue()));
+            Enemy enemyI = new EnemyKnight(position, map);
             if (enemy.get("followPlayer") != null && (Boolean)enemy.get("followPlayer")) {
                 enemyI.follow(player);
             }
@@ -90,7 +93,7 @@ public class EntityLoader {
                 JSONObject item = (JSONObject)itemObject;
                 enemyI.addDropItem(new ItemStack(EItemList.valueOf((String)item.get("name")), ((Long)item.get("amount")).intValue()));
             }
-            mapHandler.getMap(((Long)enemy.get("map")).intValue()).getEnemies().add(enemyI);
+            map.addEnemy(enemyI);
         }
     }
 
@@ -104,15 +107,15 @@ public class EntityLoader {
                 JSONObject portal = (JSONObject)group.get(i);
                 int x = ((Long)portal.get("x")).intValue();
                 int y = ((Long)portal.get("y")).intValue();
-                int map = ((Long)portal.get("map")).intValue();
+                Map map = mapHandler.getMap(((Long)portal.get("map")).intValue());
 
-                portals[i] = new Portal(new Position(x, y), mapHandler.getMap(map));
+                portals[i] = new Portal(new Position(x, y), map);
 
                 if (portal.get("open") != null) {
                     portals[i].setStatus(EPortalStatus.valueOf((String)portal.get("open")));
                 }
 
-                mapHandler.getMap(map).getPortals().add(portals[i]);
+                map.addPortal(portals[i]);
             }
 
             new PortalGroup(portals[0], portals[1]);

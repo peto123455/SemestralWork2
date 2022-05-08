@@ -25,6 +25,10 @@ public class Game {
 
     private boolean isFinished;
 
+    /**
+     * Hlavná inštancia hry, jej logika
+     * @param panel
+     */
     public Game(GamePanel panel) {
         this.isFinished = false;
         this.panel = panel;
@@ -32,10 +36,13 @@ public class Game {
 
         this.keyHandler = new KeyHandler(this);
 
-        this.createKeyListener();
+        this.panel.createKeyListener(this.keyHandler);
         this.createMouseListener();
     }
 
+    /**
+     * Začne hru
+     */
     public void startGame() {
         this.initGame();
 
@@ -43,6 +50,9 @@ public class Game {
         GameThread.getInstance().start();
     }
 
+    /**
+     * Stará sa o načítanie hry
+     */
     public void initGame() {
         this.player = new Player(this);
         this.mapHandler = new MapHandler(this);
@@ -50,10 +60,17 @@ public class Game {
         this.player.getPosition().setPosition(new Position(200, 520));
     }
 
+    /**
+     * Ukončí hru
+     */
     public void finishGame() {
         this.isFinished = true;
     }
 
+    /**
+     * Stará sa o načítanie hry, používa sa ak hráč zomrel
+     * @param died
+     */
     public void initGame(boolean died) {
         if (died) {
             this.panel.repaint();
@@ -64,14 +81,23 @@ public class Game {
         this.keyHandler.resetKeys();
     }
 
+    /**
+     * @return Vráti Map handler
+     */
     public MapHandler getMapHandler() {
         return this.mapHandler;
     }
 
+    /**
+     * @return Vráti hráča
+     */
     public Player getPlayer() {
         return this.player;
     }
 
+    /**
+     * Stará sa o aktualizáciu hry
+     */
     public void updateGame() {
         if (!this.isFinished) {
             this.player.handleKeys(this.keyHandler.getPressedKeys(), this.mapHandler.getMap());
@@ -84,14 +110,16 @@ public class Game {
         this.panel.repaint();
     }
 
-    private void createKeyListener() {
-        this.panel.createKeyListener(this.keyHandler);
-    }
-
+    /**
+     * Použije 1 elixír života
+     */
     public void useHealthPotion() {
         this.getPlayer().getInventory().useItem(new ItemStack(EItemList.HEALTH_POTION, 1), this);
     }
 
+    /**
+     * Zobrazí / Skryje inventár
+     */
     public void switchInventory() {
         this.panel.switchInventory();
     }
@@ -102,6 +130,9 @@ public class Game {
         }
     }
 
+    /**
+     * Hráč zaútočí
+     */
     public void attack() {
         if (this.isFinished) {
             return;
@@ -109,6 +140,9 @@ public class Game {
         this.player.hit(this.mapHandler.getEnemies());
     }
 
+    /**
+     * Hráč vykoná akciu
+     */
     public void useAction() {
         this.mapHandler.action(this.player);
     }
@@ -128,10 +162,16 @@ public class Game {
         }
     }
 
+    /**
+     * Volá sa pri smrti hráča
+     */
     public void onDeath() {
         this.initGame(true);
     }
 
+    /**
+     * @return Či je hra ukončená
+     */
     public boolean isFinished() {
         return this.isFinished;
     }

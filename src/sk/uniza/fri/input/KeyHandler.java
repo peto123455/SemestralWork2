@@ -13,6 +13,10 @@ public class KeyHandler extends KeyAdapter {
 
     private final Game game;
 
+    /**
+     * Stará sa o správu stlačených kláves
+     * @param game Hra
+     */
     public KeyHandler(Game game) {
         this.pressed = new HashMap<>();
         this.pressable = new HashMap<>();
@@ -21,6 +25,9 @@ public class KeyHandler extends KeyAdapter {
         this.registerKeys();
     }
 
+    /**
+     * Zaregistruje základné klávesy
+     */
     private void registerKeys() {
         this.pressed.put(KeyEvent.VK_W, false); //Pohyb hore
         this.pressed.put(KeyEvent.VK_A, false); //Pohyb doľava
@@ -33,10 +40,16 @@ public class KeyHandler extends KeyAdapter {
         this.pressable.put(KeyEvent.VK_E, new PressableKeyUseAction()); //Klávesa akcie
     }
 
+    /**
+     * Vyresetuje stlačené klávesi
+     */
     public void resetKeys() {
         this.registerKeys();
     }
 
+    /**
+     * @return Vráti zoznam stlačených kláves
+     */
     public ArrayList<Integer> getPressedKeys() {
         ArrayList<Integer> list = new ArrayList<>();
         this.pressed.forEach((kluc, hodnota) -> {
@@ -47,6 +60,11 @@ public class KeyHandler extends KeyAdapter {
         return list;
     }
 
+    /**
+     * Aktualizuje stav klávesi
+     * @param c Klávesa
+     * @param pressed Jej stav
+     */
     public void keyUpdate(int c, boolean pressed) {
         if (this.pressed.containsKey(c)) {
             this.pressed.put(c, pressed);
@@ -61,11 +79,19 @@ public class KeyHandler extends KeyAdapter {
         }
     }
 
+    /**
+     * Volá sa pri stlační klávesi, aktualizuje jej stav
+     * @param e Event
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         this.keyUpdate(e.getKeyCode(), true);
     }
 
+    /**
+     * Volá sa pri pustení klávesi, aktualizuje jej stav
+     * @param e Event
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         this.keyUpdate(e.getKeyCode(), false);

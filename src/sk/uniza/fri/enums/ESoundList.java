@@ -28,14 +28,24 @@ public enum ESoundList {
 
     private final String route;
 
+    /**
+     * Zoznam zvukov
+     * @param route Cesta k zvuku
+     */
     ESoundList(String route) {
         this.route = route;
     }
 
+    /**
+     * @return Vráti cestu k zvuku
+     */
     public String getRoute() {
         return this.route;
     }
 
+    /**
+     * @return Vríti Audo Input Stream zvuku
+     */
     private AudioInputStream getAudioInputStream() {
         try {
             return AudioSystem.getAudioInputStream(this.getClass().getResource(this.getRoute()));
@@ -47,10 +57,19 @@ public enum ESoundList {
         return null;
     }
 
+    /**
+     * Prehrá zvuk
+     * @param sound Zvuk
+     */
     public static void playSound(ESoundList sound) {
         ESoundList.playSound(sound, false);
     }
 
+    /**
+     * Prehrá zvuk
+     * @param sound Zvuk
+     * @param loop Opakovanie
+     */
     public static void playSound(ESoundList sound, boolean loop) {
         new Thread() {
             public void run() {

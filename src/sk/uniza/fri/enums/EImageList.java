@@ -26,6 +26,10 @@ public enum EImageList {
 
     private BufferedImage image;
 
+    /**
+     * Zoznam obrázkov
+     * @param route Cesta k obrázku
+     */
     EImageList(String route) {
         try {
             this.image = ImageIO.read(this.getClass().getResourceAsStream(route));
@@ -34,6 +38,9 @@ public enum EImageList {
         }
     }
 
+    /**
+     * @return Vráti obrázok
+     */
     public BufferedImage getImage() {
         return this.image;
     }

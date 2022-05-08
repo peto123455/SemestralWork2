@@ -18,6 +18,10 @@ public enum ETileList {
     private int id;
     private boolean hasCollision;
 
+    /**
+     * @param id ID
+     * @return Blok na základe ID
+     */
     public static ETileList getByID(int id) {
         if (id < 0) {
             return null;
@@ -30,6 +34,12 @@ public enum ETileList {
         return null;
     }
 
+    /**
+     * Zoznam blokov
+     * @param route Cesta k obrázku bloku
+     * @param id ID
+     * @param hasCollision Má kolízie
+     */
     ETileList(String route, int id, boolean hasCollision) {
         try {
             this.image = ImageIO.read(this.getClass().getResourceAsStream(route));
@@ -40,14 +50,23 @@ public enum ETileList {
         this.hasCollision = hasCollision;
     }
 
+    /**
+     * @return Vráti obrázok bloku
+     */
     public BufferedImage getImage() {
         return this.image;
     }
 
+    /**
+     * @return Vráti ID bloku
+     */
     public int getId() {
         return this.id;
     }
 
+    /**
+     * @return Má kolízie
+     */
     public boolean hasCollision() {
         return this.hasCollision;
     }
