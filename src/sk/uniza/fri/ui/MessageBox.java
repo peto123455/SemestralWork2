@@ -3,9 +3,10 @@ package sk.uniza.fri.ui;
 import sk.uniza.fri.enums.EFontList;
 import sk.uniza.fri.enums.ESoundList;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -46,23 +47,46 @@ public class MessageBox {
      * @return Vracia potrebný offset pre dalšiu správu.
      */
     public int draw(Graphics2D g2d, int offset) {
-        String[] strings = this.text.split("\n");
+        //String[] strings = this.text.split("\n");
 
-        g2d.setColor(Color.WHITE);
-        g2d.fillRect(950, offset, 280, 25 * strings.length + 50);
-        g2d.setColor(Color.BLACK);
+        ArrayList<String> strings = new ArrayList<>();
+
+        int counter = 0;
+        String currentString = "";
+        for (String string : this.text.split(" ")) {
+            if (counter > 25) {
+                counter = 0;
+                strings.add(currentString);
+                currentString = "";
+            }
+            currentString += " " + string;
+            counter += string.length() + 1; //dĺžka + medzera
+        }
+        strings.add(currentString);
+
         g2d.setFont(EFontList.DIALOG.getFont());
+
+        g2d.setColor(Color.BLACK);
+        g2d.setColor(Color.WHITE);
+        g2d.fillRoundRect(950, offset, 280, g2d.getFontMetrics().getHeight() * strings.size() + 50, 10, 10);
+
+
+        g2d.setColor(Color.BLACK);
+        Stroke tmp = g2d.getStroke();
+        g2d.setStroke(new BasicStroke(2));
+        g2d.drawRoundRect(950, offset, 280, g2d.getFontMetrics().getHeight() * strings.size() + 50, 10, 10);
+        g2d.setStroke(tmp);
 
         //Rozdelenie riadkov
         int y = offset;
-        int added = 25;
+        int added = g2d.getFontMetrics().getHeight();
 
         for (String string : strings) {
             added += g2d.getFontMetrics().getHeight();
             g2d.drawString(string, 975, y + added);
         }
 
-        return 25 * strings.length + 75;
+        return 25 * strings.size() + 75;
     }
 
     /**
@@ -79,7 +103,7 @@ public class MessageBox {
      * @param g2d Plátno
      */
     public static void drawMessages(Graphics2D g2d) {
-        int y = 90;
+        int y = GamePanel.HEIGHT / 8;
         for (MessageBox message : MessageBox.messageBoxes) {
             y += message.draw(g2d, y);
         }

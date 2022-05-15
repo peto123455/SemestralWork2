@@ -8,7 +8,10 @@ import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.main.Game;
 
 import javax.swing.JPanel;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
