@@ -52,7 +52,7 @@ public class EntityLoader {
         EntityLoader.loadNpcs(json, mapHandler);
 
         //Ručné vytvorenie bossa, zbytočné ho pridávať do JSONu keď je len jeden
-        Enemy enemy = new EnemyMageBoss(new Position(800, 400), mapHandler.getMap(3));
+        Enemy enemy = new EnemyMageBoss(new Position(1000, 550), mapHandler.getMap(3));
         enemy.follow(player);
         mapHandler.getMap(3).addEnemy(enemy);
     }

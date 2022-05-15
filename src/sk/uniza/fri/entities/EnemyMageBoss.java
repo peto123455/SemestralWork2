@@ -17,7 +17,7 @@ public class EnemyMageBoss extends Enemy {
      * @param map Mapa
      */
     public EnemyMageBoss(Position position, Map map) {
-        super(position, map, new EImageList[] {EImageList.MAGE_BOSS}, 2);
+        super(position, map, new EImageList[] {EImageList.MAGE_BOSS}, 4);
         super.setSpeed(2);
 
         super.setCooldown(400);

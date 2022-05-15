@@ -136,6 +136,17 @@
           "amount": 50
         }
       ]
+    },
+    {
+      "x": 800,
+      "y": 600,
+      "map": 1,
+      "items": [
+        {
+          "item": "COINS",
+          "amount": 50
+        }
+      ]
     }
   ],
   "npcs": [
@@ -148,7 +159,7 @@
     },
     {
       "image": "GOBLIN",
-      "x": 400,
+      "x": 300,
       "y": 300,
       "map": 2,
       "quest": "sk.uniza.fri.quests.QuestGoblin"

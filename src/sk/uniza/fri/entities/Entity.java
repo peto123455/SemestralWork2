@@ -25,7 +25,7 @@ public abstract class Entity {
 
     /**
      * Vytvorí entitu
-     * @param images
+     * @param images Obrázky
      */
     public Entity(EImageList[] images) {
         this.images = new BufferedImage[images.length];

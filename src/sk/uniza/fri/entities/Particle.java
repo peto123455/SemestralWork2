@@ -9,7 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class Particle extends Entity {
+public abstract class Particle extends Entity {
     private int frameDuration;
     private int currentFrame;
     private int stage;
