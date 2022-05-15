@@ -1,5 +1,6 @@
 package sk.uniza.fri.ui;
 
+import sk.uniza.fri.enums.EFontList;
 import sk.uniza.fri.enums.ESoundList;
 
 import java.awt.Color;
@@ -48,9 +49,9 @@ public class MessageBox {
         String[] strings = this.text.split("\n");
 
         g2d.setColor(Color.WHITE);
-        g2d.fillRect(950, offset, 260, 25 * strings.length + 50);
+        g2d.fillRect(950, offset, 280, 25 * strings.length + 50);
         g2d.setColor(Color.BLACK);
-        g2d.setFont(new Font("SansSerif", Font.BOLD, 15));
+        g2d.setFont(EFontList.DIALOG.getFont());
 
         //Rozdelenie riadkov
         int y = offset;

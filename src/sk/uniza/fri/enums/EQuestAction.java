@@ -8,7 +8,7 @@ public enum EQuestAction {
 
     /**
      * Typy úloh v queste
-     * @param string
+     * @param string Text úlohy
      */
     EQuestAction(String string) {
         this.string = string;

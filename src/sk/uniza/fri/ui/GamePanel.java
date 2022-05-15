@@ -2,23 +2,20 @@ package sk.uniza.fri.ui;
 
 import sk.uniza.fri.entities.Particle;
 import sk.uniza.fri.entities.Projectile;
+import sk.uniza.fri.enums.EFontList;
 import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.main.Game;
 
 import javax.swing.JPanel;
-import java.awt.Font;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
 public class GamePanel extends JPanel {
 
     public static final int WIDTH = 1280 - 32;
-    public static final int HEIGHT = 720;
+    public static final int HEIGHT = 720 + 64;
     public static final int TILE_SIZE = 16 * 3;
 
     private Game game;
@@ -30,6 +27,7 @@ public class GamePanel extends JPanel {
     public GamePanel() {
         super.setPreferredSize(new Dimension(this.WIDTH, this.HEIGHT));
         super.setDoubleBuffered(true);
+        super.setBackground(Color.DARK_GRAY);
 
         this.inventoryRenderer = new InventoryRenderer();
     }
@@ -88,7 +86,7 @@ public class GamePanel extends JPanel {
         g2d.setColor(Color.WHITE);
 
         this.drawMoney(g2d); //Mince
-        this.drawHearts(1223, 24, this.game.getPlayer().getHearts(), g2d); //Životy
+        this.drawHearts(1228 - 15, 720 + 32, this.game.getPlayer().getHearts(), g2d); //Životy
         this.drawQuest(g2d); //Quest
         this.inventoryRenderer.draw(g2d, this.game.getPlayer().getInventory()); //Inventár
         MessageBox.drawMessages(g2d); //Správy
@@ -100,8 +98,8 @@ public class GamePanel extends JPanel {
     }
 
     private void drawMoney(Graphics2D g2d) {
-        g2d.setFont(new Font("SansSerif", Font.BOLD, 25));
-        g2d.drawString(String.format("Coins: %d", this.game.getPlayer().getInventory().getItemAmount(EItemList.COINS)), 5, 35);
+        g2d.setFont(EFontList.RPG.getFont());
+        g2d.drawString(String.format("Coins: %d", this.game.getPlayer().getInventory().getItemAmount(EItemList.COINS)), 15, 720 + 40);
     }
 
     private void drawQuest(Graphics2D g2d) {

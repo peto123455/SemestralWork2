@@ -1,5 +1,6 @@
 package sk.uniza.fri.ui;
 
+import sk.uniza.fri.enums.EFontList;
 import sk.uniza.fri.essentials.Inventory;
 
 import java.awt.Color;
@@ -44,9 +45,9 @@ public class InventoryRenderer {
         g2d.setColor(Color.WHITE);
         g2d.fillRect(GamePanel.WIDTH / 4, GamePanel.HEIGHT / 8, GamePanel.WIDTH / 2, (int)((double)GamePanel.HEIGHT / 1.33));
         g2d.setColor(Color.BLACK);
-        g2d.setFont(new Font("SansSerif", Font.BOLD, 24));
-        g2d.drawString("Inventory", GamePanel.WIDTH / 4 + GamePanel.WIDTH / 4 - 53, GamePanel.HEIGHT / 8 + 30);
-        g2d.setFont(new Font("SansSerif", Font.BOLD, 15));
+        g2d.setFont(EFontList.RPG.getFont());
+        g2d.drawString("Inventory", GamePanel.WIDTH / 2 - 72, GamePanel.HEIGHT / 8 + 30);
+        g2d.setFont(EFontList.DIALOG.getFont());
 
         //Rozdelenie riadkov
         int y = GamePanel.HEIGHT / 8 + 50;
