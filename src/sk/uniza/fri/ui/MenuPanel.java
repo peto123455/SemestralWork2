@@ -1,5 +1,6 @@
 package sk.uniza.fri.ui;
 
+import sk.uniza.fri.enums.EFontList;
 import sk.uniza.fri.enums.EImageList;
 
 import javax.swing.Box;
@@ -27,15 +28,15 @@ public class MenuPanel extends JPanel {
 
         super.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         super.setPreferredSize(new Dimension(250, 250));
-        this.buttons.add(new JButton("Start game"));
-        this.buttons.add(new JButton("Help"));
-        this.buttons.add(new JButton("Exit"));
+        this.buttons.add(new JButton("START GAME"));
+        this.buttons.add(new JButton("HELP"));
+        this.buttons.add(new JButton("EXIT"));
 
         for (JButton button : this.buttons) {
             button.setAlignmentX(Component.CENTER_ALIGNMENT);
             button.setMargin(new Insets(5, 10, 5, 10));
             button.setBackground(new Color(140, 140, 140));
-            button.setFont(new Font("Monospaced", Font.BOLD, 12));
+            button.setFont(EFontList.DIALOG.getFont());
             button.setForeground(Color.WHITE);
             button.setFocusPainted(false);
 

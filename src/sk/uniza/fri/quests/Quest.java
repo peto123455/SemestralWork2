@@ -180,14 +180,14 @@ public abstract class Quest {
      * Ak hráč interaktuje s NPC mimo questu
      */
     public void onNonQuestNpcReact() {
-        new MessageBox("Not part of current quest !", 2000);
+        new MessageBox("Not part of current quest!", 2000);
     }
 
     /**
      * Ak hráč interaktuje s NPC, a quest nie je hotový
      */
     public void onQuestNpcReact() {
-        new MessageBox("Quest not complete yet !", 2000);
+        new MessageBox("Quest not complete yet!", 2000);
     }
 
     /**

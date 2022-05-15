@@ -25,26 +25,26 @@ public class QuestGoblin extends Quest {
 
     @Override
     public void onComplete() {
-        new MessageBox("You did it ! Return to the\ngoblin", 5000);
+        new MessageBox("You did it! Return to the goblin.", 5000);
     }
 
     @Override
     protected void onStart() {
-        new MessageBox("Our people need your help.\nHelp us, and we will give you\n3 health potions. I need you\nto kill a powerful ghost mage,\nbut it's not easy. Let me open\na portal for you.", 3000);
+        new MessageBox("Our people need your help. Help us, and we will give you 3 health potions. I need you to kill a powerful ghost mage, but it's not easy. Let me open a portal for you.", 3000);
         this.goblin.goToPos(new Position(1100, 500));
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
                 QuestGoblin.this.goblin.getMap().openPortals();
                 QuestGoblin.this.goblin.goToPos(new Position(1020, 500));
-                new MessageBox("You may go now. Good Luck\nmy friend.", 1500);
+                new MessageBox("You may go now. Good Luck my friend.", 1500);
             }
         }, 5500);
     }
 
     @Override
     public void onRewardPickup() {
-        super.onRewardPickup("Wow ! You've actually killed him.\nYou're a hero !.", 5000);
+        super.onRewardPickup("Wow ! You've actually killed him. You're a hero!", 5000);
         super.getQuestHandler().gameFinished();
     }
 }

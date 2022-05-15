@@ -17,7 +17,7 @@ public class QuestFinishThem extends Quest {
 
     @Override
     public void onComplete() {
-        new MessageBox("Ahh..., you killed them all, return\nto the wizard to collect your\nreward", 5000);
+        new MessageBox("Ahh..., you killed them all, return to the wizard to collect your reward.", 5000);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class QuestFinishThem extends Quest {
 
     @Override
     public void onRewardPickup() {
-        super.onRewardPickup("I can't believe it, you really\ndid it ! Here are your coins and\nsmall bonus for your bravery.", 5000);
-        MessageBox.shceduleMessage("Now go ahead and find my friend\ngoblin, he will tell you what he\nneeds.", 5000, 5000);
+        super.onRewardPickup("I can't believe it, you really did it ! Here are your coins and small bonus for your bravery.", 5000);
+        MessageBox.shceduleMessage("Now go ahead and find my friend goblin, he will tell you what he needs.", 5000, 5000);
     }
 }

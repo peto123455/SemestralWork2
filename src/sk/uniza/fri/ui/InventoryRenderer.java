@@ -1,10 +1,12 @@
 package sk.uniza.fri.ui;
 
+import sk.uniza.fri.enums.EFontList;
 import sk.uniza.fri.essentials.Inventory;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Stroke;
 
 public class InventoryRenderer {
     private boolean isVisible;
@@ -42,11 +44,16 @@ public class InventoryRenderer {
         }
 
         g2d.setColor(Color.WHITE);
-        g2d.fillRect(GamePanel.WIDTH / 4, GamePanel.HEIGHT / 8, GamePanel.WIDTH / 2, (int)((double)GamePanel.HEIGHT / 1.33));
+        g2d.fillRoundRect(GamePanel.WIDTH / 4, GamePanel.HEIGHT / 8, GamePanel.WIDTH / 2, (int)((double)GamePanel.HEIGHT / 1.33), 10, 10);
+
         g2d.setColor(Color.BLACK);
-        g2d.setFont(new Font("SansSerif", Font.BOLD, 24));
-        g2d.drawString("Inventory", GamePanel.WIDTH / 4 + GamePanel.WIDTH / 4 - 53, GamePanel.HEIGHT / 8 + 30);
-        g2d.setFont(new Font("SansSerif", Font.BOLD, 15));
+        Stroke tmp = g2d.getStroke();
+        g2d.setStroke(new BasicStroke(3));
+        g2d.drawRoundRect(GamePanel.WIDTH / 4, GamePanel.HEIGHT / 8, GamePanel.WIDTH / 2, (int)((double)GamePanel.HEIGHT / 1.33), 10, 10);
+        g2d.setStroke(tmp);
+        g2d.setFont(EFontList.RPG.getFont());
+        g2d.drawString("Inventory", GamePanel.WIDTH / 2 - 72, GamePanel.HEIGHT / 8 + 30);
+        g2d.setFont(EFontList.RPG.getFont().deriveFont(20f));
 
         //Rozdelenie riadkov
         int y = GamePanel.HEIGHT / 8 + 50;

@@ -16,13 +16,13 @@ public class QuestIntro extends Quest {
 
     @Override
     public void onComplete() {
-        super.onRewardPickup("The wizard gave you some coins\nfor your heroism. He promised\nyou more if you save his friend\nGoblin.", 5000);
+        super.onRewardPickup("The wizard gave you some coins for your heroism. He promised you more if you save his friend Goblin.", 5000);
         super.getQuestHandler().setCurrentQuest(new QuestFinishThem(super.getQuestHandler()));
     }
 
     @Override
     protected void onStart() {
-        new MessageBox("Welcome to the game. Open the\nchest, pickup the potion and kill\nthe enemy.", 3000);
+        new MessageBox("Welcome to the game. Open the chest, pickup the potion and kill the enemy.", 3000);
     }
 
 }

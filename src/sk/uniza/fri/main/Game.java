@@ -65,6 +65,9 @@ public class Game {
      */
     public void finishGame() {
         this.isFinished = true;
+        if (this.panel.isInventoryVisible()) {
+            this.switchInventory();
+        }
     }
 
     /**
