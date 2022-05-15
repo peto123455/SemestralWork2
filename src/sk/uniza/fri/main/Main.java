@@ -8,6 +8,8 @@ import sk.uniza.fri.ui.GamePanel;
 import sk.uniza.fri.ui.MenuPanel;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class Main {
 
@@ -25,6 +27,13 @@ public class Main {
      * Hlavná trieda
      */
     public Main() {
+        //Look & Feel
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
         ESoundList.playSound(ESoundList.MUSIC, true);
         this.menuPanel = new MenuPanel();
         this.gamePanel = new GamePanel();

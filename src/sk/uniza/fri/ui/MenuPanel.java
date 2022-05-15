@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
@@ -37,7 +36,7 @@ public class MenuPanel extends JPanel {
             button.setMargin(new Insets(5, 10, 5, 10));
             button.setBackground(new Color(140, 140, 140));
             button.setFont(EFontList.DIALOG.getFont());
-            button.setForeground(Color.WHITE);
+            button.setForeground(Color.BLACK);
             button.setFocusPainted(false);
 
             super.add(Box.createHorizontalStrut(1));
