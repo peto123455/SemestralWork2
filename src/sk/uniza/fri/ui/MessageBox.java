@@ -47,8 +47,6 @@ public class MessageBox {
      * @return Vracia potrebný offset pre dalšiu správu.
      */
     public int draw(Graphics2D g2d, int offset) {
-        //String[] strings = this.text.split("\n");
-
         ArrayList<String> strings = new ArrayList<>();
 
         int counter = 0;
@@ -66,7 +64,6 @@ public class MessageBox {
 
         g2d.setFont(EFontList.DIALOG.getFont());
 
-        g2d.setColor(Color.BLACK);
         g2d.setColor(Color.WHITE);
         g2d.fillRoundRect(950, offset, 280, g2d.getFontMetrics().getHeight() * strings.size() + 50, 10, 10);
 

@@ -15,7 +15,7 @@ public enum EFontList {
         try {
             InputStream is = this.getClass().getResourceAsStream(path);
             this.font = Font.createFont(Font.TRUETYPE_FONT, is);
-            this.font =  this.font.deriveFont(Font.PLAIN, defaultSize);
+            this.font = this.font.deriveFont(Font.PLAIN, defaultSize);
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }

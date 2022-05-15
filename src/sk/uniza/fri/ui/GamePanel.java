@@ -120,4 +120,8 @@ public class GamePanel extends JPanel {
     public void switchInventory() {
         this.inventoryRenderer.switchVisible();
     }
+
+    public boolean isInventoryVisible() {
+        return this.inventoryRenderer.isVisible();
+    }
 }
