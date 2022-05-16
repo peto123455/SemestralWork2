@@ -127,12 +127,6 @@ public class Game {
         this.panel.switchInventory();
     }
 
-    private void attack(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1) {
-            this.attack();
-        }
-    }
-
     /**
      * Hráč zaútočí
      */
@@ -150,6 +144,28 @@ public class Game {
         this.mapHandler.action(this.player);
     }
 
+    /**
+     * Volá sa pri smrti hráča
+     */
+    public void onDeath() {
+        this.initGame(true);
+    }
+
+    /**
+     * @return Či je hra ukončená
+     */
+    public boolean isFinished() {
+        return this.isFinished;
+    }
+
+    //Private
+
+    private void attack(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            this.attack();
+        }
+    }
+
     private void createMouseListener() {
         this.panel.createMouseListener(new MouseAdapter() {
             @Override
@@ -163,19 +179,5 @@ public class Game {
         for (Entity entity : this.getMapHandler().getMap().getEntityList()) {
             entity.update(this);
         }
-    }
-
-    /**
-     * Volá sa pri smrti hráča
-     */
-    public void onDeath() {
-        this.initGame(true);
-    }
-
-    /**
-     * @return Či je hra ukončená
-     */
-    public boolean isFinished() {
-        return this.isFinished;
     }
 }

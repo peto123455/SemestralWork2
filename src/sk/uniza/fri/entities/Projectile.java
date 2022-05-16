@@ -45,18 +45,6 @@ public abstract class Projectile extends Entity {
     }
 
     /**
-     * Nastaví pozíciu na ktorú sa strela má dostať
-     * @param toPos Pozícia
-     */
-    private void setDirection(Position toPos) {
-        Vector vector = new Vector(toPos.getX() - super.getPosition().getX(), toPos.getY() - super.getPosition().getY());
-        vector.normalize();
-        vector.multiply(1280);
-
-        super.goToPos(new Position(vector.getX(), vector.getY()).addPosition(super.getPosition()));
-    }
-
-    /**
      * Zmaže všetky projektily
      */
     public static void resetProjectiles() {
@@ -81,5 +69,19 @@ public abstract class Projectile extends Entity {
         for (Projectile projectile : Projectile.projectiles) {
             projectile.draw(g2d);
         }
+    }
+
+    //Private
+
+    /**
+     * Nastaví pozíciu na ktorú sa strela má dostať
+     * @param toPos Pozícia
+     */
+    private void setDirection(Position toPos) {
+        Vector vector = new Vector(toPos.getX() - super.getPosition().getX(), toPos.getY() - super.getPosition().getY());
+        vector.normalize();
+        vector.multiply(1280);
+
+        super.goToPos(new Position(vector.getX(), vector.getY()).addPosition(super.getPosition()));
     }
 }

@@ -69,14 +69,6 @@ public class Chest extends Entity {
     }
 
     /**
-     * Pridá predmety do bedňe
-     * @param items Predmety
-     */
-    private void addItems(ItemStack[] items) {
-        this.items.addAll(Arrays.asList(items));
-    }
-
-    /**
      * Pridá predmet do bedňe
      * @param item Predmet
      */
@@ -92,4 +84,13 @@ public class Chest extends Entity {
         return super.getImage(0);
     }
 
+    //Private
+
+    /**
+     * Pridá predmety do bedňe
+     * @param items Predmety
+     */
+    private void addItems(ItemStack[] items) {
+        this.items.addAll(Arrays.asList(items));
+    }
 }

@@ -38,17 +38,17 @@ public class EnemyMageBoss extends Enemy {
     }
 
     @Override
-    protected void onDeath() {
-        super.changeImages(new EImageList[] {EImageList.MAGE_BOSS_DEAD});
-        super.onDeath();
-    }
-
-    @Override
     public void draw(Graphics2D g2d) {
         g2d.drawImage(super.getImage(), (int)this.getPosition().getX() - super.getImage().getWidth(), (int)this.getPosition().getY() - super.getImage().getHeight(), super.getImage().getWidth() * 2, super.getImage().getHeight() * 2, null);
     }
 
     public void getQuestEvent(QuestHandler questHandler) {
         questHandler.onActionPerformed(EQuestAction.BOSS_KILLED, 1);
+    }
+
+    @Override
+    protected void onDeath() {
+        super.changeImages(new EImageList[] {EImageList.MAGE_BOSS_DEAD});
+        super.onDeath();
     }
 }

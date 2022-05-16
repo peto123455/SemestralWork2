@@ -44,20 +44,6 @@ public enum ESoundList {
     }
 
     /**
-     * @return Vríti Audo Input Stream zvuku
-     */
-    private AudioInputStream getAudioInputStream() {
-        try {
-            return AudioSystem.getAudioInputStream(this.getClass().getResource(this.getRoute()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    /**
      * Prehrá zvuk
      * @param sound Zvuk
      */
@@ -99,5 +85,21 @@ public enum ESoundList {
                 }
             }
         }.start();
+    }
+
+    //Private
+
+    /**
+     * @return Vríti Audo Input Stream zvuku
+     */
+    private AudioInputStream getAudioInputStream() {
+        try {
+            return AudioSystem.getAudioInputStream(this.getClass().getResource(this.getRoute()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

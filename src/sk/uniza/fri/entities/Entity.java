@@ -108,20 +108,6 @@ public abstract class Entity {
     }
 
     /**
-     * @return Vráti zoznam obrázkov
-     */
-    protected BufferedImage[] getImages() {
-        return this.images;
-    }
-
-    /**
-     * @return Vráti pozíciu kam sa Entita snaží dostať
-     */
-    protected Position getToPos() {
-        return this.toPos;
-    }
-
-    /**
      * Entita dostane pokyn ísť na danú pozíciu
      * @param toPos Pozícia
      */
@@ -137,6 +123,28 @@ public abstract class Entity {
     public boolean update(Game game) {
         this.updatePos(game);
         return true;
+    }
+
+    /**
+     * @return Vráti vykresľujúcu vrstvu
+     */
+    public ERenderLayer getRenderLayer() {
+        return this.renderLayer;
+    }
+
+    /**
+     * Nastaví rýchlosť
+     * @param speed Rýchlosť
+     */
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    /**
+     * @return Vráti zoznam obrázkov
+     */
+    protected BufferedImage[] getImages() {
+        return this.images;
     }
 
     /**
@@ -218,10 +226,10 @@ public abstract class Entity {
     }
 
     /**
-     * @return Vráti vykresľujúcu vrstvu
+     * @return Vráti pozíciu kam sa Entita snaží dostať
      */
-    public ERenderLayer getRenderLayer() {
-        return this.renderLayer;
+    protected Position getToPos() {
+        return this.toPos;
     }
 
     /**
@@ -230,13 +238,5 @@ public abstract class Entity {
      */
     protected void setRenderLayer(ERenderLayer renderLayer) {
         this.renderLayer = renderLayer;
-    }
-
-    /**
-     * Nastaví rýchlosť
-     * @param speed Rýchlosť
-     */
-    public void setSpeed(int speed) {
-        this.speed = speed;
     }
 }

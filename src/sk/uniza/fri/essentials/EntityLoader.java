@@ -57,6 +57,8 @@ public class EntityLoader {
         mapHandler.getMap(3).addEnemy(enemy);
     }
 
+    //Private
+
     private static void loadItems(JSONObject json, MapHandler mapHandler) {
         for (Object itemObject : (JSONArray)json.get("items")) {
             JSONObject item = (JSONObject)itemObject;

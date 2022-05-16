@@ -49,10 +49,11 @@ public class MessageBox {
     public int draw(Graphics2D g2d, int offset) {
         ArrayList<String> strings = new ArrayList<>();
 
+        //Obmedzenie dĺžky riadka
         int counter = 0;
         String currentString = "";
         for (String string : this.text.split(" ")) {
-            if (counter > 25) {
+            if ((counter + string.length() + 1) > 32) {
                 counter = 0;
                 strings.add(currentString);
                 currentString = "";
@@ -62,7 +63,8 @@ public class MessageBox {
         }
         strings.add(currentString);
 
-        g2d.setFont(EFontList.DIALOG.getFont());
+        //Okno dialog boxu
+        g2d.setFont(EFontList.DIALOG.getFont()); //Font nastavujem už tu aby som vedel vypočítať veľkosť okna podĺa neho
 
         g2d.setColor(Color.WHITE);
         g2d.fillRoundRect(950, offset, 280, g2d.getFontMetrics().getHeight() * strings.size() + 50, 10, 10);
@@ -75,15 +77,14 @@ public class MessageBox {
         g2d.setStroke(tmp);
 
         //Rozdelenie riadkov
-        int y = offset;
         int added = g2d.getFontMetrics().getHeight();
 
         for (String string : strings) {
             added += g2d.getFontMetrics().getHeight();
-            g2d.drawString(string, 975, y + added);
+            g2d.drawString(string, 975, offset + added);
         }
 
-        return 25 * strings.size() + 75;
+        return g2d.getFontMetrics().getHeight() * strings.size() + 65;
     }
 
     /**

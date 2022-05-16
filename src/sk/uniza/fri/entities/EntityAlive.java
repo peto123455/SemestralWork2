@@ -16,10 +16,6 @@ public abstract class EntityAlive extends Entity {
         this.healthSystem = new HealthSystem(maxHearts);
     }
 
-    protected HealthSystem getHealthSystem() {
-        return this.healthSystem;
-    }
-
     /**
      * Odoberie život
      * @return Či odobralo život
@@ -73,4 +69,8 @@ public abstract class EntityAlive extends Entity {
      * Volá sa pri smrti
      */
     protected abstract void onDeath();
+
+    protected HealthSystem getHealthSystem() {
+        return this.healthSystem;
+    }
 }

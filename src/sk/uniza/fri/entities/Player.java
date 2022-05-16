@@ -75,11 +75,6 @@ public class Player extends EntityAlive {
         }
     }
 
-    @Override
-    protected void onDeath() {
-        this.game.onDeath();
-    }
-
     /**
      * Stará sa o spracovanie kláves
      * @param keys Stlačené klávesy
@@ -121,5 +116,10 @@ public class Player extends EntityAlive {
      */
     public Game getGame() {
         return this.game;
+    }
+
+    @Override
+    protected void onDeath() {
+        this.game.onDeath();
     }
 }

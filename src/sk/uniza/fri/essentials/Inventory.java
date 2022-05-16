@@ -53,19 +53,6 @@ public class Inventory {
      * @param item Item
      * @return Má item v inventári
      */
-    private ItemStack containsItem(ItemStack item) {
-        for (ItemStack itemStack : this.inventory) {
-            if (itemStack.getItem() == item.getItem()) {
-                return itemStack;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * @param item Item
-     * @return Má item v inventári
-     */
     public ItemStack containsItem(EItemList item) {
         return this.containsItem(new ItemStack(item, 0));
     }
@@ -115,5 +102,20 @@ public class Inventory {
         }
 
         return false;
+    }
+
+    //Private
+
+    /**
+     * @param item Item
+     * @return Má item v inventári
+     */
+    private ItemStack containsItem(ItemStack item) {
+        for (ItemStack itemStack : this.inventory) {
+            if (itemStack.getItem() == item.getItem()) {
+                return itemStack;
+            }
+        }
+        return null;
     }
 }

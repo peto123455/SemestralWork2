@@ -87,20 +87,6 @@ public abstract class Quest {
     }
 
     /**
-     * Dá hráčovi itemy za dokončenie questu
-     */
-    protected void giveItems() {
-        this.questHandler.onRewardPickup(this.itemRewards);
-    }
-
-    /**
-     * Dokončí quest
-     */
-    protected void finishQuest() {
-        this.questHandler.completeQuest();
-    }
-
-    /**
      * Volá sa pri vykonaní nejakej u úloh, ktorá môže byť v queste
      * @param questAction Typ akcie questu
      * @param amount Množstvo koľko vykonal
@@ -194,4 +180,18 @@ public abstract class Quest {
      * Pri začatí questu
      */
     protected abstract void onStart();
+
+    /**
+     * Dá hráčovi itemy za dokončenie questu
+     */
+    protected void giveItems() {
+        this.questHandler.onRewardPickup(this.itemRewards);
+    }
+
+    /**
+     * Dokončí quest
+     */
+    protected void finishQuest() {
+        this.questHandler.completeQuest();
+    }
 }

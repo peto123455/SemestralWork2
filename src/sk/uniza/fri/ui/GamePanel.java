@@ -28,7 +28,7 @@ public class GamePanel extends JPanel {
      * Samotné zobrazovanie hry
      */
     public GamePanel() {
-        super.setPreferredSize(new Dimension(this.WIDTH, this.HEIGHT));
+        super.setPreferredSize(new Dimension(GamePanel.WIDTH, GamePanel.HEIGHT));
         super.setDoubleBuffered(true);
         super.setBackground(Color.DARK_GRAY);
 
@@ -74,6 +74,29 @@ public class GamePanel extends JPanel {
         g2d.dispose();
     }
 
+    /**
+     * Skryje alebo zobrazí inventár na základe jeho aktuálneho stavu.
+     */
+    public void switchInventory() {
+        this.inventoryRenderer.switchVisible();
+    }
+
+    /**
+     * Vráti či je inventár zobrazený
+     * @return Či je inventár zobrazený
+     */
+    public boolean isInventoryVisible() {
+        return this.inventoryRenderer.isVisible();
+    }
+
+    //Private
+
+    private void drawHearts(int x, int y, int amount, Graphics2D g2d) {
+        for (int i = 0; i < amount; ++i) {
+            g2d.drawImage(EImageList.HEART.getImage(), x -  39 / 2 - 50 * i, y - 36 / 2, 39, 36, null);
+        }
+    }
+
     private void drawGame(Graphics2D g2d) {
         this.game.getMapHandler().drawTiles(g2d);       //Políčka
 
@@ -109,19 +132,5 @@ public class GamePanel extends JPanel {
         if (this.game.getPlayer().getQuestHandler().isQuest()) {
             this.game.getPlayer().getQuestHandler().draw(g2d);
         }
-    }
-
-    private void drawHearts(int x, int y, int amount, Graphics2D g2d) {
-        for (int i = 0; i < amount; ++i) {
-            g2d.drawImage(EImageList.HEART.getImage(), x -  39 / 2 - 50 * i, y - 36 / 2, 39, 36, null);
-        }
-    }
-
-    public void switchInventory() {
-        this.inventoryRenderer.switchVisible();
-    }
-
-    public boolean isInventoryVisible() {
-        return this.inventoryRenderer.isVisible();
     }
 }

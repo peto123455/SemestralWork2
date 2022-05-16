@@ -28,22 +28,6 @@ public class EnemyKnight extends Enemy {
         return true;
     }
 
-    @Override
-    protected void onDeath() {
-        super.changeImages(new EImageList[] {EImageList.KNIGHT_DEAD});
-        super.onDeath();
-    }
-
-    /**
-     * Skontroluje, či je hráč v blízkosti na útok
-     * @param player
-     */
-    private void checkForPlayer(Player player) {
-        if (this.isNearEntity(player, EnemyKnight.ATTACK_RANGE)) {
-            this.hit(player);
-        }
-    }
-
     /**
      * Útok nepriateľa
      * @param player Hráč
@@ -58,5 +42,23 @@ public class EnemyKnight extends Enemy {
 
     public void getQuestEvent(QuestHandler questHandler) {
         questHandler.onActionPerformed(EQuestAction.ENEMY_KILLED, 1);
+    }
+
+    @Override
+    protected void onDeath() {
+        super.changeImages(new EImageList[] {EImageList.KNIGHT_DEAD});
+        super.onDeath();
+    }
+
+    //Private
+
+    /**
+     * Skontroluje, či je hráč v blízkosti na útok
+     * @param player
+     */
+    private void checkForPlayer(Player player) {
+        if (this.isNearEntity(player, EnemyKnight.ATTACK_RANGE)) {
+            this.hit(player);
+        }
     }
 }

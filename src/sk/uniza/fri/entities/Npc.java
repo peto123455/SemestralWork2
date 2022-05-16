@@ -67,6 +67,6 @@ public class Npc extends Entity {
      * @return Vráti mapu NPCčka
      */
     public Map getMap() {
-        return map;
+        return this.map;
     }
 }

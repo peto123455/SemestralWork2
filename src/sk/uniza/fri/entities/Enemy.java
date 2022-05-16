@@ -61,27 +61,6 @@ public abstract class Enemy extends EntityAlive {
     }
 
     /**
-     * Zistí, či nepraiteľ môže videiť hráča
-     * @param player Hráč
-     * @param mapHandler Map Handler
-     * @return Vráti, či nepriateľ vidí hráča
-     */
-    protected boolean canSeePlayer(Player player, MapHandler mapHandler) {
-        Vector vector = new Vector((int)player.getPosition().getX() - (int)super.getPosition().getX(), (int)player.getPosition().getY() - (int)super.getPosition().getY());
-        for (int i = 1; i < (int)vector.length() / 20; ++i) {
-            Vector vectorPart = new Vector(vector.getX(), vector.getY());
-            vectorPart.normalize();
-            Position gridPos = Position.getPositionRelativeToGrid(new Position((int)this.getPosition().getX() + (int)(vectorPart.getX() * i * 20), (int)this.getPosition().getY() + (int)(vectorPart.getY() * i * 20)));
-
-            GameTile tile = mapHandler.getTile((int)gridPos.getX(), (int)gridPos.getY());
-            if (tile != null && tile.hasCollision()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
      Zistí, či už nepriateľ môže zaútočiť na hráča (Cooldown)
      * @return Vráti, či nepriateľ môže zaútočiť
      */
@@ -102,6 +81,65 @@ public abstract class Enemy extends EntityAlive {
         return this.eDirection;
     }
 
+    /**
+     * Nepriateľ bude nasledovať entitu
+     * @param entity Entita na sledovanie
+     */
+    public void follow(Entity entity) {
+        this.follow = entity;
+    }
+
+    @Override
+    public BufferedImage getImage() {
+        if (this.eDirection == EDirection.LEFT) {
+            return ImageTools.flip(super.getImage());
+        }
+        return super.getImage();
+    }
+
+    /**
+     * Pridá item, ktorý vypadne po smrti
+     * @param item Item na pridanie
+     */
+    public void addDropItem(ItemStack item) {
+        this.drops.add(item);
+    }
+
+    /**
+     * Nastaví vzdialenosť, na ktorú bude následovať entitu
+     * @param followDistance Vzdialenosť
+     */
+    public void setFollowDistance(int followDistance) {
+        this.followDistance = followDistance;
+    }
+
+    /**
+     * Vráti splnenú úlohu do questu (Pri smrti)
+     * @param questHandler Quest handler
+     */
+    public abstract void getQuestEvent(QuestHandler questHandler);
+
+    /**
+     * Zistí, či nepraiteľ môže videiť hráča
+     * @param player Hráč
+     * @param mapHandler Map Handler
+     * @return Vráti, či nepriateľ vidí hráča
+     */
+    protected boolean canSeePlayer(Player player, MapHandler mapHandler) {
+        Vector vector = new Vector((int)player.getPosition().getX() - (int)super.getPosition().getX(), (int)player.getPosition().getY() - (int)super.getPosition().getY());
+        for (int i = 1; i < (int)vector.length() / 20; ++i) {
+            Vector vectorPart = new Vector(vector.getX(), vector.getY());
+            vectorPart.normalize();
+            Position gridPos = Position.getPositionRelativeToGrid(new Position((int)this.getPosition().getX() + (int)(vectorPart.getX() * i * 20), (int)this.getPosition().getY() + (int)(vectorPart.getY() * i * 20)));
+
+            GameTile tile = mapHandler.getTile((int)gridPos.getX(), (int)gridPos.getY());
+            if (tile != null && tile.hasCollision()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     protected void onDeath() {
         super.setRenderLayer(ERenderLayer.CORPSES);
@@ -109,14 +147,6 @@ public abstract class Enemy extends EntityAlive {
         ESoundList.playSound(ESoundList.DEATH);
         this.dropItems();
         this.map.onEnemyDeath();
-    }
-
-    /**
-     * Nepriateľ bude nasledovať entitu
-     * @param entity Entita na sledovanie
-     */
-    public void follow(Entity entity) {
-        this.follow = entity;
     }
 
     @Override
@@ -142,21 +172,7 @@ public abstract class Enemy extends EntityAlive {
         return null;
     }
 
-    @Override
-    public BufferedImage getImage() {
-        if (this.eDirection == EDirection.LEFT) {
-            return ImageTools.flip(super.getImage());
-        }
-        return super.getImage();
-    }
-
-    /**
-     * Pridá item, ktorý vypadne po smrti
-     * @param item Item na pridanie
-     */
-    public void addDropItem(ItemStack item) {
-        this.drops.add(item);
-    }
+    //Private
 
     /**
      * Vyhodí veci na zem (Pri smrti)
@@ -167,18 +183,4 @@ public abstract class Enemy extends EntityAlive {
             Item.spawnItem(this.map, item, new Position((int)this.getPosition().getX() + rand.nextInt(50) - 25, (int)this.getPosition().getY() + rand.nextInt(50) - 25));
         }
     }
-
-    /**
-     * Nastaví vzdialenosť, na ktorú bude následovať entitu
-     * @param followDistance Vzdialenosť
-     */
-    public void setFollowDistance(int followDistance) {
-        this.followDistance = followDistance;
-    }
-
-    /**
-     * Vráti splnenú úlohu do questu (Pri smrti)
-     * @param questHandler Quest handler
-     */
-    public abstract void getQuestEvent(QuestHandler questHandler);
 }

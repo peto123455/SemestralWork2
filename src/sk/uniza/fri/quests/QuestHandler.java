@@ -74,7 +74,7 @@ public class QuestHandler {
      */
     public void onRewardPickup(ArrayList<ItemStack> items) {
         for (ItemStack item : items) {
-            player.getInventory().addItemStack(item);
+            this.player.getInventory().addItemStack(item);
         }
     }
 

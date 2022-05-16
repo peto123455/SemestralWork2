@@ -46,6 +46,15 @@ public class MenuPanel extends JPanel {
     }
 
     /**
+     * Zaregistruje akciu na tlačidlo v menu.
+     * @param a Akcia
+     * @param id Id tlačidla
+     */
+    public void registerAction(ActionListener a, int id) {
+        this.buttons.get(id).addActionListener(a);
+    }
+
+    /**
      * Vykresluje obrázok na pozadí.
      * @param g Plátno, na ktoré vykreslí obrázok
      */
@@ -55,14 +64,5 @@ public class MenuPanel extends JPanel {
 
         Graphics2D g2d = (Graphics2D)g;
         g.drawImage(EImageList.MENU.getImage(), 0, 0, null);
-    }
-
-    /**
-     * Zaregistruje akciu na tlačidlo v menu.
-     * @param a Akcia
-     * @param id Id tlačidla
-     */
-    public void registerAction(ActionListener a, int id) {
-        this.buttons.get(id).addActionListener(a);
     }
 }

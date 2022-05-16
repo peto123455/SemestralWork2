@@ -33,27 +33,6 @@ public class MapHandler {
     }
 
     /**
-     * Stará sa o načítanie máp
-     * @param game Referencia na Hru
-     */
-    private void loadMaps(Game game) {
-        for (int map = 0; map < MapHandler.MAPS_COUNT; ++map) {
-            InputStream mapFile = this.getClass().getResourceAsStream(String.format("/maps/map%02d.txt", map + 1));
-            Scanner scanner = new Scanner(mapFile);
-            int x = scanner.nextInt();
-            int y = scanner.nextInt();
-            this.maps[map] = new Map(x, y);
-            for (int i = 0; i < y; ++i) {
-                for (int j = 0; j < x; ++j) {
-                    this.maps[map].setTile(j, i, ETileList.getByID(scanner.nextInt()));
-                }
-            }
-        }
-
-        this.currentMap = this.maps[0];
-    }
-
-    /**
      * Nastaví blok na daných súradniciach
      * @param x Súradnica X
      * @param y Súradnica Y
@@ -167,6 +146,27 @@ public class MapHandler {
      */
     public ArrayList<Enemy> getEnemies() {
         return this.currentMap.getEnemies();
+    }
+
+    /**
+     * Stará sa o načítanie máp
+     * @param game Referencia na Hru
+     */
+    private void loadMaps(Game game) {
+        for (int map = 0; map < MapHandler.MAPS_COUNT; ++map) {
+            InputStream mapFile = this.getClass().getResourceAsStream(String.format("/maps/map%02d.txt", map + 1));
+            Scanner scanner = new Scanner(mapFile);
+            int x = scanner.nextInt();
+            int y = scanner.nextInt();
+            this.maps[map] = new Map(x, y);
+            for (int i = 0; i < y; ++i) {
+                for (int j = 0; j < x; ++j) {
+                    this.maps[map].setTile(j, i, ETileList.getByID(scanner.nextInt()));
+                }
+            }
+        }
+
+        this.currentMap = this.maps[0];
     }
 
 }

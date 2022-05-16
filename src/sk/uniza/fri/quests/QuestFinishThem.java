@@ -21,13 +21,13 @@ public class QuestFinishThem extends Quest {
     }
 
     @Override
-    protected void onStart() {
-
+    public void onRewardPickup() {
+        super.onRewardPickup("I can't believe it, you really did it! Here are your coins and small bonus for your bravery.", 5000);
+        MessageBox.shceduleMessage("Now go ahead and find my friend goblin, he will tell you what he needs.", 5000, 5000);
     }
 
     @Override
-    public void onRewardPickup() {
-        super.onRewardPickup("I can't believe it, you really did it ! Here are your coins and small bonus for your bravery.", 5000);
-        MessageBox.shceduleMessage("Now go ahead and find my friend goblin, he will tell you what he needs.", 5000, 5000);
+    protected void onStart() {
+
     }
 }

@@ -26,21 +26,6 @@ public class KeyHandler extends KeyAdapter {
     }
 
     /**
-     * Zaregistruje základné klávesy
-     */
-    private void registerKeys() {
-        this.pressed.put(KeyEvent.VK_W, false); //Pohyb hore
-        this.pressed.put(KeyEvent.VK_A, false); //Pohyb doľava
-        this.pressed.put(KeyEvent.VK_S, false); //Pohyb dole
-        this.pressed.put(KeyEvent.VK_D, false); //Pohyb doprava
-
-        this.pressable.put(KeyEvent.VK_K, new PressableKeyAttack()); //Útok
-        this.pressable.put(KeyEvent.VK_I, new PressableKeyInventory()); //Otvorenie inventáru
-        this.pressable.put(KeyEvent.VK_Q, new PressableKeyHealthPotion()); //Použitie elixíru života
-        this.pressable.put(KeyEvent.VK_E, new PressableKeyUseAction()); //Klávesa akcie
-    }
-
-    /**
      * Vyresetuje stlačené klávesi
      */
     public void resetKeys() {
@@ -95,5 +80,22 @@ public class KeyHandler extends KeyAdapter {
     @Override
     public void keyReleased(KeyEvent e) {
         this.keyUpdate(e.getKeyCode(), false);
+    }
+
+    //Private
+
+    /**
+     * Zaregistruje základné klávesy
+     */
+    private void registerKeys() {
+        this.pressed.put(KeyEvent.VK_W, false); //Pohyb hore
+        this.pressed.put(KeyEvent.VK_A, false); //Pohyb doľava
+        this.pressed.put(KeyEvent.VK_S, false); //Pohyb dole
+        this.pressed.put(KeyEvent.VK_D, false); //Pohyb doprava
+
+        this.pressable.put(KeyEvent.VK_K, new PressableKeyAttack()); //Útok
+        this.pressable.put(KeyEvent.VK_I, new PressableKeyInventory()); //Otvorenie inventáru
+        this.pressable.put(KeyEvent.VK_Q, new PressableKeyHealthPotion()); //Použitie elixíru života
+        this.pressable.put(KeyEvent.VK_E, new PressableKeyUseAction()); //Klávesa akcie
     }
 }
