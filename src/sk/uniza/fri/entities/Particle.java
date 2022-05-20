@@ -68,8 +68,10 @@ public abstract class Particle extends Entity {
      * Stará sa o aktualizáciu všetkých efektov
      */
     public static void updateParticles() {
-        for (int i = 0; i < Particle.particles.size(); ++i) {
-            Particle.particles.get(i).update();
+        ArrayList<Particle> particlesCopy = new ArrayList<>(Particle.particles);
+
+        for (Particle particle : particlesCopy) {
+            particle.update();
         }
     }
 }

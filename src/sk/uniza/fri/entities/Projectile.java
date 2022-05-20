@@ -56,8 +56,10 @@ public abstract class Projectile extends Entity {
      * @param game Hra
      */
     public static void updateProjectiles(Game game) {
-        for (int i = 0; i < Projectile.projectiles.size(); ++i) {
-            Projectile.projectiles.get(i).update(game);
+        ArrayList<Projectile> projectilesCopy = new ArrayList<>(Projectile.projectiles);
+
+        for (Projectile projectile : projectilesCopy) {
+            projectile.update(game);
         }
     }
 
