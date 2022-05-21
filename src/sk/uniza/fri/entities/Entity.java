@@ -41,8 +41,8 @@ public abstract class Entity {
 
     /**
      * Vytvorí entitu a pridelí jej vykreslovaciu vrstvu
-     * @param images
-     * @param renderLayer
+     * @param images Obrázky
+     * @param renderLayer Vrstva
      */
     public Entity(EImageList[] images, ERenderLayer renderLayer) {
         this(images);
@@ -219,10 +219,7 @@ public abstract class Entity {
     protected boolean isCollision(Position futurePosition, Map map) {
         futurePosition = Position.getPositionRelativeToGrid(futurePosition);
         GameTile tile = map.getTile((int)futurePosition.getX(), (int)futurePosition.getY());
-        if (tile != null && tile.hasCollision()) {
-            return true;
-        }
-        return false;
+        return tile != null && tile.hasCollision();
     }
 
     /**

@@ -79,6 +79,7 @@ public class Game {
             this.panel.repaint();
             JOptionPane.showMessageDialog(null, "You died");
             Projectile.resetProjectiles();
+            Particle.resetParticles();
         }
         this.initGame();
         this.keyHandler.resetKeys();

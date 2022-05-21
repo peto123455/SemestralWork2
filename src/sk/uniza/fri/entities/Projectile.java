@@ -31,18 +31,6 @@ public abstract class Projectile extends Entity {
 
     @Override
     public boolean update(Game game) {
-        for (EDirection direction : EDirection.values()) {
-            Position pos = direction.getPos(10).addPosition(super.getPosition());
-            if (super.isCollision(pos, game.getMapHandler().getMap())) {
-                Projectile.projectiles.remove(this);
-                new ParticleExplosion(this.getPosition());
-            }
-        }
-        if (super.isNearEntity(game.getPlayer(), 30)) {
-            game.getPlayer().takeHeart();
-            Projectile.projectiles.remove(this);
-            new ParticleExplosion(this.getPosition());
-        }
         return super.update(game);
     }
 
@@ -73,6 +61,20 @@ public abstract class Projectile extends Entity {
         for (Projectile projectile : Projectile.projectiles) {
             projectile.draw(g2d);
         }
+    }
+
+    protected void removeProjectile(Projectile projectile) {
+        Projectile.projectiles.remove(projectile);
+    }
+
+    protected boolean wallHit(Game game) {
+        for (EDirection direction : EDirection.values()) {
+            Position pos = direction.getPos(10).addPosition(super.getPosition());
+            if (super.isCollision(pos, game.getMapHandler().getMap())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     //Private

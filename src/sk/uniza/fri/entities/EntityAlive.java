@@ -8,8 +8,8 @@ public abstract class EntityAlive extends Entity {
 
     /**
      * Žijúca entita (Má systém životov)
-     * @param images
-     * @param maxHearts
+     * @param images Obrázky
+     * @param maxHearts Maximálne životy
      */
     public EntityAlive(EImageList[] images, int maxHearts) {
         super(images);

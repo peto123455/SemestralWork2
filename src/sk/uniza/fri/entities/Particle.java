@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public abstract class Particle extends Entity {
-    private int frameDuration;
+    private final int frameDuration;
     private int currentFrame;
     private int stage;
 
@@ -73,5 +73,12 @@ public abstract class Particle extends Entity {
         for (Particle particle : particlesCopy) {
             particle.update();
         }
+    }
+
+    /**
+     * Zmaže všetky efekty
+     */
+    public static void resetParticles() {
+        Particle.particles = new ArrayList<>();
     }
 }

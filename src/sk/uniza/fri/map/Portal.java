@@ -1,6 +1,7 @@
 package sk.uniza.fri.map;
 
 import sk.uniza.fri.entities.Entity;
+import sk.uniza.fri.entities.Particle;
 import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.entities.Projectile;
 import sk.uniza.fri.enums.EImageList;
@@ -58,6 +59,7 @@ public class Portal extends Entity {
         player.getPosition().setPosition(portal.getPosition());
 
         Projectile.resetProjectiles();
+        Particle.resetParticles();
     }
 
     /**

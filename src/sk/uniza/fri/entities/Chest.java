@@ -13,9 +13,9 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Chest extends Entity {
-    private ArrayList<ItemStack> items;
+    private final ArrayList<ItemStack> items;
     private boolean isOpen;
-    private Map map;
+    private final Map map;
 
     /**
      * Vytvorí chestku s predmetmi
