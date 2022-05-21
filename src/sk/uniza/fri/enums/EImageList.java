@@ -13,6 +13,13 @@ public enum EImageList {
     SLASH1("/textures/entities/particlesAndProjectiles/slash1.png"),
     SLASH2("/textures/entities/particlesAndProjectiles/slash2.png"),
     SLASH3("/textures/entities/particlesAndProjectiles/slash3.png"),
+    EXPLOSION1("/textures/entities/particlesAndProjectiles/explosion1.png"),
+    EXPLOSION2("/textures/entities/particlesAndProjectiles/explosion2.png"),
+    EXPLOSION3("/textures/entities/particlesAndProjectiles/explosion3.png"),
+    EXPLOSION4("/textures/entities/particlesAndProjectiles/explosion4.png"),
+    EXPLOSION5("/textures/entities/particlesAndProjectiles/explosion5.png"),
+    EXPLOSION6("/textures/entities/particlesAndProjectiles/explosion6.png"),
+    EXPLOSION7("/textures/entities/particlesAndProjectiles/explosion7.png"),
     HEART("/textures/ui/heart.png"),
     HEALTH_POTION("/textures/entities/itemsAndChests/healthPotion.png"),
     SPEED_POTION("/textures/entities/itemsAndChests/speedPotion.png"),
@@ -22,7 +29,7 @@ public enum EImageList {
     GOBLIN("/textures/entities/creatures/goblin.png"),
     MAGE_BOSS("/textures/entities/creatures/mageBoss.png"),
     MAGE_BOSS_DEAD("/textures/entities/creatures/mageBossDead.png"),
-    PROJECILE_MAGE("/textures/entities/itemsAndChests/ProjectileMage.png"),
+    PROJECILE_MAGE("/textures/entities/particlesAndProjectiles/ProjectileMage.png"),
     PORTAL("/textures/entities/itemsAndChests/portal.png");
 
     private BufferedImage image;

@@ -35,11 +35,13 @@ public abstract class Projectile extends Entity {
             Position pos = direction.getPos(10).addPosition(super.getPosition());
             if (super.isCollision(pos, game.getMapHandler().getMap())) {
                 Projectile.projectiles.remove(this);
+                new ParticleExplosion(this.getPosition());
             }
         }
         if (super.isNearEntity(game.getPlayer(), 30)) {
             game.getPlayer().takeHeart();
             Projectile.projectiles.remove(this);
+            new ParticleExplosion(this.getPosition());
         }
         return super.update(game);
     }
