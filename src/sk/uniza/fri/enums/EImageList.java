@@ -30,6 +30,7 @@ public enum EImageList {
     MAGE_BOSS("/textures/entities/creatures/mageBoss.png"),
     MAGE_BOSS_DEAD("/textures/entities/creatures/mageBossDead.png"),
     PROJECILE_MAGE("/textures/entities/particlesAndProjectiles/ProjectileMage.png"),
+    CURSOR("/textures/ui/cursor.png"),
     PORTAL("/textures/entities/itemsAndChests/portal.png");
 
     private BufferedImage image;

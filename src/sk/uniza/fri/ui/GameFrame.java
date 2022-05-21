@@ -4,6 +4,7 @@ import sk.uniza.fri.enums.EImageList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -17,6 +18,11 @@ public class GameFrame extends JFrame {
         super.setResizable(false);
         super.setIconImage(EImageList.KNIGHT.getImage());
         super.setVisible(true);
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image image = EImageList.CURSOR.getImage();
+        Cursor c = toolkit.createCustomCursor(image , new Point(super.getX(), super.getY()), "swordCursor");
+        super.setCursor(c);
 
         super.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
