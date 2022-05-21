@@ -1,6 +1,6 @@
 package sk.uniza.fri.inventory;
 
-import entities.ItemHealthPotion;
+import sk.uniza.fri.entities.ItemHealthPotion;
 import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.ItemStack;

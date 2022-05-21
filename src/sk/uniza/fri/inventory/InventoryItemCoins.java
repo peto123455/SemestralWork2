@@ -1,6 +1,6 @@
 package sk.uniza.fri.inventory;
 
-import entities.ItemCoins;
+import sk.uniza.fri.entities.ItemCoins;
 import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;

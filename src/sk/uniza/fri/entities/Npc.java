@@ -1,4 +1,4 @@
-package entities;
+package sk.uniza.fri.entities;
 
 import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.essentials.Position;

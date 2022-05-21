@@ -1,6 +1,6 @@
 package sk.uniza.fri.quests;
 
-import entities.Player;
+import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.enums.EQuestAction;
 import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.ItemStack;

@@ -1,11 +1,11 @@
 package sk.uniza.fri.map;
 
-import entities.Chest;
-import entities.Enemy;
-import entities.Entity;
-import entities.Item;
-import entities.Npc;
-import entities.Player;
+import sk.uniza.fri.entities.Chest;
+import sk.uniza.fri.entities.Enemy;
+import sk.uniza.fri.entities.Entity;
+import sk.uniza.fri.entities.Item;
+import sk.uniza.fri.entities.Npc;
+import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.enums.EPortalStatus;
 import sk.uniza.fri.main.GameTile;
 import sk.uniza.fri.enums.ETileList;

@@ -1,8 +1,8 @@
 package sk.uniza.fri.map;
 
-import entities.Enemy;
-import entities.Entity;
-import entities.Player;
+import sk.uniza.fri.entities.Enemy;
+import sk.uniza.fri.entities.Entity;
+import sk.uniza.fri.entities.Player;
 import sk.uniza.fri.enums.ETileList;
 import sk.uniza.fri.essentials.EntityLoader;
 import sk.uniza.fri.main.Game;
