@@ -15,10 +15,7 @@ public abstract class Item extends Entity {
      * @param position
      */
     public static void spawnItem(Map map, ItemStack item, Position position) {
-        switch (item.getItem()) {
-            case COINS -> map.addItem(new ItemCoins((int)position.getX(), (int)position.getY(), item.getAmount()));
-            case HEALTH_POTION -> map.addItem(new ItemHealthPotion((int)position.getX(), (int)position.getY()));
-        }
+        item.getItemType().getItem().spawnItem(map, item, position);
     }
 
     /**

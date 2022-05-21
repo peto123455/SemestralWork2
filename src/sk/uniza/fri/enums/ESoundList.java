@@ -19,6 +19,7 @@ public enum ESoundList {
     CHEST("/sounds/chest.wav"),
     MUSIC("/sounds/music.wav"),
     MESSAGE("/sounds/message.wav"),
+    MESSAGE_WRONG("/sounds/error.wav"),
     PROJECTILE_MAGIC("/sounds/projectileMagic.wav"),
     QUEST_COMPLETE("/sounds/questComplete.wav"),
     SWORD_STAB("/sounds/swordStab.wav");

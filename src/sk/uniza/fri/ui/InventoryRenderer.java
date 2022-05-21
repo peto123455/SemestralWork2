@@ -1,7 +1,7 @@
 package sk.uniza.fri.ui;
 
 import sk.uniza.fri.enums.EFontList;
-import sk.uniza.fri.essentials.Inventory;
+import sk.uniza.fri.inventory.Inventory;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

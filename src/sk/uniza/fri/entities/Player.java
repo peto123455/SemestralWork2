@@ -5,7 +5,7 @@ import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.enums.ERenderLayer;
 import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.ImageTools;
-import sk.uniza.fri.essentials.Inventory;
+import sk.uniza.fri.inventory.Inventory;
 import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.main.Game;
 import sk.uniza.fri.main.GameThread;
@@ -20,6 +20,8 @@ public class Player extends EntityAlive {
     private Inventory inventory;
     private Game game;
     private QuestHandler questHandler;
+
+    private long speedBoostUntil;
 
     /**
      * Vytvorí hráča
@@ -97,7 +99,7 @@ public class Player extends EntityAlive {
             if (direction == EDirection.RIGHT || direction == EDirection.LEFT) {
                 this.setDirection(direction);
             }
-            finalPosition.addPosition(EDirection.getPosByInt(c, 4));
+            finalPosition.addPosition(EDirection.getPosByInt(c, (this.speedBoostUntil > System.currentTimeMillis() ? 6 : 4)));
         }
 
         finalPosition.multiply(GameThread.getInstance().getDeltaTime() * 50);
@@ -121,5 +123,9 @@ public class Player extends EntityAlive {
     @Override
     protected void onDeath() {
         this.game.onDeath();
+    }
+
+    public void setBoost(int duration) {
+        this.speedBoostUntil = System.currentTimeMillis() + duration * 1000L;
     }
 }

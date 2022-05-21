@@ -96,6 +96,7 @@ public class KeyHandler extends KeyAdapter {
         this.pressable.put(KeyEvent.VK_K, new PressableKeyAttack()); //Útok
         this.pressable.put(KeyEvent.VK_I, new PressableKeyInventory()); //Otvorenie inventáru
         this.pressable.put(KeyEvent.VK_Q, new PressableKeyHealthPotion()); //Použitie elixíru života
+        this.pressable.put(KeyEvent.VK_T, new PressableKeySpeedPotion()); //Použitie elixíru rýchlosti
         this.pressable.put(KeyEvent.VK_E, new PressableKeyUseAction()); //Klávesa akcie
     }
 }

@@ -37,7 +37,7 @@ public class QuestHandler {
      * @param quest Trieda questu
      * @return Dokončenosť questu
      */
-    public boolean isQuestCompleted(Class quest) {
+    public boolean isQuestCompleted(Class<?> quest) {
         for (Quest completedQuest : this.completedQuests) {
             if (completedQuest.getClass().isAssignableFrom(quest)) {
                 return true;

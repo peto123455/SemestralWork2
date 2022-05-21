@@ -14,9 +14,8 @@ import java.util.TimerTask;
 public class MessageBox {
     private static ArrayList<MessageBox> messageBoxes = new ArrayList<>();
 
-    private long deleteAt;
-    private int duration;
-    private String text;
+    private final long deleteAt;
+    private final String text;
 
     /**
      * Správy, ktoré sa hráčovi zobrazujú (Ako napríklad rozhovor s NPC).
@@ -24,10 +23,21 @@ public class MessageBox {
      * @param duration dĺžka zobrazenia
      */
     public MessageBox(String text, int duration) {
-        this.duration = duration;
+        this(text, duration, false);
+    }
+
+    /**
+     * Správy, ktoré sa hráčovi zobrazujú (Ako napríklad rozhovor s NPC).
+     * @param text Text správy
+     * @param duration dĺžka zobrazenia
+     * @param soundOff Vypne zvuk správy
+     */
+    public MessageBox(String text, int duration, boolean soundOff) {
+        if (!soundOff) {
+            ESoundList.playSound(ESoundList.MESSAGE);
+        }
         this.deleteAt = System.currentTimeMillis() + duration;
         this.text = text;
-        ESoundList.playSound(ESoundList.MESSAGE);
         MessageBox.messageBoxes.add(this);
     }
 

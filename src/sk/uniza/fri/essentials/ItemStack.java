@@ -19,7 +19,7 @@ public class ItemStack {
     /**
      * @return Typ itemu
      */
-    public EItemList getItem() {
+    public EItemList getItemType() {
         return this.item;
     }
 

@@ -15,6 +15,7 @@ public enum EImageList {
     SLASH3("/textures/entities/particlesAndProjectiles/slash3.png"),
     HEART("/textures/ui/heart.png"),
     HEALTH_POTION("/textures/entities/itemsAndChests/healthPotion.png"),
+    SPEED_POTION("/textures/entities/itemsAndChests/speedPotion.png"),
     CHEST("/textures/entities/itemsAndChests/chest.png"),
     CHEST_OPEN("/textures/entities/itemsAndChests/chest_open.png"),
     WIZARD("/textures/entities/creatures/wizard.png"),

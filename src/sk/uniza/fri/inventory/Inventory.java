@@ -1,7 +1,7 @@
-package sk.uniza.fri.essentials;
+package sk.uniza.fri.inventory;
 
 import sk.uniza.fri.enums.EItemList;
-import sk.uniza.fri.enums.ESoundList;
+import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.main.Game;
 
 import java.util.ArrayList;
@@ -78,7 +78,7 @@ public class Inventory {
 
         String string = new String();
         for (ItemStack item : this.inventory) {
-            string += String.format("%s: %dx\n", item.getItem().getName(), item.getAmount());
+            string += String.format("%s: %dx\n", item.getItemType().getName(), item.getAmount());
         }
         return string;
     }
@@ -90,18 +90,7 @@ public class Inventory {
      * @return Či použilo item
      */
     public boolean useItem(ItemStack item, Game game) {
-        switch (item.getItem()) {
-            case HEALTH_POTION -> {
-                if (!game.getPlayer().isMaxHearts() && this.removeItemStack(item)) {
-                    ESoundList.playSound(ESoundList.POTION_DRINK);
-                    game.getPlayer().addHeart();
-                    return true;
-                }
-                return false;
-            }
-        }
-
-        return false;
+        return item.getItemType().getItem().useItem(game);
     }
 
     //Private
@@ -112,7 +101,7 @@ public class Inventory {
      */
     private ItemStack containsItem(ItemStack item) {
         for (ItemStack itemStack : this.inventory) {
-            if (itemStack.getItem() == item.getItem()) {
+            if (itemStack.getItemType() == item.getItemType()) {
                 return itemStack;
             }
         }

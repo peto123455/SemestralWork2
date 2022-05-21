@@ -121,6 +121,13 @@ public class Game {
     }
 
     /**
+     * Použije 1 elixír rýchlosti
+     */
+    public void useSpeedPotion() {
+        this.getPlayer().getInventory().useItem(new ItemStack(EItemList.SPEED_POTION, 1), this);
+    }
+
+    /**
      * Zobrazí / Skryje inventár
      */
     public void switchInventory() {
