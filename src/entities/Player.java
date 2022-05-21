@@ -1,4 +1,4 @@
-package sk.uniza.fri.entities;
+package entities;
 
 import sk.uniza.fri.enums.EDirection;
 import sk.uniza.fri.enums.EImageList;

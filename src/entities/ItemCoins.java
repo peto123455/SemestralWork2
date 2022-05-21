@@ -1,4 +1,4 @@
-package sk.uniza.fri.entities;
+package entities;
 
 import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.enums.EItemList;
@@ -6,20 +6,23 @@ import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;
 
-public class ItemSpeedPotion extends Item {
+public class ItemCoins extends Item {
+    private int amount;
 
     /**
-     * Vytvorí elixír rýchlosti
+     * Vytvorí peniaze
      * @param x Súradnica X
      * @param y Súradnica Y
+     * @param amount Množstvo
      */
-    public ItemSpeedPotion(int x, int y) {
-        super(new EImageList[] {EImageList.SPEED_POTION});
+    public ItemCoins(int x, int y, int amount) {
+        super(new EImageList[] {EImageList.COINS});
+        this.amount = amount;
         super.getPosition().setPosition(new Position(x, y));
     }
 
     public ItemStack pickup() {
-        ESoundList.playSound(ESoundList.PICKUP);
-        return new ItemStack(EItemList.SPEED_POTION, 1);
+        ESoundList.playSound(ESoundList.COIN_PICKUP);
+        return new ItemStack(EItemList.COINS, this.amount);
     }
 }

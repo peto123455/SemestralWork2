@@ -1,9 +1,9 @@
 package sk.uniza.fri.main;
 
-import sk.uniza.fri.entities.Entity;
-import sk.uniza.fri.entities.Particle;
-import sk.uniza.fri.entities.Player;
-import sk.uniza.fri.entities.Projectile;
+import entities.Entity;
+import entities.Particle;
+import entities.Player;
+import entities.Projectile;
 import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.essentials.ItemStack;
 import sk.uniza.fri.essentials.Position;

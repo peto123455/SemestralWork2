@@ -1,4 +1,4 @@
-package sk.uniza.fri.entities;
+package entities;
 
 import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.enums.ERenderLayer;
@@ -10,9 +10,9 @@ public abstract class Item extends Entity {
 
     /**
      * Vytvorí item v hre (Ako entitu)
-     * @param map
-     * @param item
-     * @param position
+     * @param map Mapa
+     * @param item Predmet
+     * @param position Pozícia
      */
     public static void spawnItem(Map map, ItemStack item, Position position) {
         item.getItemType().getItem().spawnItem(map, item, position);

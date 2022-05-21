@@ -1,6 +1,6 @@
 package sk.uniza.fri.quests;
 
-import sk.uniza.fri.entities.Npc;
+import entities.Npc;
 import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.enums.EQuestAction;
 import sk.uniza.fri.essentials.ItemStack;

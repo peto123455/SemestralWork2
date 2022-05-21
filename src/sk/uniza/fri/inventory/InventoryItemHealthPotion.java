@@ -1,6 +1,6 @@
 package sk.uniza.fri.inventory;
 
-import sk.uniza.fri.entities.ItemHealthPotion;
+import entities.ItemHealthPotion;
 import sk.uniza.fri.enums.EItemList;
 import sk.uniza.fri.enums.ESoundList;
 import sk.uniza.fri.essentials.ItemStack;
@@ -8,7 +8,6 @@ import sk.uniza.fri.essentials.Position;
 import sk.uniza.fri.main.Game;
 import sk.uniza.fri.map.Map;
 import sk.uniza.fri.ui.ErrorMessageBox;
-import sk.uniza.fri.ui.MessageBox;
 
 public class InventoryItemHealthPotion implements IInventoryItem {
 

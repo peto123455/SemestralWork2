@@ -1,8 +1,8 @@
 package sk.uniza.fri.map;
 
-import sk.uniza.fri.entities.Entity;
-import sk.uniza.fri.entities.Player;
-import sk.uniza.fri.entities.Projectile;
+import entities.Entity;
+import entities.Player;
+import entities.Projectile;
 import sk.uniza.fri.enums.EImageList;
 import sk.uniza.fri.enums.EPortalStatus;
 import sk.uniza.fri.enums.ERenderLayer;
