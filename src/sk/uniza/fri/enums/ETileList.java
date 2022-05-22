@@ -3,6 +3,7 @@ package sk.uniza.fri.enums;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 public enum ETileList {
     WALL1("/textures/blocks/wall_1.png", 1, true),
@@ -42,7 +43,7 @@ public enum ETileList {
      */
     ETileList(String route, int id, boolean hasCollision) {
         try {
-            this.image = ImageIO.read(this.getClass().getResourceAsStream(route));
+            this.image = ImageIO.read(Objects.requireNonNull(this.getClass().getResourceAsStream(route)));
         } catch (IOException e) {
             e.printStackTrace();
         }

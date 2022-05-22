@@ -120,7 +120,7 @@ public abstract class Enemy extends EntityAlive {
     public abstract void getQuestEvent(QuestHandler questHandler);
 
     /**
-     * Zistí, či nepraiteľ môže videiť hráča
+     * Zistí, či nepriateľ môže vidieť hráča
      * @param player Hráč
      * @param mapHandler Map Handler
      * @return Vráti, či nepriateľ vidí hráča

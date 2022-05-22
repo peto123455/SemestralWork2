@@ -3,6 +3,7 @@ package sk.uniza.fri.enums;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 public enum EImageList {
     MENU("/textures/ui/menu.png"),
@@ -41,7 +42,7 @@ public enum EImageList {
      */
     EImageList(String route) {
         try {
-            this.image = ImageIO.read(this.getClass().getResourceAsStream(route));
+            this.image = ImageIO.read(Objects.requireNonNull(this.getClass().getResourceAsStream(route)));
         } catch (IOException e) {
             e.printStackTrace();
         }

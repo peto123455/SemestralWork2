@@ -8,6 +8,7 @@ import javax.sound.sampled.Line;
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.util.Objects;
 
 public enum ESoundList {
     COIN_PICKUP("/sounds/coinPickup.wav"),
@@ -95,10 +96,8 @@ public enum ESoundList {
      */
     private AudioInputStream getAudioInputStream() {
         try {
-            return AudioSystem.getAudioInputStream(this.getClass().getResource(this.getRoute()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (UnsupportedAudioFileException e) {
+            return AudioSystem.getAudioInputStream(Objects.requireNonNull(this.getClass().getResource(this.getRoute())));
+        } catch (IOException | UnsupportedAudioFileException e) {
             e.printStackTrace();
         }
         return null;

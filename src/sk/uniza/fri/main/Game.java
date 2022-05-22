@@ -27,7 +27,7 @@ public class Game {
 
     /**
      * Hlavná inštancia hry, jej logika
-     * @param panel
+     * @param panel Panel
      */
     public Game(GamePanel panel) {
         this.isFinished = false;
@@ -72,7 +72,7 @@ public class Game {
 
     /**
      * Stará sa o načítanie hry, používa sa ak hráč zomrel
-     * @param died
+     * @param died Či zomrel
      */
     public void initGame(boolean died) {
         if (died) {

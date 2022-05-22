@@ -11,7 +11,7 @@ public class GameComplete {
 
     /**
      * Vykresluje okno konca hry
-     * @param g2d
+     * @param g2d Plátno
      */
     public static void draw(Graphics2D g2d) {
         g2d.setColor(Color.WHITE);
