@@ -80,13 +80,6 @@
       "x": 450,
       "y": 200,
       "item": "HEALTH_POTION",
-      "amount": 2
-    },
-    {
-      "map": 1,
-      "x": 400,
-      "y": 600,
-      "item": "SPEED_POTION",
       "amount": 1
     }
   ],
@@ -141,6 +134,10 @@
         {
           "item": "COINS",
           "amount": 50
+        },
+        {
+          "item": "SPEED_POTION",
+          "amount": 1
         }
       ]
     },
@@ -150,8 +147,8 @@
       "map": 1,
       "items": [
         {
-          "item": "COINS",
-          "amount": 50
+          "item": "HEALTH_POTION",
+          "amount": 2
         }
       ]
     }

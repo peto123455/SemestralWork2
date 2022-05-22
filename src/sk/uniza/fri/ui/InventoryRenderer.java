@@ -53,7 +53,7 @@ public class InventoryRenderer {
         g2d.setStroke(tmp);
         g2d.setFont(EFontList.RPG.getFont());
         g2d.drawString("Inventory", GamePanel.WIDTH / 2 - 72, GamePanel.HEIGHT / 8 + 30);
-        g2d.setFont(EFontList.RPG.getFont().deriveFont(20f));
+        g2d.setFont(EFontList.RPG.getFont().deriveFont(25f));
 
         //Rozdelenie riadkov
         int y = GamePanel.HEIGHT / 8 + 50;

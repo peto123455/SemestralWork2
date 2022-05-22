@@ -9,11 +9,11 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 public abstract class Quest {
-    private String name;
+    private final String name;
     private boolean isCompleted;
-    private ArrayList<Task> tasks;
-    private ArrayList<ItemStack> itemRewards;
-    private QuestHandler questHandler;
+    private final ArrayList<Task> tasks;
+    private final ArrayList<ItemStack> itemRewards;
+    private final QuestHandler questHandler;
 
     /**
      * Quest
@@ -174,6 +174,13 @@ public abstract class Quest {
      */
     public void onQuestNpcReact() {
         new MessageBox("Quest not complete yet!", 2000);
+    }
+
+    /**
+     * Ak hráč interaktuje s NPC, a jeho quest už splnil
+     */
+    public static void onQuestCompleteNpcReact() {
+        new MessageBox("I don't have enything else to say!", 2000);
     }
 
     /**

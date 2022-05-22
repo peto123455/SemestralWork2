@@ -4,7 +4,10 @@ import sk.uniza.fri.enums.EImageList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import java.awt.*;
+import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 

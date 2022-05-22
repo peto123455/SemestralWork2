@@ -64,10 +64,10 @@ public class Game {
      * Ukončí hru
      */
     public void finishGame() {
-        this.isFinished = true;
         if (this.panel.isInventoryVisible()) {
             this.switchInventory();
         }
+        this.isFinished = true;
     }
 
     /**
@@ -132,6 +132,9 @@ public class Game {
      * Zobrazí / Skryje inventár
      */
     public void switchInventory() {
+        if (this.isFinished) {
+            return;
+        }
         this.panel.switchInventory();
     }
 

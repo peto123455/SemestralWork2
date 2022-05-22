@@ -88,13 +88,6 @@ public class Map {
     }
 
     /**
-     * @return Zoznam portálov
-     */
-    public ArrayList<Portal> getPortals() {
-        return this.portals;
-    }
-
-    /**
      * Kontroluje, či sa hráč nachádza pri iteme
      * @param player Hráč
      */

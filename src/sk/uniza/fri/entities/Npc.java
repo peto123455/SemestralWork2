@@ -8,7 +8,7 @@ import sk.uniza.fri.quests.QuestGoblin;
 
 public class Npc extends Entity {
 
-    private Class quest;
+    private Class<?> quest;
     private Map map;
 
     /**
@@ -28,7 +28,7 @@ public class Npc extends Entity {
      * Nastaví NPCčku jeho quest
      * @param quest Quest
      */
-    public void setQuest(Class quest) {
+    public void setQuest(Class<?> quest) {
         this.quest = quest;
     }
 
@@ -38,28 +38,28 @@ public class Npc extends Entity {
      * @return Či sa splnila očakávaná akcia
      */
     public boolean checkQuest(Player player) {
-        Quest curerentQuest = player.getQuestHandler().getCurrentQuest();
+        Quest currentQuest = player.getQuestHandler().getCurrentQuest();
 
-        if (curerentQuest == null) {
+        if (currentQuest == null) {
             if (player.getQuestHandler().isQuestCompleted(this.quest)) {
+                Quest.onQuestCompleteNpcReact();
                 return false;
             } else if (QuestGoblin.class.isAssignableFrom(this.quest)) {
                 player.getQuestHandler().setCurrentQuest(new QuestGoblin(player.getQuestHandler(), this));
             }
-
             return true;
         }
 
-        if (this.quest.isInstance(curerentQuest)) {
-            if (curerentQuest.isCompleted()) {
-                curerentQuest.onRewardPickup();
+        if (this.quest.isInstance(currentQuest)) {
+            if (currentQuest.isCompleted()) {
+                currentQuest.onRewardPickup();
                 return true;
             } else {
-                curerentQuest.onQuestNpcReact();
+                currentQuest.onQuestNpcReact();
                 return false;
             }
         }
-        curerentQuest.onNonQuestNpcReact();
+        currentQuest.onNonQuestNpcReact();
         return false;
     }
 
